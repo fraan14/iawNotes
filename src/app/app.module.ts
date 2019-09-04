@@ -4,7 +4,7 @@ import {MaterialModule} from './material.module'
 import { NgModule } from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout'
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './app.component'; 
 import { fromEventPattern } from 'rxjs';
 
 @NgModule({
@@ -21,3 +21,4 @@ import { fromEventPattern } from 'rxjs';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+ 
