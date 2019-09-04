@@ -1,0 +1,25 @@
+angular
+$ npm install -g @angular/cli
+
+hay que instalar angular material
+$npm install --save @angular/material @angular/cdk @angular/animations
+
+hay que instalar no se si al final se usa pero bueno
+$npm install --save hammerjs
+
+esto es para el modal
+$npm install @angular/flex-layout
+
+despues de isntalar el flex si hay drama de versiones y no se que hacer
+$ng update --all --force
+
+si hay problemas con la version de typescript
+$npm i typescript@3.5.3 --save-dev --save-exact
+
+
+-hay que instalar firebase y angularfirebase
+
+$ npm i firebase @angular/fire --save
+
+para iconos:
+$ npm i font-awesome -S

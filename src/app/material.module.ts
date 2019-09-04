@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import{MatSidenavModule, MatToolbarModule, MatIconModule, MatListModule, MatSidenav, MatIcon} from '@angular/material';
+import{MatSidenavModule, MatToolbarModule, MatIconModule, MatListModule, MatSidenav, MatIcon, } from '@angular/material';
 import { fromEventPattern } from 'rxjs';
 
 @NgModule({

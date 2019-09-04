@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Registro</h1>
+
+<div mat-dialog-content>
+    <mat-form-field>
+        <input (ngModel)="usuario" placeholder="Nombre de usuario" matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <input (ngModel)="email" placeholder="Email" matInput>
+    </mat-form-field>
+    <mat-form-field>
+    <input type="password" placeholder="Contraseña" matInput>
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button >Aceptar</button>
+    <button mat-raised-button [mat-dialog-close]="inputValue">Cancelar</button>
+</div>

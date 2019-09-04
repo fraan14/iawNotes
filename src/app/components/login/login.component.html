@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Bienvenido !</h1>
+
+<div mat-dialog-content>
+
+    <mat-form-field>
+        <input (ngModel)="inputValue" placeholder="Nombre de usuario" matInput>
+    </mat-form-field>
+    <mat-form-field>
+    <input type="password" placeholder="Contraseña" matInput>
+    </mat-form-field>
+
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="AceptarLogin()">Aceptar</button>
+    <button mat-raised-button [mat-dialog-close]="inputValue">Cancelar</button>
+</div>
+<hr>
+<h1 mat-dialog-title>O logueate con:</h1>
+<div mat-dialog-content>
+    <button mat-raised-button> <span class="fa fa-facebook"></span> Facebook</button>
+    <button mat-raised-button (click)="onLoginGoogle()" > <span class="fa fa-google"></span> Google</button>
+</div>

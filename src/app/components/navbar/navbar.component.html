@@ -1,0 +1,29 @@
+<mat-sidenav-container>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+       <div>
+         <a>
+            IAW - NOTES
+         </a>
+       </div>
+       <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs>
+          <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+              <li>
+                  <a (click)="abrirVentanaLogueo()">
+                    <mat-icon class="icon">input</mat-icon>
+                    <span  class="label">Login</span>
+                   </a>
+              </li>
+              <li>
+                  <a (click)="abrirVentanaRegistro()">
+                      <mat-icon class="icon">person_add</mat-icon>
+                      <span class="label">Register</span>
+                  </a>
+                </li>
+          </ul>
+       </div>
+      </mat-toolbar>
+      <main>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
