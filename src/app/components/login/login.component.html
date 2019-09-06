@@ -3,10 +3,10 @@
 <div mat-dialog-content>
 
     <mat-form-field>
-        <input (ngModel)="inputValue" placeholder="Nombre de usuario" matInput>
+        <input [(ngModel)]="email" placeholder="email" matInput>
     </mat-form-field>
     <mat-form-field>
-    <input type="password" placeholder="Contraseña" matInput>
+        <input type="password" placeholder="Contraseña" (ngModel)="pass" matInput>
     </mat-form-field>
 
 </div>
@@ -18,6 +18,6 @@
 <hr>
 <h1 mat-dialog-title>O logueate con:</h1>
 <div mat-dialog-content>
-    <button mat-raised-button> <span class="fa fa-facebook"></span> Facebook</button>
+    <button mat-raised-button (click)="onLoginFacebook()" > <span class="fa fa-facebook"></span> Facebook</button>
     <button mat-raised-button (click)="onLoginGoogle()" > <span class="fa fa-google"></span> Google</button>
 </div>
