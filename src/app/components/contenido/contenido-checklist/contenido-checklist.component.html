@@ -1,0 +1,7 @@
+<ng-container *ngIf="inicializado">
+    <section *ngFor="let c of obj">
+        <mat-checkbox [(ngModel)]="c.check" (change)=cambiemos(obj)>
+                {{c.text}}
+        </mat-checkbox>
+    </section>
+</ng-container>
