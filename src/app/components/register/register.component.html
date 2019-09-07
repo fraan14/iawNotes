@@ -2,17 +2,19 @@
 
 <div mat-dialog-content>
     <mat-form-field>
-        <input (ngModel)="usuario" placeholder="Nombre de usuario" matInput>
+        <input [(ngModel)]="email" placeholder="Email" matInput>
     </mat-form-field>
     <mat-form-field>
-        <input (ngModel)="email" placeholder="Email" matInput>
+        <input [(ngModel)]="contra" type="password" placeholder="Contraseña" matInput>
     </mat-form-field>
-    <mat-form-field>
-    <input type="password" placeholder="Contraseña" matInput>
-    </mat-form-field>
+    <ng-container *ngIf="isError">
+        <p class="errorLabel">{{error_msg}}</p>
+    </ng-container>
+
 </div>
 
 <div mat-dialog-actions>
-    <button mat-raised-button >Aceptar</button>
-    <button mat-raised-button [mat-dialog-close]="inputValue">Cancelar</button>
+    <button mat-raised-button (click)="onAddUser()" >Aceptar</button>
+    <button mat-raised-button [mat-dialog-close]>Cancelar</button>
 </div>
+ 
