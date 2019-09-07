@@ -15,12 +15,16 @@ export class LoginComponent implements OnInit {
 
   public email:string =""; //asd
   public pass:string="";
+  public error_msg:string="";
+  public isError:boolean=true;
 
   ngOnInit() {
   }
 
   inputValue='';
   AceptarLogin(){
+    console.log('Email', this.email);
+    console.log('Password', this.pass);
   }
   CancelarLogin(){
   }
@@ -28,7 +32,9 @@ export class LoginComponent implements OnInit {
   onLogin():void{
     this.authService.loginEmailUser(this.email,this.pass).then((res)=>{
       this.close()
-    }).catch(err => console.log('err',err.message));
+    }).catch(err => {
+      this.errorRised(err.message);
+    });
   }
 
   onLoginGoogle():void{
@@ -36,7 +42,8 @@ export class LoginComponent implements OnInit {
     this.authService.loginGoogleUser().then((res)=>{
       this.close();
     }).catch(err=>{
-      console.log('error',err.message);   //esto se ejecuta cuando sucede un error, aca tendria que evitar el cierre del popup y poner en rojo el problema
+      console.log('error',err.message); 
+      this.errorRised(err.message);  //esto se ejecuta cuando sucede un error, aca tendria que evitar el cierre del popup y poner en rojo el problema
     })
   }
   onLoginFacebook(){
@@ -45,6 +52,7 @@ export class LoginComponent implements OnInit {
       this.close();
     }).catch(err=>{
       console.log('error',err.message);   //esto se ejecuta cuando sucede un error, aca tendria que evitar el cierre del popup y poner en rojo el problema
+      this.errorRised(err.message);
     })
   }
 
@@ -54,6 +62,11 @@ export class LoginComponent implements OnInit {
 
   close() {
     this.dialogRef.close();
-}
+  }
+
+  errorRised(detail:string){
+    this.isError=true;
+    this.error_msg=this.authService.errorProcessor(detail);
+  }
 
 }

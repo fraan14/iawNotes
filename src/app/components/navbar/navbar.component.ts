@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
   
   abrirVentanaLogueo(){
     let config:MatDialogConfig={
-      width:'400px', height:'400px'
+      width:'400px'
     }
     this.loginDialog.open(LoginComponent,config);
   }

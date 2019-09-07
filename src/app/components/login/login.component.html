@@ -6,14 +6,17 @@
         <input [(ngModel)]="email" placeholder="email" matInput>
     </mat-form-field>
     <mat-form-field>
-        <input type="password" placeholder="Contraseña" (ngModel)="pass" matInput>
+        <input type="password" placeholder="Contraseña" [(ngModel)]="pass" matInput>
     </mat-form-field>
+    <ng-container *ngIf="isError">
+        <p class="errorLabel">{{error_msg}}</p>
+    </ng-container>
 
 </div>
 
 <div mat-dialog-actions>
-    <button mat-raised-button (click)="AceptarLogin()">Aceptar</button>
-    <button mat-raised-button [mat-dialog-close]="inputValue">Cancelar</button>
+    <button mat-raised-button (click)="onLogin()">Aceptar</button>
+    <button mat-raised-button [mat-dialog-close]>Cancelar</button>
 </div>
 <hr>
 <h1 mat-dialog-title>O logueate con:</h1>
