@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { environment } from '../environments/environment';
+import { CardModule } from './components/card/card.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { environment } from '../environments/environment';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    CardModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),  //de esta manera toma los datos de environment para conectar con la db
     AngularFireDatabaseModule
 
