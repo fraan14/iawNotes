@@ -15,7 +15,7 @@ export class CardComponent implements OnInit {
       id: 123,
       texto: '[  {"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]',
       color: "rojo",
-      titulo: "Prueba 1",
+      titulo: "El titulo mas largo delasdnknajkldsjkldjkljldasjdklasjdkalsjdmomentoooooooooooooooooooooooooooo",
       img: "https://material.angular.io/assets/img/examples/shiba2.jpg",
       tipo: 2,
       label: ["hola", "como", "andas"]

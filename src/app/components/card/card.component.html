@@ -1,11 +1,11 @@
-<mat-card class="example-card">
+<mat-card class="card">
+    <img class="card-image" mat-card-image  [src]=card?.img >
     <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{card.titulo}}</mat-card-title>
+        <mat-card-title>{{card.titulo | TransformarTextoPipe :"":"cortarTitulo"}}</mat-card-title>
     </mat-card-header>
-    <img mat-card-image [src]=card?.img alt="Photo of a Shiba Inu">
     <mat-card-content>
         <app-contenido  [tipo]="card.tipo" [texto] = "card.texto" ></app-contenido>
+
     </mat-card-content>
     <mat-card-actions>
     </mat-card-actions>
