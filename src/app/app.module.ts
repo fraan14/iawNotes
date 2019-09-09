@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { environment } from '../environments/environment';
 import { CardModule } from './components/card/card.module';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+//import {AngularFireStorageModule} from '@angular/fire/firestore'
 
 @NgModule({
   declarations: [
@@ -41,7 +43,7 @@ import { CardModule } from './components/card/card.module';
     
   ],
   entryComponents:[NavbarComponent,LoginComponent,RegisterComponent],
-  providers: [AngularFireAuth],
+  providers: [AngularFireAuth,AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
