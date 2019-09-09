@@ -22,4 +22,4 @@ $npm i typescript@3.5.3 --save-dev --save-exact
 $ npm i firebase @angular/fire --save
 
 para iconos:
-$ npm i font-awesome -S
+$ npm i font-awesome -S  
