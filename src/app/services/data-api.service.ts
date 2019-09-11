@@ -3,6 +3,7 @@ import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} 
 import { UserInterface } from '../models/user';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { auth } from 'firebase/app';
 //tengo que importar las interfaces.
 
 @Injectable({
@@ -13,7 +14,9 @@ export class DataApiService {
   constructor(private afs:AngularFirestore) { }
 
   private userDoc: AngularFirestoreDocument<UserInterface>;
+  private users:Observable<UserInterface[]>;
   private user:Observable<UserInterface>;
+  private user2:UserInterface;
 
   getUserById(idUser: string){
     this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
@@ -26,6 +29,19 @@ export class DataApiService {
         return data;
       }
     }));
+  }
+
+  getEmailFromUser(email:string)
+  {
+    this.users = this.afs.collection("Usuarios", ref => ref.where('email', '==', email)).valueChanges();
+    //console.log("RESULTADO",this.users);
+
+    this.users.subscribe(res => { 
+      console.log("RES",res);
+      this.user2 = res[0];
+      console.log("this is the user:" + this.user2.nombre);
+    });
+
   }
 
   createGroup(){}

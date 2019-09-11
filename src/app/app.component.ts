@@ -21,22 +21,19 @@ export class AppComponent implements OnInit {
   verifyUser(){
     this.authService.isAuth().subscribe(auth => {
       if(auth){
-        console.log('auth email', auth);
-        this.getOrCreateUser(auth.uid)
+        console.log('VERRRRRRRRRRRRR',auth)
+        this.getOrCreateUser(auth)
         this.isLogged = true;
       }
       else{
-        //console.log('no logged user');
         this.isLogged = false;
       }
     });
   }
 
-  //aca tengo que ver si el id del usuario que llega esta incluido en la bd, si no esta 
-  getOrCreateUser(id : string){
-    this.das.getUserById('x69B4FCi4JAPUcoNdx4G').subscribe(user =>{
-      console.log(user);
-    });
+  //aca tengo que ver si el email del usuario que llega esta incluido en la bd, si no esta 
+  getOrCreateUser(person : firebase.User){
+    
   }
 
 }

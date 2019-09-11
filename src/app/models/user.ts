@@ -1,6 +1,6 @@
 export interface UserInterface{
     id?: string;
-    name?:string;
+    nombre?:string;
     email?:string;
     grupos?:Array<string>; 
 }
