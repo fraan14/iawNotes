@@ -21,8 +21,8 @@ export class AppComponent implements OnInit {
   verifyUser(){
     this.authService.isAuth().subscribe(auth => {
       if(auth){
-        console.log('VERRRRRRRRRRRRR',auth)
-        this.getOrCreateUser(auth)
+        //console.log('VERRRRRRRRRRRRR',auth);
+        this.getOrCreateUser(auth);
         this.isLogged = true;
       }
       else{
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
 
   //aca tengo que ver si el email del usuario que llega esta incluido en la bd, si no esta 
   getOrCreateUser(person : firebase.User){
-    
+    this.user = this.das.getOrCreateUser(person);
   }
 
 }

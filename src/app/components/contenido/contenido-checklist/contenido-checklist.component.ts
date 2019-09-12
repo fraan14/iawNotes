@@ -18,8 +18,8 @@ public inicializado: boolean = false;
   ngOnInit() {
     if(this.texto != null){
       this.obj = JSON.parse(this.texto);
-      console.log("obj",this.obj);
-      console.log(isBoolean(this.obj[0].check));
+      //console.log("obj",this.obj);
+      //console.log(isBoolean(this.obj[0].check));
       
       this.inicializado = true;
     }
@@ -29,7 +29,7 @@ public inicializado: boolean = false;
    * cambiemos
    */
   public cambiemos(c:object) {
-    console.log(c);
+    //console.log(c);
     
   }
  

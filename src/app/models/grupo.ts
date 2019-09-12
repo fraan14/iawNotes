@@ -1,6 +1,6 @@
 export interface GrupInterface{
-    admin?:string;
+    Admin?:string;
     nombreGrupo?:string;
-    notas?:Array<string>;
-    usuarios?:Array<string>;
+    notasID?:Array<string>;
+    usuarioiD?:Array<string>;
 }
