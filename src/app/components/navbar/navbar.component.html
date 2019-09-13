@@ -23,7 +23,20 @@
           </ul>
        </div>
        <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs *ngIf="isLogged">
+    
         <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+            <li>
+                <a (click)="onLogout()">
+                  <mat-icon class="icon">event_note</mat-icon>
+                  <span  class="label">Crear Nota</span>
+                 </a>
+            </li>
+            <li>
+                <a (click)="onLogout()">
+                  <mat-icon class="icon">group</mat-icon>
+                  <span  class="label">Crear Grupo</span>
+                 </a>
+            </li>
             <li>
                 <a (click)="onLogout()">
                   <mat-icon class="icon">input</mat-icon>
@@ -31,6 +44,7 @@
                  </a>
             </li>
         </ul>
+        
      </div>
       </mat-toolbar>
       <main>

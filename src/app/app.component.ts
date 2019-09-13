@@ -33,7 +33,9 @@ export class AppComponent implements OnInit {
 
   //aca tengo que ver si el email del usuario que llega esta incluido en la bd, si no esta 
   getOrCreateUser(person : firebase.User){
-    this.user = this.das.getOrCreateUser(person);
+    this.das.getOrCreateUser(person);
   }
+
+  
 
 }

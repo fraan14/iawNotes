@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Pipe, PipeTransform } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore'
 import { UserInterface } from '../models/user';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { auth, User } from 'firebase/app';
-import undefined = require('firebase/empty-import');
 import { GrupInterface } from '../models/grupo';
+import { toPublicName } from '@angular/compiler/src/i18n/serializers/xmb';
+import * as firebase from 'firebase';
 //tengo que importar las interfaces.
 
 @Injectable({
@@ -28,71 +29,68 @@ export class DataApiService {
   private userDoc: AngularFirestoreDocument<UserInterface>;
   private users:Observable<UserInterface[]>;
   private usersFiltrados:Observable<UserInterface[]>;
-  //private user:Observable<UserInterface>;
-  private user2:UserInterface;
+  private user:Observable<UserInterface>;
+  private user2:UserInterface = null;
 
-  // getUserById(idUser: string){
-  //   this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
-  //   return this.user = this.userDoc.snapshotChanges().pipe(map(action =>{
-  //     if(action.payload.exists===false){
-  //       return null;
-  //     }else{
-  //       const data = action.payload.data() as UserInterface;
-  //       data.id = action.payload.id;
-  //       return data;
-  //     }
-  //   }));
-  // }
-
-  getEmailFromUser(email:string, person:firebase.User)
-  {
-    this.usersFiltrados = this.afs.collection("Usuarios", ref => ref.where('email', '==', email)).valueChanges();  //este puede ser otra variable
-    //console.log("RESULTADO",this.users);
-
-    this.usersFiltrados.subscribe(res => { 
-      //console.log("RES",res);
-      if(res.length!=0){
-        this.user2 = res[0];
-        console.log("this is the user:" + this.user2.nombre);
+  getUserById(idUser: string){
+    this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
+    return this.user = this.userDoc.snapshotChanges().pipe(map(action =>{
+      if(action.payload.exists===false){
+        return null;
       }else{
-        this.user2 = this.CreateNewUser(person);
-        console.log("No existe el usuario en la bd");
+        const data = action.payload.data() as UserInterface;
+        data.id = action.payload.id;
+        return data;
       }
-    });
-
-    
-
+    }));
   }
 
   CreateNewUser(person: firebase.User){
     
     let auxName = "";
+
     if(person.displayName != undefined)
       auxName = person.displayName;
     else
       auxName = person.email.split('@',1)[0]; //si se registra con email, el nombre que le queda es el del inicio del mail.
+    
+    let newgpid:string = this.CreateNewGroup(auxName,person.uid);
+
+    console.log("GRUPO CREADO",newgpid)
+    
     const newPerson = <UserInterface>
      {
        id: person.uid,
        email:person.email,
        nombre:auxName,
-       Grupos:null
+       Grupos:[newgpid]
      }
 
-    this.usersCollection.add(newPerson);    //agrega el usuario a la base de datos
+    this.usersCollection.doc(person.uid).set(newPerson);    //agrega el usuario a la base de datos
     return newPerson;
+  }
+
+  CreateNewGroup(pname:string,pid:string):string{
+    
+    let auxName = "";
+    let customId = this.generateNewKey('Grupos');
+    const newGroup = <GrupInterface>
+     {
+      Admin:pname,
+      AdminID:pid,
+      nombreGrupo:"Mis Notas",
+      notasID:null,
+      usuarioiD:null
+     }
+    
+    this.groupCollection.doc(customId).set(newGroup);    //agrega el usuario a la base de datos
+    return customId;
   }
 
 
 
   getOrCreateUser(person: firebase.User){
-    // this.getEmailFromUser(person.email,person);
-    // if( this.user2 == null){
-    //   console.log("ENTRO ACA")
-    //   //this.user2 = this.CreateNewUser(person);
-    // }
-    // return this.user2;
-
+   
     //primero tengo que buscar en la base de datos de usuarios por uid
     this.usersFiltrados = this.afs.collection("Usuarios", ref => ref.where('id', '==', person.uid)).valueChanges();  //este puede ser otra variable
     this.usersFiltrados.subscribe(res => { 
@@ -101,14 +99,21 @@ export class DataApiService {
         this.user2 = res[0];
         console.log("el usuario con ese id es: " + this.user2.nombre);
       }else{
-        this.user2 = this.CreateNewUser(person);
+        this.CreateNewUser(person);
         console.log("No existe el usuario en la base de datos");
       }
     });
-
-    console.log("AL FINAL DE TODO ESTO TENGO: ",this.user2.nombre);
   }
 
+  getLoggedUser(){
+    return this.usersFiltrados;
+  }
+
+  generateNewKey(ref: any) {
+    const _ref = firebase.firestore().collection(ref).doc();
+    const newKey = _ref.id;
+    return newKey;
+  }
 
   createGroup(){}
   getNotes(){}
