@@ -54,7 +54,7 @@ export class DataApiService {
     else
       auxName = person.email.split('@',1)[0]; //si se registra con email, el nombre que le queda es el del inicio del mail.
     
-    let newgpid:string = this.CreateNewGroup(auxName,person.uid);
+    let newgpid:string = this.CreateNewGroup(auxName,person.uid,"Mis Notas");
 
     console.log("GRUPO CREADO",newgpid)
     
@@ -70,7 +70,7 @@ export class DataApiService {
     return newPerson;
   }
 
-  CreateNewGroup(pname:string,pid:string):string{
+  CreateNewGroup(pname:string,pid:string, gname:string):string{
     
     let auxName = "";
     let customId = this.generateNewKey('Grupos');
@@ -78,23 +78,23 @@ export class DataApiService {
      {
       Admin:pname,
       AdminID:pid,
-      nombreGrupo:"Mis Notas",
+      nombreGrupo:gname,
       notasID:null,
-      usuarioiD:null
+      usuarioiD:[pid]
      }
     
     this.groupCollection.doc(customId).set(newGroup);    //agrega el usuario a la base de datos
     return customId;
   }
 
+  
 
 
   getOrCreateUser(person: firebase.User){
-   
     //primero tengo que buscar en la base de datos de usuarios por uid
     this.usersFiltrados = this.afs.collection("Usuarios", ref => ref.where('id', '==', person.uid)).valueChanges();  //este puede ser otra variable
     this.usersFiltrados.subscribe(res => { 
-      console.log("RES",res);
+      //console.log("RES",res);
       if(res.length!=0){
         this.user2 = res[0];
         console.log("el usuario con ese id es: " + this.user2.nombre);
