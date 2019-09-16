@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Crear Grupo</h1>
+
+<div mat-dialog-content>
+
+    <mat-form-field>
+        <input [(ngModel)]="ngrupo" placeholder="nombre de grupo" matInput>
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="crearGrupo()">Crear Grupo</button>
+    <button mat-raised-button [mat-dialog-close]>Cancelar</button>
+</div>

@@ -5,6 +5,7 @@ import { RegisterComponent } from '../register/register.component';
 import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {auth} from 'firebase/app';
+import { CreateGroupComponent } from '../create-group/create-group.component';
 
 
 @Component({
@@ -50,6 +51,14 @@ export class NavbarComponent implements OnInit {
     }
     this.loginDialog.open(RegisterComponent,config);
   }
+
+  abrirVentanaCrearGrupo(){
+    let config:MatDialogConfig={
+      width:'700px'
+    }
+    this.loginDialog.open(CreateGroupComponent,config);
+  }
+
 
   onLogout(){
     this.afsAuth.auth.signOut();

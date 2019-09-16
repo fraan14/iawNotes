@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private das: DataApiService){}
   title = 'Iaw-Notes';
   isLogged:Boolean=false;
-  public user: UserInterface;
+  public idPerson:string="";
 
   ngOnInit() {
     this.verifyUser();
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
       if(auth){
         //console.log('VERRRRRRRRRRRRR',auth);
         this.getOrCreateUser(auth);
+        this.idPerson = auth.uid;
         this.isLogged = true;
       }
       else{
