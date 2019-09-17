@@ -45,6 +45,36 @@ export class DataApiService {
     }));
   }
 
+  //este metodo se encarga de actualizar la lista de referencias a grupos de los usuarios.
+  updateUserGroups(idUser:string,idGroup:string){
+    
+    this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
+
+    this.userDoc.snapshotChanges().pipe(map(action =>{
+      if(action.payload.exists===false){
+        return null;
+      }else{
+        const data = action.payload.data() as UserInterface;
+        data.id = action.payload.id;
+        return data;
+      }
+    })).subscribe(user=>{
+     user.Grupos.push(idGroup);
+     console.log("USUARIO UPDATEADO", user);
+     this.afs.doc(`Usuarios/${idUser}`).update(user);
+    })
+    
+
+
+    // this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
+    // this.userDoc.valueChanges().subscribe(res=>{
+    //   res.Grupos.push(idGroup);
+    //   this.userDoc.update(res);
+      
+    // });
+    
+  }
+
   CreateNewUser(person: firebase.User){
     
     let auxName = "";

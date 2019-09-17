@@ -35,7 +35,7 @@ export class CreateGroupComponent implements OnInit {
   crearGrupo(){
     this.das.getUserById(this.actualUserId).subscribe(user=>{
       this.newGroupid=this.das.CreateNewGroup(user.nombre,user.id,this.ngrupo);
-      
+      this.das.updateUserGroups(user.id,this.newGroupid);
     });
   }
 
