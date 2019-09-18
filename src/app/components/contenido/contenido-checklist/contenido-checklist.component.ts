@@ -20,6 +20,9 @@ public inicializado: boolean = false;
   ngOnInit() {
     if(this.texto != null){
       this.obj = JSON.parse(this.texto);
+      //console.log("obj",this.obj);
+      //console.log(isBoolean(this.obj[0].check));
+      
       this.inicializado = true;
     }
   }
@@ -30,12 +33,15 @@ public inicializado: boolean = false;
   /**
    * cambiemos
    */
-  public modificacion(c:object) {
-    this.obj= c;    
-    // console.log("me modifique");
+  public cambiemos(c:object) {
+    //console.log(c);
     
     this.textoAGuardar.emit(JSON.stringify(this.obj));
 
   }
- 
+ /**
+  * modificacion  */
+ public modificacion(o: any) {
+   
+ }
 }

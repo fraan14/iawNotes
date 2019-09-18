@@ -1,6 +1,6 @@
 <ng-container *ngIf="inicializado">
     <section *ngFor="let c of obj">
-        <mat-checkbox [(ngModel)]="c.check" (change)=cambiemos(obj)>
+        <mat-checkbox [(ngModel)]="c.check" (change)=modificacion(obj)>
                 {{c.text}}
         </mat-checkbox>
     </section>

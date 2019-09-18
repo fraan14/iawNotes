@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-contenido',
@@ -8,9 +8,15 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ContenidoComponent implements OnInit {
   @Input() texto;
   @Input() tipo;
-  constructor() { }
+  @Output() contenido_texto;
+  constructor() { 
+    this.contenido_texto = new EventEmitter<string>();
+  }
 
   ngOnInit() {
   }
 
+  aGuardar(event){
+    this.contenido_texto.emit(event)    
+  }
 }
