@@ -15,7 +15,7 @@ export class CardComponent implements OnInit {
       id: 123,
       texto: '[  {"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]',
       color: "rojo",
-      titulo: "El titulo mas largo delasdnknajkldsjkldjkljldasjdklasjdkalsjdmomentoooooooooooooooooooooooooooo",
+      titulo: "El titulo mas largo delasd nknajk ldsjkl djklj ldasj dkla ",
       img: "https://material.angular.io/assets/img/examples/shiba2.jpg",
       tipo: 2,
       label: ["hola", "como", "andas"]
@@ -24,12 +24,17 @@ export class CardComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log( JSON.parse('[  {"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]'));
+    // console.log( JSON.parse('[  {"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]'));
         
     
     
     
 
+  }
+
+  aGuardar(event){
+    console.log(event);
+    
   }
 
 }

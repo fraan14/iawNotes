@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { isBoolean } from 'util';
 
 @Component({
@@ -8,29 +8,34 @@ import { isBoolean } from 'util';
 })
 export class ContenidoChecklistComponent implements OnInit {
 @Input() texto;
+@Output() textoAGuardar;
 public obj;
 public inicializado: boolean = false;
 
 
   constructor() {
+    this.textoAGuardar = new EventEmitter<string>();
    }
 
   ngOnInit() {
     if(this.texto != null){
       this.obj = JSON.parse(this.texto);
-      console.log("obj",this.obj);
-      console.log(isBoolean(this.obj[0].check));
-      
       this.inicializado = true;
     }
+  }
+  ngOnDestroy(): void {
+    this.textoAGuardar.emit(JSON.stringify(this.obj));
   }
 
   /**
    * cambiemos
    */
-  public cambiemos(c:object) {
-    console.log(c);
+  public modificacion(c:object) {
+    this.obj= c;    
+    // console.log("me modifique");
     
+    this.textoAGuardar.emit(JSON.stringify(this.obj));
+
   }
  
 }

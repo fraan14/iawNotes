@@ -4,7 +4,7 @@
         <mat-card-title>{{card.titulo | TransformarTextoPipe :"":"cortarTitulo"}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <app-contenido  [tipo]="card.tipo" [texto] = "card.texto" ></app-contenido>
+        <app-contenido  (contenido_texto)=aGuardar($event) [tipo]="card.tipo" [texto] = "card.texto" ></app-contenido>
 
     </mat-card-content>
     <mat-card-actions>
