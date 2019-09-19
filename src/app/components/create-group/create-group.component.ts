@@ -5,6 +5,7 @@ import {MatDialogRef} from '@angular/material'
 import {auth} from 'firebase/app';
 import { GrupInterface } from '../../models/grupo';
 import { DataApiService } from '../../services/data-api.service';
+import { UserInterface } from '../../models/user';
 
 @Component({
   selector: 'app-create-group',
@@ -33,10 +34,12 @@ export class CreateGroupComponent implements OnInit {
     });
   }
   crearGrupo(){
-    this.das.getUserById(this.actualUserId).subscribe(user=>{
-      this.newGroupid=this.das.CreateNewGroup(user.nombre,user.id,this.ngrupo);
-      this.das.updateUserGroups(user.id,this.newGroupid);
-    });
+    this.das.CrearGrupoYactualizarUser(this.actualUserId,this.ngrupo);
+  //    this.das.getUserById(this.actualUserId).subscribe(user=>{
+  //      this.newGroupid=this.das.CreateNewGroup(user.nombre,user.id,this.ngrupo);
+  //      this.das.updateUserGroups(user,this.newGroupid);
+  //    });
+  // }
   }
 
 }
