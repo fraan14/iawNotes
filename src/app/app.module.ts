@@ -19,6 +19,8 @@ import { CardModule } from './components/card/card.module';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 //import {AngularFireStorageModule} from '@angular/fire/firestore'
 import { CreateGroupComponent } from './components/create-group/create-group.component';
+import { GroupPanelComponent } from './components/group-panel/group-panel.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { CreateGroupComponent } from './components/create-group/create-group.com
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
-    CreateGroupComponent
+    CreateGroupComponent,
+    GroupPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,7 @@ import { CreateGroupComponent } from './components/create-group/create-group.com
 
     
   ],
-  entryComponents:[NavbarComponent,LoginComponent,RegisterComponent,CreateGroupComponent],
+  entryComponents:[NavbarComponent,LoginComponent,RegisterComponent,CreateGroupComponent,GroupPanelComponent],
   providers: [AngularFireAuth,AngularFirestore],
   bootstrap: [AppComponent]
 })

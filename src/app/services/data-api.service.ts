@@ -150,7 +150,11 @@ export class DataApiService {
     return newKey;
   }
 
-  createGroup(){}
+  //este metodo recibe como parametro el uid del usuario logueado y retorna los grupos en los que el usuario aparece registrado.
+  getKnownGroups(idUser:string){
+    return this.grups = this.afs.collection("Grupos").valueChanges();
+  }
+
   getNotes(){}
   saveNote(){}
 
