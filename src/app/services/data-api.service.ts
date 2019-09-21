@@ -152,7 +152,7 @@ export class DataApiService {
 
   //este metodo recibe como parametro el uid del usuario logueado y retorna los grupos en los que el usuario aparece registrado.
   getKnownGroups(idUser:string){
-    return this.grups = this.afs.collection("Grupos").valueChanges();
+    return this.afs.collection("Grupos", ref => ref.where('usuarioiD', "array-contains", idUser)).valueChanges();
   }
 
   getNotes(){}
