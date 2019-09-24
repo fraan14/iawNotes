@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { GrupInterface } from '../../models/grupo';
 
 
+
 @Component({
   selector: 'app-group-panel',
   templateUrl: './group-panel.component.html',
@@ -50,6 +51,7 @@ export class GroupPanelComponent implements OnInit {
 
   showNotes(item:GrupInterface){
     //console.log("item",item.usuarioiD);
+    this.das.grupoSeleccionado=item;
   }
 
 

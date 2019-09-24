@@ -6,6 +6,9 @@ import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {auth} from 'firebase/app';
 import { CreateGroupComponent } from '../create-group/create-group.component';
+import { CreateNoteComponent } from '../create-note/create-note.component';
+import { DataApiService } from '../../services/data-api.service';
+
 
 
 @Component({
@@ -15,13 +18,14 @@ import { CreateGroupComponent } from '../create-group/create-group.component';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private loginDialog:MatDialog, private authService: AuthService, private afsAuth: AngularFireAuth) { }
+  constructor(private loginDialog:MatDialog, private authService: AuthService, private afsAuth: AngularFireAuth, private das:DataApiService) { }
   public app_name: string = 'notes-iaw';
   public isLogged: boolean = false;
-
+  public hayGrupo:boolean = false;
 
   ngOnInit() {
     this.getCurrentUser();
+    
   }
   
   getCurrentUser(){
@@ -35,8 +39,7 @@ export class NavbarComponent implements OnInit {
         this.isLogged = false;
       }
     });
-  }
-  
+  } 
   
   abrirVentanaLogueo(){
     let config:MatDialogConfig={
@@ -50,6 +53,22 @@ export class NavbarComponent implements OnInit {
       width:'400px'
     }
     this.loginDialog.open(RegisterComponent,config);
+  }
+
+  abrirVentanaCrearNota(){
+
+    if(this.das.getCurrentGroup()!= null){
+      console.log("Grupo seleccionado: ", this.das.getCurrentGroup().nombreGrupo)
+      let config:MatDialogConfig={
+        width:'400px',
+      }
+      this.loginDialog.open(CreateNoteComponent,config);
+    }
+    else{
+      console.log("seleccione grupo");
+    }
+
+    
   }
 
   abrirVentanaCrearGrupo(){

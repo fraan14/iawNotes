@@ -5,9 +5,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { auth, User } from 'firebase/app';
 import { GrupInterface } from '../models/grupo';
-import { toPublicName } from '@angular/compiler/src/i18n/serializers/xmb';
 import * as firebase from 'firebase';
-import {take} from 'rxjs/operators';
+
+
 //tengo que importar las interfaces.
 
 @Injectable({
@@ -21,6 +21,8 @@ export class DataApiService {
 
     this.groupCollection = afs.collection<GrupInterface>('Grupos');
     this.grups = this.groupCollection.valueChanges();
+
+    this.getCurrentGroup();
   }
 
   private groupCollection: AngularFirestoreCollection<GrupInterface>;
@@ -32,6 +34,8 @@ export class DataApiService {
   private usersFiltrados:Observable<UserInterface[]>;
   private user:Observable<UserInterface>;
   private user2:UserInterface = null;
+
+  public grupoSeleccionado:GrupInterface = null;
 
   getUserById(idUser: string){
     this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
@@ -153,6 +157,10 @@ export class DataApiService {
   //este metodo recibe como parametro el uid del usuario logueado y retorna los grupos en los que el usuario aparece registrado.
   getKnownGroups(idUser:string){
     return this.afs.collection("Grupos", ref => ref.where('usuarioiD', "array-contains", idUser)).valueChanges();
+  }
+
+  getCurrentGroup():GrupInterface{
+    return this.grupoSeleccionado;
   }
 
   getNotes(){}

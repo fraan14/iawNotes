@@ -22,6 +22,8 @@ import { CreateGroupComponent } from './components/create-group/create-group.com
 import { GroupPanelComponent } from './components/group-panel/group-panel.component';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { NotesBoardComponent } from './components/notes-board/notes-board.component';
+import { CreateNoteComponent } from './components/create-note/create-note.component';
+
 
 
 
@@ -34,7 +36,8 @@ import { NotesBoardComponent } from './components/notes-board/notes-board.compon
     CreateGroupComponent,
     GroupPanelComponent,
     MainNavComponent,
-    NotesBoardComponent
+    NotesBoardComponent,
+    CreateNoteComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,7 @@ import { NotesBoardComponent } from './components/notes-board/notes-board.compon
 
     
   ],
-  entryComponents:[NavbarComponent,LoginComponent,RegisterComponent,CreateGroupComponent,GroupPanelComponent,MainNavComponent],
+  entryComponents:[NavbarComponent,LoginComponent,RegisterComponent,CreateGroupComponent,GroupPanelComponent,MainNavComponent,CreateNoteComponent],
   providers: [AngularFireAuth,AngularFirestore],
   bootstrap: [AppComponent]
 })
