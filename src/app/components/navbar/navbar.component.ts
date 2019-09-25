@@ -8,6 +8,7 @@ import {auth} from 'firebase/app';
 import { CreateGroupComponent } from '../create-group/create-group.component';
 import { CreateNoteComponent } from '../create-note/create-note.component';
 import { DataApiService } from '../../services/data-api.service';
+import { AddToGroupComponent } from '../add-to-group/add-to-group.component';
 
 
 
@@ -56,7 +57,6 @@ export class NavbarComponent implements OnInit {
   }
 
   abrirVentanaCrearNota(){
-
     if(this.das.getCurrentGroup()!= null){
       console.log("Grupo seleccionado: ", this.das.getCurrentGroup().nombreGrupo)
       let config:MatDialogConfig={
@@ -66,9 +66,7 @@ export class NavbarComponent implements OnInit {
     }
     else{
       console.log("seleccione grupo");
-    }
-
-    
+    }   
   }
 
   abrirVentanaCrearGrupo(){
@@ -76,6 +74,19 @@ export class NavbarComponent implements OnInit {
       width:'700px'
     }
     this.loginDialog.open(CreateGroupComponent,config);
+  }
+
+  abrirVentanaAgregarPersonaGrupo(){
+    if(this.das.getCurrentGroup()!= null){
+      console.log("Grupo seleccionado: ", this.das.getCurrentGroup().nombreGrupo)
+      let config:MatDialogConfig={
+        width:'400px',
+      }
+      this.loginDialog.open(AddToGroupComponent,config);
+    }
+    else{
+      console.log("seleccione grupo");
+    }   
   }
 
 

@@ -25,11 +25,6 @@ export class CardComponent implements OnInit {
   ngOnInit() {
 
     //console.log( JSON.parse('[  {"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]'));
-        
-    
-    
-    
-
   }
 
 }

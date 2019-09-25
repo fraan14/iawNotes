@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { auth, User } from 'firebase/app';
 import { GrupInterface } from '../models/grupo';
 import * as firebase from 'firebase';
+import { card } from '../interfaces/card.interface';
 
 
 //tengo que importar las interfaces.
@@ -164,9 +165,27 @@ export class DataApiService {
   }
 
   getNotes(){}
-  saveNote(){}
+  saveNote(miNota:card){}
+
+
+  //****************ACA VA LO DE AÑADIR USUARIO A GRUPO***********************/
+
+  ///este metodo tiene que
+  ///primero dado un mail verificar si el usuario exite y retornarlo
+  async VerifyAndAddUser(mail:string){
+    const aux = await this.afs.collection<UserInterface>("Usuarios", ref => ref.where('id',"==","0")).ref.get().then(function(res){
+      if(res.docs.length!=0)
+        console.log("EL USUARIO ES ESTE?",res.docs);
+    })
+    //let user:UserInterface = aux[0].data();
+    
+  }
 
 
 }
+
+//this.afs.collection("Usuarios", ref => ref.where('id', '==', person.uid)).valueChanges()
+
+
 
 //https://stackoverflow.com/questions/51678820/how-to-retrieve-user-from-firestore-based-on-property
