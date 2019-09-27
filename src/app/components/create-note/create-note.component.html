@@ -1,0 +1,28 @@
+
+<h1 mat-dialog-title>Crear Nota</h1>
+
+<div mat-dialog-content>
+
+    <mat-form-field>
+        <input [(ngModel)]="tituloNota" placeholder="Titulo" matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Contenido</mat-label>
+        <textarea matInput [(ngModel)]="textoNota"
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+        <input [(ngModel)]="colorNota" placeholder="Color" matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <input [(ngModel)]="image" placeholder="Imagen" matInput>
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close] (click)="crearNota()">Crear Nota</button>
+    <button mat-raised-button [mat-dialog-close]>Cancelar</button>
+</div>

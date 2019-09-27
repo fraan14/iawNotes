@@ -5,8 +5,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { auth, User } from 'firebase/app';
 import { GrupInterface } from '../models/grupo';
-import { toPublicName } from '@angular/compiler/src/i18n/serializers/xmb';
 import * as firebase from 'firebase';
+import { card } from '../interfaces/card.interface';
+
+
 //tengo que importar las interfaces.
 
 @Injectable({
@@ -20,6 +22,8 @@ export class DataApiService {
 
     this.groupCollection = afs.collection<GrupInterface>('Grupos');
     this.grups = this.groupCollection.valueChanges();
+
+    this.getCurrentGroup();
   }
 
   private groupCollection: AngularFirestoreCollection<GrupInterface>;
@@ -48,6 +52,7 @@ export class DataApiService {
       // }
     }));
   }
+  public grupoSeleccionado:GrupInterface = null;
 
   getUserById(idUser: string){
     this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
@@ -62,7 +67,25 @@ export class DataApiService {
     }));
   }
 
+
+  async CrearGrupoYactualizarUser(idUser: string, groupName:string){
+    
+    const aux = await this.afs.doc<UserInterface>(`Usuarios/${idUser}`).ref.get(); //este me lo transforma en promesa
+    // if (aux.exists) {
+    //   console.log("Document data:", aux.data());
+    // } else {
+    //   console.log("No such document!");
+    // }
+    let user:UserInterface = aux.data();
+    let idGroup = this.CreateNewGroup(user.nombre,user.id,groupName);
+    user.Grupos.push(idGroup);
+    console.log("USUARIO UPDATEADO", user);
+    this.afs.doc(`Usuarios/${user.id}`).set(user);
+    
+  }
+
   //este metodo se encarga de actualizar la lista de referencias a grupos de los usuarios.
+<<<<<<< HEAD
   updateUserGroups(idUser:string,idGroup:string){
     this.getUserById(idUser).subscribe(u=>{
       console.log(u);
@@ -71,6 +94,9 @@ export class DataApiService {
       
       // this.afs.doc(`Usuarios/${idUser}`).set(u);
     });
+=======
+  updateUserGroups(user:UserInterface,idGroup:string){
+>>>>>>> a0e6cf7f3f38121ff4d5e7360c96c3e5d3d3d55c
     
     // this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
 
@@ -82,14 +108,20 @@ export class DataApiService {
     //     data.id = action.payload.id;
     //     return data;
     //   }
+<<<<<<< HEAD
     // })).subscribe(user=>{
     //  user.Grupos.push(idGroup);
     //  console.log("USUARIO UPDATEADO", user);
     //  this.afs.doc(`Usuarios/${idUser}`).update(user);
     // })
+=======
+    // })).toPromise().then(user=>{
+     user.Grupos.push(idGroup);
+     console.log("USUARIO UPDATEADO", user);
+     this.afs.doc(`Usuarios/${user.id}`).set(user);
+    // });
+>>>>>>> a0e6cf7f3f38121ff4d5e7360c96c3e5d3d3d55c
     
-
-
     // this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
     // this.userDoc.valueChanges().subscribe(res=>{
     //   res.Grupos.push(idGroup);
@@ -100,18 +132,13 @@ export class DataApiService {
   }
 
   CreateNewUser(person: firebase.User){
-    
     let auxName = "";
-
     if(person.displayName != undefined)
       auxName = person.displayName;
     else
       auxName = person.email.split('@',1)[0]; //si se registra con email, el nombre que le queda es el del inicio del mail.
     
     let newgpid:string = this.CreateNewGroup(auxName,person.uid,"Mis Notas");
-
-    console.log("GRUPO CREADO",newgpid)
-    
     const newPerson = <UserInterface>
      {
        id: person.uid,
@@ -119,13 +146,11 @@ export class DataApiService {
        nombre:auxName,
        Grupos:[newgpid]
      }
-
     this.usersCollection.doc(person.uid).set(newPerson);    //agrega el usuario a la base de datos
     return newPerson;
   }
 
   CreateNewGroup(pname:string,pid:string, gname:string):string{
-    
     let auxName = "";
     let customId = this.generateNewKey('Grupos');
     const newGroup = <GrupInterface>
@@ -136,13 +161,9 @@ export class DataApiService {
       notasID:null,
       usuarioiD:[pid]
      }
-    
     this.groupCollection.doc(customId).set(newGroup);    //agrega el usuario a la base de datos
     return customId;
   }
-
-  
-
 
   getOrCreateUser(person: firebase.User){
     //primero tengo que buscar en la base de datos de usuarios por uid
@@ -153,8 +174,8 @@ export class DataApiService {
         this.user2 = res[0];
         console.log("el usuario con ese id es: " + this.user2.nombre);
       }else{
+        console.log("No existe el usuario en la base de datos, se procede a crearlo...");
         this.CreateNewUser(person);
-        console.log("No existe el usuario en la base de datos");
       }
     });
   }
@@ -169,11 +190,37 @@ export class DataApiService {
     return newKey;
   }
 
-  createGroup(){}
+  //este metodo recibe como parametro el uid del usuario logueado y retorna los grupos en los que el usuario aparece registrado.
+  getKnownGroups(idUser:string){
+    return this.afs.collection("Grupos", ref => ref.where('usuarioiD', "array-contains", idUser)).valueChanges();
+  }
+
+  getCurrentGroup():GrupInterface{
+    return this.grupoSeleccionado;
+  }
+
   getNotes(){}
-  saveNote(){}
+  saveNote(miNota:card){}
+
+
+  //****************ACA VA LO DE AÑADIR USUARIO A GRUPO***********************/
+
+  ///este metodo tiene que
+  ///primero dado un mail verificar si el usuario exite y retornarlo
+  async VerifyAndAddUser(mail:string){
+    const aux = await this.afs.collection<UserInterface>("Usuarios", ref => ref.where('id',"==","0")).ref.get().then(function(res){
+      if(res.docs.length!=0)
+        console.log("EL USUARIO ES ESTE?",res.docs);
+    })
+    //let user:UserInterface = aux[0].data();
+    
+  }
 
 
 }
+
+//this.afs.collection("Usuarios", ref => ref.where('id', '==', person.uid)).valueChanges()
+
+
 
 //https://stackoverflow.com/questions/51678820/how-to-retrieve-user-from-firestore-based-on-property

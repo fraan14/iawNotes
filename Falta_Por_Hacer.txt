@@ -1,0 +1,8 @@
+Crear nota y agregarla al grupo seleccionado - para esto solamente necesito que se mapee la informacion de la nueva card a una variable en el componente create-note.component.ts
+despues de que este eso hecho yo la agrego a la base de datos. La nueva card debe tener un boton para ser eliminada. Tambien debe poseer un campo para almacenar el id de su creador ya que solamente este va a poder eliminarla.
+
+Agregar persona a grupo - para agregar una nueva persona al grupo este debe conocer su email, una vez obtenido el mismo si el email no esta registrado para ningun usuario se le informara al usuario que quiere agregar que el email no existe/ no esta registrado. si el email existe el id del dueño del email es agregado a la lista de personas que componen el grupo y al usuario destino se le agrega el id del grupo a su arreglo de grupos.
+para esto necesito :
+    metodo para obtener usuario a partir del email.
+    metodo para obtener grupo , modificarlo y actualizarlo con el id del nuevo integrante.
+    metodo para actualizar el usuario que ya obtuve con el nuevo id de grupo que se debe mostrar.

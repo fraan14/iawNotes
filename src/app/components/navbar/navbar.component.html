@@ -26,7 +26,7 @@
     
         <ul fxLayout fxLayoutGap="20px" class="navigation-items">
             <li>
-                <a (click)="onLogout()">
+                <a (click)="abrirVentanaCrearNota()" >
                   <mat-icon class="icon">event_note</mat-icon>
                   <span  class="label">Crear Nota</span>
                  </a>
@@ -36,6 +36,12 @@
                   <mat-icon class="icon">group</mat-icon>
                   <span  class="label">Crear Grupo</span>
                  </a>
+            </li>
+            <li>
+              <a (click)="abrirVentanaAgregarPersonaGrupo()">
+                <mat-icon class="icon">group</mat-icon>
+                <span  class="label">Agregar a Grupo</span>
+               </a>
             </li>
             <li>
                 <a (click)="onLogout()">

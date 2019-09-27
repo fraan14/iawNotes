@@ -27,11 +27,6 @@ export class CardComponent implements OnInit {
 
     // console.log( JSON.parse('[  {"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]'));
     //console.log( JSON.parse('[  {"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]'));
-        
-    
-    
-    
-
   }
   borrar(){
     console.log("me borran");
