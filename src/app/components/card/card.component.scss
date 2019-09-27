@@ -1,0 +1,28 @@
+@import"../../styles/styles.scss";
+.card {
+    // margin: 5%;
+    width: 200px;
+    max-height: 470px;
+    border-radius:10px;
+    .card-header{
+        margin-bottom: 5px;
+        .card-title{
+            font-size: 20px;
+        }
+    }
+  
+    .card-image{
+        width: 232px;
+        height: 250px;
+        object-fit: cover;
+        /* width: 100%; */
+        // width: 232px;
+        // height: auto;
+    }
+
+    .botones-container{
+        .mat-button &.mat-button-base{
+            
+        }
+    }
+}

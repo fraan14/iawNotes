@@ -1,25 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { card } from 'src/app/interfaces/card.interface';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { MatDialog } from '@angular/material';
+import { MensajeConfirmacionComponent } from '../mensajes/mensaje-confirmacion/mensaje-confirmacion.component';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
-  public card:card;
+  @Input() card:card;
 
-  constructor() {
-      this.card = {
-      id: 123,
-      texto: '[  {"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]',
-      color: "rojo",
-      titulo: "El titulo mas largo delasd nknajk ldsjkl djklj ldasj dkla ",
-      img: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-      tipo: 2,
-      label: ["hola", "como", "andas"]
-    }
+  constructor(public dialog: MatDialog) {
+    //   this.card = {
+    //   id: 123,
+    //   texto: '[  {"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]',
+    //   color: "rojo",
+    //   titulo: "El titulo mas largo delasd nknajk ldsjkl djklj ldasj dkla ",
+    //   img: "https://material.angular.io/assets/img/examples/shiba2.jpg",
+    //   tipo: 2,
+    //   label: ["hola", "como", "andas"]
+    // }
    }
 
   ngOnInit() {
@@ -31,6 +32,16 @@ export class CardComponent implements OnInit {
     
     
 
+  }
+  borrar(){
+    console.log("me borran");
+    let dialogRef = this.dialog.open(MensajeConfirmacionComponent, {
+      height: '145px',
+      width: '220px',
+    });
+  }
+  masOpciones(){
+    
   }
 
   aGuardar(event){

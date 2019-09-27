@@ -19,6 +19,7 @@ import { CardModule } from './components/card/card.module';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 //import {AngularFireStorageModule} from '@angular/fire/firestore'
 import { CreateGroupComponent } from './components/create-group/create-group.component';
+import { CardContainerModule } from './components/card-container/card-container.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CreateGroupComponent } from './components/create-group/create-group.com
     MatFormFieldModule,
     FormsModule,
     CardModule,
+    CardContainerModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),  //de esta manera toma los datos de environment para conectar con la db
     AngularFireDatabaseModule
 

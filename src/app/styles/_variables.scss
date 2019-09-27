@@ -1,0 +1,13 @@
+/*
+Hasta 599px son teléfonos móviles en modo vertical.
+De 600px a 959px son tabletas.
+De 960px a 1279px son pantallas de escritorio normales.
+1280px o más son pantallas grandes como televisores.
+*/
+//tamaños 
+$breakpoint-celular: 599px;
+$breakpoint-tablet-min: 749px;
+$breakpoint-tablet: 959px;
+$breakpoint-pantalla: 1280px;
+
+

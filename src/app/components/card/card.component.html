@@ -1,12 +1,23 @@
 <mat-card class="card">
-    <img class="card-image" mat-card-image  [src]=card?.img >
-    <mat-card-header>
-        <mat-card-title>{{card.titulo | TransformarTextoPipe :"":"cortarTitulo"}}</mat-card-title>
-    </mat-card-header>
+    <img *ngIf="card.img != '' " class="card-image" mat-card-image  [src]=card?.img >
+    <div class="card-header">
+        <div class="card-title">{{card.titulo | TransformarTextoPipe :"":"cortarTitulo"}}</div>
+    </div>
+    
     <mat-card-content>
         <app-contenido  (contenido_texto)=aGuardar($event) [tipo]="card.tipo" [texto] = "card.texto" ></app-contenido>
-        <app-contenido  [tipo]="card.tipo" [texto] = "card.texto" ></app-contenido>
+        <!-- <app-contenido  [tipo]="card.tipo" [texto] = "card.texto" ></app-contenido> -->
     </mat-card-content>
     <mat-card-actions>
+        <div fxLayout="row" fxLayoutAlign="space-around center" class="botones-container">
+            <a  matTooltip="Borrar" (click)="borrar()" ><i class="material-icons">delete</i></a>
+            <a  matTooltip="Editar"><i class="material-icons">edit</i></a>
+            <a  matTooltip="Agregar"><i class="material-icons">group</i></a>
+            <a  matTooltip="Cambiar color"><i class="material-icons">palette</i></a>
+            <a  matTooltip="Agregar imagen"><i class="material-icons">add_photo_alternate</i></a>
+            <a  matTooltip="Mas" (click)="masOpciones()"><i class="material-icons">more_vert</i></a>
+            
+        </div>
+
     </mat-card-actions>
 </mat-card>

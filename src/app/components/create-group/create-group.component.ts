@@ -33,10 +33,23 @@ export class CreateGroupComponent implements OnInit {
     });
   }
   crearGrupo(){
-    this.das.getUserById(this.actualUserId).subscribe(user=>{
-      this.newGroupid=this.das.CreateNewGroup(user.nombre,user.id,this.ngrupo);
-      this.das.updateUserGroups(user.id,this.newGroupid);
+    this.das.getUBI(this.actualUserId).subscribe(res =>{
+      console.log("componente: ", res);
+      
     });
+    
+    
+    
+    // this.das.getUserById(this.actualUserId).subscribe(user=>{
+    //   this.newGroupid = this.das.CreateNewGroup(user.nombre,user.id,this.ngrupo);
+    //   this.das.updateUserGroups(user.id,this.newGroupid);
+    // });
   }
 
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.das.getUBI("").subscribe();
+  }
 }

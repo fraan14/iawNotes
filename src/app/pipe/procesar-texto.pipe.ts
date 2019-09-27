@@ -4,7 +4,7 @@ import { PipeTransform, Pipe } from "@angular/core";
 @Pipe({name:"TransformarTextoPipe"})
 
 export class TransformarTextoPipe implements PipeTransform {
-    MAXIMA_LONGITUD_TEXTO: number = 50;
+    MAXIMA_LONGITUD_TEXTO: number = 200;
     MAXIMA_LONGITUD_TITULO: number = 25;
 
     transform(input: string, tipo: string, tipo_pipe:string):string {

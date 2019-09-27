@@ -1,2 +1,4 @@
-<ng-container *ngIf="tipo === 1"> <app-contenido-texto [texto] = "texto"></app-contenido-texto></ng-container>
-<ng-container *ngIf="tipo === 2"> <app-contenido-checklist [texto] = "texto" (textoAGuardar)=aGuardar($event)></app-contenido-checklist></ng-container>
+<div class="container-contenido">
+    <ng-container *ngIf="tipo === 1"> <app-contenido-texto [texto] = "texto"></app-contenido-texto></ng-container>
+    <ng-container *ngIf="tipo === 2"> <app-contenido-checklist [texto] = "texto" (textoAGuardar)=aGuardar($event)></app-contenido-checklist></ng-container>
+</div>

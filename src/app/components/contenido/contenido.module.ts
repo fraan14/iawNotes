@@ -6,6 +6,7 @@ import { ContenidoTextoComponent } from './contenido-texto/contenido-texto.compo
 import { ContenidoChecklistComponent } from './contenido-checklist/contenido-checklist.component';
 import { MatCheckboxModule} from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { ComunPipeModule } from 'src/app/pipe/comun-pipe.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    ComunPipeModule
   ],
   exports:[ContenidoComponent]
 })
