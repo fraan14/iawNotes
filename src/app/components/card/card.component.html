@@ -11,13 +11,23 @@
     <mat-card-actions>
         <div fxLayout="row" fxLayoutAlign="space-around center" class="botones-container">
             <a  matTooltip="Borrar" (click)="borrar()" ><i class="material-icons">delete</i></a>
-            <a  matTooltip="Editar"><i class="material-icons">edit</i></a>
-            <a  matTooltip="Agregar"><i class="material-icons">group</i></a>
-            <a  matTooltip="Cambiar color"><i class="material-icons">palette</i></a>
+            <a  matTooltip="Editar" (click)="editar()" ><i class="material-icons">edit</i></a>
+            <a  matTooltip="Compartir" (click)="compartir()" ><i class="material-icons">group</i></a>
+            <a  matTooltip="Cambiar color" [matMenuTriggerFor]="colores"><i class="material-icons">palette</i></a>
             <a  matTooltip="Agregar imagen"><i class="material-icons">add_photo_alternate</i></a>
             <a  matTooltip="Mas" (click)="masOpciones()"><i class="material-icons">more_vert</i></a>
-            
         </div>
+        
+        
+        <mat-menu #colores="" fxLayout="row wrap" fxLayoutAlign="center center">
+            
+            <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-around center" > 
+                <div class="ta-btn" fxFlex="30" >
+                    <span class="circle"></span>
+                </div>
+            </div>
 
-    </mat-card-actions>
-</mat-card>
+            </mat-menu>
+            
+        </mat-card-actions>
+    </mat-card>

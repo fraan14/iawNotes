@@ -12,4 +12,8 @@ export class MensajeConfirmacionComponent implements OnInit {
   ngOnInit() {
   }
 
+  opcionElegida(op:string){
+    console.log(op);
+    
+  }
 }

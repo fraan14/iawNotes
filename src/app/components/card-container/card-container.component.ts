@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { card } from 'src/app/interfaces/card.interface';
+import { CardModalComponent } from '../modals/card-modal/card-modal.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-card-container',
@@ -8,8 +11,11 @@ import { Component, OnInit } from '@angular/core';
 export class CardContainerComponent implements OnInit {
 
   cards : object[];
+  btn_activo:boolean = false;
 
-  constructor() { 
+  constructor(
+    public dialog: MatDialog
+  ) { 
     let card_1 = {
       id: 123,
       texto: '[  {"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]',
@@ -44,7 +50,49 @@ export class CardContainerComponent implements OnInit {
 
   }
 
+  // Espero a que me pasen una card a eliminar
+  private borrarCard(e:number) {
+    console.log("llego",e);
+  //  TODO:Falta la comunicacion con firebase para borrar 
+  }
+
+  private deshacerBorrarCard(e:card) {
+    console.log("llego: ",e);
+  //  TODO:Falta la comunicacion con firebase para re insertar la card 
+  }
+
+
+  public crearCard(tipo:string){
+    let nuevaCard: card; 
+    let tipo_aux: number = Number.parseInt(tipo);
+    nuevaCard = {
+      texto : "",
+      titulo : "",
+      img: "",
+      tipo: tipo_aux
+    }
+    if(tipo_aux == 2){
+      nuevaCard.texto = "[]";
+    }
+    let dialogRef = this.dialog.open(CardModalComponent, {
+      data: {card: nuevaCard}
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      console.log("se cerro el modal: ", res);
+    });
+  }
+
   ngOnInit() {
+  }
+
+  activo(){
+    console.log("clickeo");
+    
+    if(this.btn_activo == false)
+      this.btn_activo = true;
+    else
+      this.btn_activo = false;
   }
 
 }

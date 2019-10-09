@@ -1,0 +1,58 @@
+<div [formGroup]="cardForm" fxLayout="row wrap" class="form-container">
+  
+  <mat-form-field fxFlex="100" class="titulo">
+    <mat-label>Titulo</mat-label>
+    <input type="text" matInput formControlName="titulo">
+  </mat-form-field>
+  
+  <div fxFlex="100" fxLayout="row wrap" class="selector">
+    <label fxFlex="20">Tipo: </label>
+    <mat-radio-group fxFlex="80" fxLayout="row wrap" formControlName="tipo_contenido">
+      <mat-radio-button fxFlex="50" value="texto">Texto</mat-radio-button>
+      <mat-radio-button fxFlex="50" value="check_list">Lista</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  
+  <div fxFlex="100" fxLayout="row wrap" class="contenido" >
+    <mat-form-field fxFlex="100" 
+    *ngIf="cardForm.get('tipo_contenido').value == 'texto'">
+    <mat-label>Contenido</mat-label>
+    <textarea matInput formControlName="contenido" class="texto"></textarea>
+  </mat-form-field>
+  
+  <div fxFlex="100" fxLayout="row wrap" class="container_checklist">
+    <mat-form-field fxFlex="100" *ngIf="cardForm.get('tipo_contenido').value == 'check_list'">
+      <div fxFlex="100">
+        <mat-label>Lista</mat-label>
+        <input type="text" matInput formControlName="agregar_check" 
+        (click)="limpiar()"  
+        (keyup.enter)='enterAction()'>  
+      </div>
+    </mat-form-field>
+    <div *ngIf="cardForm.get('tipo_contenido').value == 'check_list'" fxFlex="100" fxLayout="row wrap" class="lista">
+      <div *ngFor="let item of lista_check; let i = index" fxFlex="100" (click)="seleccionaronElemento(item,i)">
+        <mat-checkbox [checked]="item.check"  >
+          {{item.text}}
+        </mat-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div fxFlex="100" fxLayout="row wrap">
+  <p fxFlex="60">Cargar Imagen</p>
+  <button mat-button color="primary" (click)="subirImagen()">
+    <mat-icon>file_upload</mat-icon>
+    Cargar
+  </button>
+</div>
+
+<!-- <input  id="fileInput" type="file" > -->
+<input type="file" id="fileUpload" name="fileUpload" multiple="multiple" 
+ style="display:none;"/>
+
+<div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-evenly center" >
+  <button fxFlex="30" mat-button [mat-dialog-close]="true">Cancelar</button>
+  <button fxFlex="30" mat-raised-button color="primary" [mat-dialog-close]="accionEditar()" >Editar</button>
+</div>
+</div>

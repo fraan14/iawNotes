@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { card } from 'src/app/interfaces/card.interface';
-import { MatDialog } from '@angular/material';
-import { MensajeConfirmacionComponent } from '../mensajes/mensaje-confirmacion/mensaje-confirmacion.component';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { CardModalComponent } from '../modals/card-modal/card-modal.component';
+import { BusquedaModalComponent } from '../modals/busqueda-modal/busqueda-modal.component';
 
 @Component({
   selector: 'app-card',
@@ -10,38 +11,63 @@ import { MensajeConfirmacionComponent } from '../mensajes/mensaje-confirmacion/m
 })
 export class CardComponent implements OnInit {
   @Input() card:card;
+  @Input() id: number;
 
-  constructor(public dialog: MatDialog) {
-    //   this.card = {
-    //   id: 123,
-    //   texto: '[  {"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]',
-    //   color: "rojo",
-    //   titulo: "El titulo mas largo delasd nknajk ldsjkl djklj ldasj dkla ",
-    //   img: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-    //   tipo: 2,
-    //   label: ["hola", "como", "andas"]
-    // }
-   }
+  @Output() borrarCard: EventEmitter<number>;
+  @Output() deshacerBorrarCard: EventEmitter<card>;
 
-  ngOnInit() {
-
-    // console.log( JSON.parse('[  {"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]'));
-    //console.log( JSON.parse('[  {"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]'));
+  constructor(private _snackBar: MatSnackBar,
+    public dialog: MatDialog) {
+    this.borrarCard = new EventEmitter();  
+    this.deshacerBorrarCard = new EventEmitter();
   }
+  
+  ngOnInit() {
+  }
+  
+  
+  //Accion de borrar crea un SnackBar para deshacer los cambios
   borrar(){
-    console.log("me borran");
-    let dialogRef = this.dialog.open(MensajeConfirmacionComponent, {
-      height: '145px',
-      width: '220px',
+    let copiaDelCard = this.card;
+    let snackBar_borrar = this._snackBar.open("Se eliminó la tarjeta ", 'deshacer',{panelClass:"sucess", verticalPosition: "bottom",   duration: 5000});
+    snackBar_borrar.afterDismissed().subscribe(data => {
+      if(data.dismissedByAction)
+        this.deshacerBorrarCard.emit(copiaDelCard);
+    });
+    this.borrarCard.emit(this.id);
+  }
+
+  editar(){
+    console.log("Editar");
+    let dialogRef = this.dialog.open(CardModalComponent, {
+      data: {card: this.card}
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      console.log("se cerro el modal: ", res);
+    });
+
+
+  }
+
+  compartir(){
+    let dialog = this.dialog.open(BusquedaModalComponent, {
+      data: {card: this.card }
+    });
+
+    dialog.afterClosed().subscribe(res => {
+      console.log("Se cerro la busqueda", res);
+      
     });
   }
+
   masOpciones(){
     
   }
-
+  
   aGuardar(event){
     console.log(event);
     
   }
-
+  
 }

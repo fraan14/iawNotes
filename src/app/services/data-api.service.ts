@@ -85,18 +85,7 @@ export class DataApiService {
   }
 
   //este metodo se encarga de actualizar la lista de referencias a grupos de los usuarios.
-<<<<<<< HEAD
-  updateUserGroups(idUser:string,idGroup:string){
-    this.getUserById(idUser).subscribe(u=>{
-      console.log(u);
-      u.Grupos.push(idGroup);
-      console.log(u);
-      
-      // this.afs.doc(`Usuarios/${idUser}`).set(u);
-    });
-=======
   updateUserGroups(user:UserInterface,idGroup:string){
->>>>>>> a0e6cf7f3f38121ff4d5e7360c96c3e5d3d3d55c
     
     // this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
 
@@ -108,19 +97,11 @@ export class DataApiService {
     //     data.id = action.payload.id;
     //     return data;
     //   }
-<<<<<<< HEAD
-    // })).subscribe(user=>{
-    //  user.Grupos.push(idGroup);
-    //  console.log("USUARIO UPDATEADO", user);
-    //  this.afs.doc(`Usuarios/${idUser}`).update(user);
-    // })
-=======
     // })).toPromise().then(user=>{
      user.Grupos.push(idGroup);
      console.log("USUARIO UPDATEADO", user);
      this.afs.doc(`Usuarios/${user.id}`).set(user);
     // });
->>>>>>> a0e6cf7f3f38121ff4d5e7360c96c3e5d3d3d55c
     
     // this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
     // this.userDoc.valueChanges().subscribe(res=>{

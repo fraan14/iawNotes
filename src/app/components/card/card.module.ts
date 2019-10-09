@@ -10,7 +10,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MensajesModule } from '../mensajes/mensajes.module';
-import { MensajeConfirmacionComponent } from '../mensajes/mensaje-confirmacion/mensaje-confirmacion.component';
+import { MatSnackBarModule, MatMenuModule } from '@angular/material';
+import { CardModalComponent } from '../modals/card-modal/card-modal.component';
+import { ModalsModule } from '../modals/modals.module';
+import { BusquedaModalComponent } from '../modals/busqueda-modal/busqueda-modal.component';
 
 
 
@@ -27,9 +30,12 @@ import { MensajeConfirmacionComponent } from '../mensajes/mensaje-confirmacion/m
     MatTooltipModule,
     MatButtonModule,
     MatDialogModule,
-    MensajesModule
+    MensajesModule,
+    MatSnackBarModule,
+    ModalsModule,
+    MatMenuModule
   ],
-  entryComponents:[MensajeConfirmacionComponent],
+   entryComponents:[CardModalComponent, BusquedaModalComponent],
   exports:[CardComponent]
 })
 export class CardModule { }

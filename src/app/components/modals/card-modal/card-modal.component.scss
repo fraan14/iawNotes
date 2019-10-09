@@ -1,0 +1,27 @@
+.form-container{
+    max-width: 500px;
+    .titulo{
+        height: 50px;
+    }
+    .selector{
+        margin-top: 10px;
+    }
+    .contenido{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        min-height: 150px;
+        .texto{
+            min-height: 100px;
+        }
+        .container_checklist{
+         .lista{
+            overflow: auto;
+            max-height: 300px;
+         }   
+        }
+    }
+    // .lista{
+    //     min-height: 100px;
+
+    // }
+}

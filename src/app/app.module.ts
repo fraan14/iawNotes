@@ -3,7 +3,7 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {MaterialModule} from './material.module'
 import { NgModule } from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout'
-import {MatDialogModule, MatButtonModule, MatInputModule, MatFormFieldModule} from '@angular/material'
+import {MatDialogModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatIconModule, MatMenuModule} from '@angular/material'
 import {AngularFireModule} from '@angular/fire'
 import {AngularFireDatabaseModule} from '@angular/fire/database'
 import {AngularFireAuth} from '@angular/fire/auth';
@@ -25,8 +25,7 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { NotesBoardComponent } from './components/notes-board/notes-board.component';
 import { CreateNoteComponent } from './components/create-note/create-note.component';
 import { AddToGroupComponent} from './components/add-to-group/add-to-group.component';
-
-
+import {MatFileUploadModule} from '@webacad/ng-mat-file-upload';
 
 
 @NgModule({
@@ -49,14 +48,16 @@ import { AddToGroupComponent} from './components/add-to-group/add-to-group.compo
     FlexLayoutModule,
     MatDialogModule,
     MatButtonModule,
+    MatIconModule,
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
     CardModule,
     CardContainerModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),  //de esta manera toma los datos de environment para conectar con la db
-    AngularFireDatabaseModule
-
+    AngularFireDatabaseModule,
+    MatFileUploadModule,
+    MatMenuModule
     
   ],
   entryComponents:[NavbarComponent,LoginComponent,RegisterComponent,CreateGroupComponent,GroupPanelComponent,MainNavComponent,CreateNoteComponent,AddToGroupComponent],

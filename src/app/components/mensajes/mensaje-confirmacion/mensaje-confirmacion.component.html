@@ -1,7 +1,7 @@
 <div fxLayout="row wrap" fxLayoutAlign="space-around center">
     <h3 fxFlex="100" class="titulo">¿Desea borrar?</h3>
     <div fxFlex="100" fxLayout="row " fxLayoutAlign="space-around center">
-      <button fxFlex="40" mat-raised-button>No</button>
-      <button fxFlex="40" mat-raised-button color="primary">Si</button>
+      <button fxFlex="40" mat-raised-button (click)="opcionElegida('no')">No</button>
+      <button fxFlex="40" mat-raised-button color="primary" (click)="opcionElegida('si')" >Si</button>
     </div>
 </div>

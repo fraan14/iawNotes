@@ -1,3 +1,44 @@
 .container-card{
    padding: 1%; 
+   position: relative;
+   
+   .boton-speed-dial{
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      .boton-mas{
+         &.activo {
+            transition: width 5s;
+            transform:rotate(45deg);
+            background-color: red !important;
+            // color: red !important;
+         }
+         .mat-button-wrapper{
+            padding: 0px 0 !important;
+            .icon-add{
+               height:48px !important;
+               width:48px !important;
+               font-size:48px !important;
+            }
+            // .icon-add:focus {
+            //    transform:rotate(45deg);
+            //    -ms-transform:rotate(45deg);
+            //    -webkit-transform:rotate(45deg);
+            //    -webkit-transition: width 5s; /* Safari prior 6.1 */
+            //    transition: width 5s;
+            // }
+         }
+
+         
+      }
+      // .boton-mas::after {
+      //    transform: rotate(45deg);
+      //    background-color: red;
+      // }
+
+      @keyframes rotate {
+         from { transform: rotate(0deg); }
+         to { transform: rotate(45deg); }
+     }
+   }
 }
