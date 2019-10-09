@@ -13,7 +13,7 @@ import { card } from '../interfaces/card.interface';
 
 @Injectable({
   providedIn: 'root'
-})
+}) 
 export class DataApiService {
 
   constructor(private afs:AngularFirestore) { 
@@ -51,6 +51,17 @@ export class DataApiService {
     }));
   }
 
+  async getUsuarioPorId(idUser:string){
+    
+    //return await this.afs.doc<UserInterface>(`Usuarios/${idUser}`).ref.get()
+    let usr: UserInterface;
+    await this.afs.doc<UserInterface>(`Usuarios/${idUser}`).ref.get().then(function(nuevoUsuario){
+      usr = nuevoUsuario.data();
+      //console.log("nuevo usuario "+usr.nombre);
+    });
+    //console.log("Este es el usiario perteneciente al grupo: "+usr.nombre);
+    return usr;
+  }
 
   async CrearGrupoYactualizarUser(idUser: string, groupName:string){
     
@@ -96,6 +107,8 @@ export class DataApiService {
     
   }
 
+
+
   CreateNewUser(person: firebase.User){
     let auxName = "";
     if(person.displayName != undefined)
@@ -124,7 +137,8 @@ export class DataApiService {
       AdminID:pid,
       nombreGrupo:gname,
       notasID:null,
-      usuarioiD:[pid]
+      usuarioiD:[pid],
+      id:customId
      }
     this.groupCollection.doc(customId).set(newGroup);    //agrega el usuario a la base de datos
     return customId;
@@ -173,14 +187,28 @@ export class DataApiService {
   ///este metodo tiene que
   ///primero dado un mail verificar si el usuario exite y retornarlo
   async VerifyAndAddUser(mail:string){
-    const aux = await this.afs.collection<UserInterface>("Usuarios", ref => ref.where('id',"==","0")).ref.get().then(function(res){
-      if(res.docs.length!=0)
-        console.log("EL USUARIO ES ESTE?",res.docs);
-    })
-    //let user:UserInterface = aux[0].data();
+    
+    // const aux = await this.afs.collection<UserInterface>("Usuarios", ref => ref.where('email',"==","garcia.andi90@gmail.com")).ref.get();
+    const aux = await this.afs.collection<UserInterface>("Usuarios", ref => ref.where('email',"==",mail)).ref.get();
+    let finalUser:UserInterface;
+    aux.forEach(function(doc){
+          let miuser:UserInterface = doc.data();
+          let mimail:string = miuser.email;
+          if(mimail===mail){
+            finalUser = miuser;            
+          }
+        });
+    return finalUser;
     
   }
+  
+  UpdateGroup(grp:GrupInterface){
+    this.groupCollection.doc(grp.id).set(grp);    //agrega el usuario a la base de datos
+  }
 
+  updateUser(usr:UserInterface){
+    this.usersCollection.doc(usr.id).set(usr);    //agrega el usuario a la base de datos
+  }
 
 }
 

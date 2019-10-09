@@ -20,7 +20,6 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 //import {AngularFireStorageModule} from '@angular/fire/firestore'
 import { CreateGroupComponent } from './components/create-group/create-group.component';
 import { GroupPanelComponent } from './components/group-panel/group-panel.component';
-import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { NotesBoardComponent } from './components/notes-board/notes-board.component';
 import { CreateNoteComponent } from './components/create-note/create-note.component';
 import { AddToGroupComponent} from './components/add-to-group/add-to-group.component';
@@ -36,7 +35,6 @@ import { AddToGroupComponent} from './components/add-to-group/add-to-group.compo
     RegisterComponent,
     CreateGroupComponent,
     GroupPanelComponent,
-    MainNavComponent,
     NotesBoardComponent,
     CreateNoteComponent,
     AddToGroupComponent
@@ -57,7 +55,7 @@ import { AddToGroupComponent} from './components/add-to-group/add-to-group.compo
 
     
   ],
-  entryComponents:[NavbarComponent,LoginComponent,RegisterComponent,CreateGroupComponent,GroupPanelComponent,MainNavComponent,CreateNoteComponent,AddToGroupComponent],
+  entryComponents:[NavbarComponent,LoginComponent,RegisterComponent,CreateGroupComponent,GroupPanelComponent,CreateNoteComponent,AddToGroupComponent],
   providers: [AngularFireAuth,AngularFirestore],
   bootstrap: [AppComponent]
 })
