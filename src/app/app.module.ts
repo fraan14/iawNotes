@@ -21,7 +21,6 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { CreateGroupComponent } from './components/create-group/create-group.component';
 import { CardContainerModule } from './components/card-container/card-container.module';
 import { GroupPanelComponent } from './components/group-panel/group-panel.component';
-import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { NotesBoardComponent } from './components/notes-board/notes-board.component';
 import { CreateNoteComponent } from './components/create-note/create-note.component';
 import { AddToGroupComponent} from './components/add-to-group/add-to-group.component';
@@ -36,7 +35,6 @@ import {MatFileUploadModule} from '@webacad/ng-mat-file-upload';
     RegisterComponent,
     CreateGroupComponent,
     GroupPanelComponent,
-    MainNavComponent,
     NotesBoardComponent,
     CreateNoteComponent,
     AddToGroupComponent
@@ -60,7 +58,7 @@ import {MatFileUploadModule} from '@webacad/ng-mat-file-upload';
     MatMenuModule
     
   ],
-  entryComponents:[NavbarComponent,LoginComponent,RegisterComponent,CreateGroupComponent,GroupPanelComponent,MainNavComponent,CreateNoteComponent,AddToGroupComponent],
+  entryComponents:[NavbarComponent,LoginComponent,RegisterComponent,CreateGroupComponent,GroupPanelComponent,CreateNoteComponent,AddToGroupComponent],
   providers: [AngularFireAuth,AngularFirestore],
   bootstrap: [AppComponent]
 })

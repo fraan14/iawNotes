@@ -4,4 +4,5 @@ export interface GrupInterface{
     nombreGrupo?:string;
     notasID?:Array<string>;
     usuarioiD?:Array<string>;
+    id?:string;
 }

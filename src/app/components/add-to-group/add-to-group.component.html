@@ -1,7 +1,17 @@
-<h1 mat-dialog-title>Agregar Integrante al grupo</h1>
+<h1 mat-dialog-title>Usuarios Actuales del Grupo</h1>
 
 <div mat-dialog-content>
-
+    <mat-list *ngIf="usuariosDelGrupo"  fxFlex="100" fxLayout="row wrap">
+        <h3 mat-subheader fxFlex="100">Lista de usuarios del grupo</h3>
+        <mat-list-item *ngFor="let l of usuariosDelGrupo; let i=index" fxFlex="100">
+            <p fxFlex="95">{{l.nombre}}</p>
+            <button fxFlex="5" (click)="RemoverUsuarioDelGrupo(i)" >x</button>
+        </mat-list-item>
+    </mat-list>
+</div>
+<br>
+<h1 mat-dialog-title>Añadir nuevo usuario</h1>
+<div mat-dialog-content>
     <mat-form-field>
         <input [(ngModel)]="suemail" placeholder="email" matInput>
     </mat-form-field>
