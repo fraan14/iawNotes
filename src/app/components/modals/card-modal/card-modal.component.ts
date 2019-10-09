@@ -3,6 +3,7 @@ import { card } from 'src/app/interfaces/card.interface';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, Validator, FormControl, FormBuilder } from '@angular/forms';
 import { UploadFile } from '@webacad/ng-mat-file-upload';
+import { DataApiService } from 'src/app/services/data-api.service';
 
 @Component({
   selector: 'app-card-modal',
@@ -20,7 +21,7 @@ export class CardModalComponent implements OnInit {
   
   
   constructor(@Inject(MAT_DIALOG_DATA) private data: any,
-  fb: FormBuilder            
+  fb: FormBuilder , private das:DataApiService           
   ) {
     //Datos pasados
     if(data){
@@ -122,6 +123,8 @@ export class CardModalComponent implements OnInit {
     }
     
     // console.log(card);
+
+    
     return card;
     
   }
@@ -152,14 +155,14 @@ export class CardModalComponent implements OnInit {
   }
   
   
-  
+  // TODO: Guardar la imagen en el storage de Firebase
   subirImagen(){
     const fileUpload = document.getElementById('fileUpload') as HTMLInputElement;
     fileUpload.onchange = () => {
 
+      const file = fileUpload.files[0];
+      console.log("files:",file);
       for (let index = 0; index < fileUpload.files.length; index++) {
-        const file = fileUpload.files[index];
-        console.log("files:",file);
         
         // this.files.push({ data: file, state: 'in', 
         // inProgress: false, progress: 0, canRetry: false, canCancel: true });

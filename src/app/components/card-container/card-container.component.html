@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutAlign="center start">
+<div fxLayout="row wrap" fxLayoutAlign="center start" *ngIf="cards.length > 0">
   <div *ngFor="let c of cards; let i = index" class="container-card">
     <app-card (borrarCard)="borrarCard($event)" (deshacerBorrarCard)="deshacerBorrarCard($event)" [card] = c [id] = i > </app-card>
     
