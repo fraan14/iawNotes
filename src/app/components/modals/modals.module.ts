@@ -7,7 +7,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { MatRadioModule} from '@angular/material/radio';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatFileUploadModule } from 'angular-material-fileupload';
 import { BusquedaModalComponent } from './busqueda-modal/busqueda-modal.component';
 
 
@@ -24,8 +23,6 @@ import { BusquedaModalComponent } from './busqueda-modal/busqueda-modal.componen
     MatCheckboxModule,
     MatRadioModule,
     MatInputModule,
-    MatFileUploadModule,
-    MatFileUploadModule,
     MatListModule,
     MatIconModule
   ],

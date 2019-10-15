@@ -24,7 +24,6 @@ import { GroupPanelComponent } from './components/group-panel/group-panel.compon
 import { NotesBoardComponent } from './components/notes-board/notes-board.component';
 import { CreateNoteComponent } from './components/create-note/create-note.component';
 import { AddToGroupComponent} from './components/add-to-group/add-to-group.component';
-import {MatFileUploadModule} from '@webacad/ng-mat-file-upload';
 
 
 @NgModule({
@@ -54,7 +53,6 @@ import {MatFileUploadModule} from '@webacad/ng-mat-file-upload';
     CardContainerModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),  //de esta manera toma los datos de environment para conectar con la db
     AngularFireDatabaseModule,
-    MatFileUploadModule,
     MatMenuModule
     
   ],

@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { card } from 'src/app/interfaces/card.interface';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, Validator, FormControl, FormBuilder } from '@angular/forms';
-import { UploadFile } from '@webacad/ng-mat-file-upload';
 import { DataApiService } from 'src/app/services/data-api.service';
 
 @Component({
@@ -17,7 +16,6 @@ export class CardModalComponent implements OnInit {
   fb: FormBuilder;
   lista_check: {check:boolean, text:string}[];
   fileUploadInputFor:string = "";
-  files: UploadFile[];
   
   
   constructor(@Inject(MAT_DIALOG_DATA) private data: any,
@@ -47,11 +45,7 @@ export class CardModalComponent implements OnInit {
           'agregar_check':      ["agregar item"] ,
           'imagen':             [""],
         });
-      }
-      
-      
-      
-      
+      }      
     }
     
     // this.lista_check = new Array<any>();

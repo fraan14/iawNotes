@@ -1,5 +1,5 @@
 export interface card{
-    id ?:number,
+    id ?:string,
     texto ?: string,
     color ?: string,
     titulo ?: string,
