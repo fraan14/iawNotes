@@ -4,7 +4,7 @@ import { isBoolean } from 'util';
 @Component({
   selector: 'app-contenido-checklist',
   templateUrl: './contenido-checklist.component.html',
-  styleUrls: ['./contenido-checklist.component.css']
+  styleUrls: ['./contenido-checklist.component.scss']
 })
 export class ContenidoChecklistComponent implements OnInit {
 @Input() texto;

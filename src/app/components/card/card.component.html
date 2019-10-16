@@ -6,7 +6,6 @@
     
     <mat-card-content>
         <app-contenido  (contenido_texto)=aGuardar($event) [tipo]="card.tipo" [texto] = "card.texto" ></app-contenido>
-        <!-- <app-contenido  [tipo]="card.tipo" [texto] = "card.texto" ></app-contenido> -->
     </mat-card-content>
     <mat-card-actions>
         <div fxLayout="row" fxLayoutAlign="space-around center" class="botones-container">
@@ -19,15 +18,43 @@
         </div>
         
         
-        <mat-menu #colores="" fxLayout="row wrap" fxLayoutAlign="center center">
+        <mat-menu #colores="">
             
-            <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-around center" > 
-                <div class="ta-btn" fxFlex="30" >
-                    <span class="circle"></span>
+            <div fxLayout="row wrap" fxLayoutAlign="center center">
+                <div class="contenedor-color" fxFlex="50">
+                    <a matTooltip="Sin estilo" fxLayout="row wrap" fxLayoutAlign="center center" (click)="cambiarColor('sin-color')" >
+                        <mat-icon class="material-icons sin-color">
+                            panorama_fish_eye
+                        </mat-icon>
+                    </a>
+                </div>
+                
+                <div class="contenedor-color" fxFlex="50">
+                    <a fxLayout="row wrap" matTooltip="Azul" fxLayoutAlign="center center" (click)="cambiarColor('primary')" >                    
+                        <mat-icon color="primary" class="material-icons amarillo" >
+                            fiber_manual_record
+                        </mat-icon>
+                    </a>
+                </div>
+                
+                <div class="contenedor-color" fxFlex="50">
+                    <a fxLayout="row wrap" matTooltip="Rosa" fxLayoutAlign="center center" (click)="cambiarColor('accent')" >                    
+                        <mat-icon color="accent" class="material-icons amarillo" >
+                            fiber_manual_record
+                        </mat-icon>
+                    </a>
+                </div>
+
+                <div class="contenedor-color" fxFlex="50">
+                    <a fxLayout="row wrap" matTooltip="Rojo" fxLayoutAlign="center center" (click)="cambiarColor('warn')" >                    
+                        <mat-icon color="warn" class="material-icons amarillo" >
+                            fiber_manual_record
+                        </mat-icon>
+                    </a>
                 </div>
             </div>
-
-            </mat-menu>
             
-        </mat-card-actions>
-    </mat-card>
+        </mat-menu>
+        
+    </mat-card-actions>
+</mat-card>

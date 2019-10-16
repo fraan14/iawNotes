@@ -5,7 +5,7 @@
     <input type="text" matInput formControlName="titulo">
   </mat-form-field>
   
-  <div fxFlex="100" fxLayout="row wrap" class="selector">
+  <div fxFlex="100" fxLayout="row wrap" class="selector" *ngIf="card.texto.length == 0">
     <label fxFlex="20">Tipo: </label>
     <mat-radio-group fxFlex="80" fxLayout="row wrap" formControlName="tipo_contenido">
       <mat-radio-button fxFlex="50" value="texto">Texto</mat-radio-button>
@@ -39,8 +39,8 @@
   </div>
 </div>
 
-<div fxFlex="100" fxLayout="row wrap">
-  <p fxFlex="60">Cargar Imagen</p>
+<div class="texto-cargar" fxFlex="100" fxLayout="row wrap">
+  <span  fxFlex="60">Cargar Imagen</span>
   <button mat-button color="primary" (click)="subirImagen()">
     <mat-icon>file_upload</mat-icon>
     Cargar

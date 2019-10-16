@@ -14,14 +14,22 @@
             min-height: 100px;
         }
         .container_checklist{
-         .lista{
-            overflow: auto;
-            max-height: 300px;
-         }   
+            .lista{
+                overflow: auto;
+                max-height: 300px;
+            }   
         }
     }
+    
+    .texto-cargar{
+        margin: 5px 0px;
+        font-size: inherit;
+        font-weight: 400;
+        line-height: 1.125;
+        font-family: Roboto,"Helvetica Neue",sans-serif;
+    }
     // .lista{
-    //     min-height: 100px;
-
-    // }
-}
+        //     min-height: 100px;
+        
+        // }
+    }

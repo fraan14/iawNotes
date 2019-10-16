@@ -10,7 +10,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MensajesModule } from '../mensajes/mensajes.module';
-import { MatSnackBarModule, MatMenuModule } from '@angular/material';
+import { MatSnackBarModule, MatMenuModule, MatListModule } from '@angular/material';
 import { CardModalComponent } from '../modals/card-modal/card-modal.component';
 import { ModalsModule } from '../modals/modals.module';
 import { BusquedaModalComponent } from '../modals/busqueda-modal/busqueda-modal.component';
@@ -33,7 +33,8 @@ import { BusquedaModalComponent } from '../modals/busqueda-modal/busqueda-modal.
     MensajesModule,
     MatSnackBarModule,
     ModalsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatListModule
   ],
    entryComponents:[CardModalComponent, BusquedaModalComponent],
   exports:[CardComponent]

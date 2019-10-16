@@ -2,18 +2,32 @@
 @include mat-core();
 
 
+$color: #ffffff;
+
 // tema light
-$light-app-primary: mat-palette($mat-indigo);
-$light-app-accent:  mat-palette($mat-pink, A200, A100, A400);
-$light-app-theme:   mat-light-theme($light-app-primary, $light-app-accent);
+$my-theme-primary:  mat-palette($mat-indigo);
+$my-theme-accent:   mat-palette($mat-pink, A200, A100, A400);
+$my-theme-warm:     mat-palette($mat-red);
+$my-theme:  mat-light-theme(
+$my-theme-primary, 
+$my-theme-accent, 
+$my-theme-warm
+);
+
 
 // tema dark
 $dark-primary: mat-palette($mat-blue-grey);
-$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-accent:  mat-palette($mat-amber);
 $dark-warn:    mat-palette($mat-deep-orange);
-$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$dark-theme:   mat-dark-theme(
+$dark-primary,
+$dark-accent, 
+$dark-warn
+);
 
-
-.unicorn-dark-theme {
+.my-theme{
+    @include angular-material-theme($my-theme);
+}
+.my-second-theme{
     @include angular-material-theme($dark-theme);
 }

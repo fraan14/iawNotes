@@ -1,10 +1,12 @@
 @import"../../styles/styles.scss";
 .card {
+    
     // margin: 5%;
     box-shadow: 1px 3px 8px #00000047;
     width: 200px;
     max-height: 470px;
     border-radius:10px;
+    background-color: $color;
     .card-header{
         margin-bottom: 5px;
         .card-title{
@@ -30,22 +32,14 @@
                 font-size: 200px;
               }
         }
-        // .circle:before {
-        //     content: ' \25CF';
-        //     font-size: 200px;
-        //   }
-        // .btn-color{
-        //     margin: 1%;
-        //     height: 25px;
-        //     width: 25px;
-        //     background-color: #bbb;
-        //     border-radius: 50%;
-        //     display: inline-block;
-        // }
-        .mat-button &.mat-button-base{
-            
-        }
+     
+       
     }
+.mat-menu-content{
+    .contenedor-color{
+        text-align: center;
+    }
+}
 }
 .card:hover{
     transform: scale(1.05);

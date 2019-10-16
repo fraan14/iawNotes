@@ -12,62 +12,83 @@ import { BusquedaModalComponent } from '../modals/busqueda-modal/busqueda-modal.
 export class CardComponent implements OnInit {
   @Input() card:card;
   @Input() id: number;
-
+  
   @Output() borrarCard: EventEmitter<number>;
   @Output() deshacerBorrarCard: EventEmitter<card>;
-
+  
+  
   constructor(private _snackBar: MatSnackBar,
     public dialog: MatDialog) {
-    this.borrarCard = new EventEmitter();  
-    this.deshacerBorrarCard = new EventEmitter();
-  }
-  
-  ngOnInit() {
-  }
-  
-  
-  //Accion de borrar crea un SnackBar para deshacer los cambios
-  borrar(){
-    let copiaDelCard = this.card;
-    let snackBar_borrar = this._snackBar.open("Se eliminó la tarjeta ", 'deshacer',{panelClass:"sucess", verticalPosition: "bottom",   duration: 5000});
-    snackBar_borrar.afterDismissed().subscribe(data => {
-      if(data.dismissedByAction)
+      this.borrarCard = new EventEmitter();  
+      this.deshacerBorrarCard = new EventEmitter();
+    }
+    
+    ngOnInit() {
+    }
+    
+    
+    //Accion de borrar crea un SnackBar para deshacer los cambios
+    borrar(){
+      let copiaDelCard = this.card;
+      let snackBar_borrar = this._snackBar.open("Se eliminó la tarjeta ", 'deshacer',{panelClass:"sucess", verticalPosition: "bottom",   duration: 5000});
+      snackBar_borrar.afterDismissed().subscribe(data => {
+        if(data.dismissedByAction)
         this.deshacerBorrarCard.emit(copiaDelCard);
-    });
-    this.borrarCard.emit(this.id);
-  }
-
-  editar(){
-    console.log("Editar");
-    let dialogRef = this.dialog.open(CardModalComponent, {
-      data: {card: this.card}
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      console.log("se cerro el modal: ", res);
-    });
-
-
-  }
-
-  compartir(){
-    let dialog = this.dialog.open(BusquedaModalComponent, {
-      data: {card: this.card }
-    });
-
-    dialog.afterClosed().subscribe(res => {
-      console.log("Se cerro la busqueda", res);
+      });
+      this.borrarCard.emit(this.id);
+    }
+    
+    editar(){
+      console.log("Editar");
+      let dialogRef = this.dialog.open(CardModalComponent, {
+        data: {card: this.card}
+      });
       
-    });
-  }
-
-  masOpciones(){
+      dialogRef.afterClosed().subscribe(res => {
+        console.log("se cerro el modal: ", res);
+      });
+      
+      
+    }
+    
+    compartir(){
+      let dialog = this.dialog.open(BusquedaModalComponent, {
+        data: {card: this.card }
+      });
+      
+      dialog.afterClosed().subscribe(res => {
+        console.log("Se cerro la busqueda", res);
+        
+      });
+    }
+    
+    masOpciones(){
+      
+    }
+    
+    aGuardar(event){
+      console.log(event);
+      
+    }
+    
+    cambiarColor(color:String){
+      switch (color) {
+        case 'sin-color':
+        this.card.color = "white"; 
+        break;
+        case 'primary':
+        this.card.color = "blue";
+        break;
+        case 'accent':
+        this.card.color = "pink";
+        break;
+        case 'warn':
+        this.card.color = "red";
+        break;
+        default:
+        break;
+      }
+    }
     
   }
   
-  aGuardar(event){
-    console.log(event);
-    
-  }
-  
-}
