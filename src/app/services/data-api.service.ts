@@ -23,8 +23,11 @@ export class DataApiService {
     this.groupCollection = afs.collection<GrupInterface>('Grupos');
     this.grups = this.groupCollection.valueChanges();
 
+    this.notesCollection = afs.collection<GrupInterface>('Notas');
+
     this.getCurrentGroup();
   }
+  private notesCollection: AngularFirestoreCollection<card>;
 
   private groupCollection: AngularFirestoreCollection<GrupInterface>;
   private grups: Observable<GrupInterface[]>;
@@ -90,7 +93,7 @@ export class DataApiService {
     let user:UserInterface = aux.data();
     let idGroup = this.CreateNewGroup(user.nombre,user.id,groupName);
     user.Grupos.push(idGroup);
-    console.log("USUARIO UPDATEADO", user);
+    //console.log("USUARIO UPDATEADO", user);
     this.afs.doc(`Usuarios/${user.id}`).set(user);
     
   }
@@ -122,8 +125,6 @@ export class DataApiService {
     // });
     
   }
-
-
 
   CreateNewUser(person: firebase.User){
     let auxName = "";
@@ -194,11 +195,12 @@ export class DataApiService {
     return this.grupoSeleccionado;
   }
 
+  //este metodo debe retornar un arreglo de notas a partir de las ids de nota del grupo seleccionado
   getNotes(){
     let cards: card[] = [];
 
     let card_1 = {
-      id: 123,
+      id: "123",
       texto: '[  {"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]',
       color: "rojo",
       titulo: "El titulo mas largo delasd nknajk ldsjkl djklj ldasj dkla ",
@@ -208,7 +210,7 @@ export class DataApiService {
     }
 
     let card_2 = {
-      id: 124,
+      id: "124",
       texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porttitor tristique condimentum. Fusce non mauris id nibh volutpat facilisis vel in sem. Nunc aliquet augue quis dui laoreet, sit amet aliquet velit ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi faucibus lobortis nulla, quis volutpat metus eleifend vitae. Nulla quis nisl enim. Nunc fringilla nulla in egestas dictum. Morbi consectetur nibh lorem, non tincidunt risus vestibulum non. Pellentesque varius vulputate sem sit amet convallis. Pellentesque blandit leo at dignissim ornare. Quisque ut eros enim.',
       color: "rojo",
       titulo: "Un titulo de prueba 2 ",
@@ -218,7 +220,7 @@ export class DataApiService {
     }
 
     let card_3 = {
-      id: 124,
+      id: "124",
       texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porttitor tristique condimentum. Fusce non mauris id nibh volutpat facilisis vel in sem. Nunc aliquet augue quis dui laoreet, sit amet aliquet velit ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi faucibus lobortis nulla, quis volutpat metus eleifend vitae. Nulla quis nisl enim. Nunc fringilla nulla in egestas dictum. Morbi consectetur nibh lorem, non tincidunt risus vestibulum non. Pellentesque varius vulputate sem sit amet convallis. Pellentesque blandit leo at dignissim ornare. Quisque ut eros enim.',
       color: "rojo",
       titulo: "Un titulo de prueba 2 ",
@@ -231,13 +233,62 @@ export class DataApiService {
 
   }
 
-  deleteNote(id:string){
+  //este metodo deberia eliminar la nota de la base de datos y el id de notas del arreglo de notas del grupo
+  async deleteNote(id:string){
+    if(this.grupoSeleccionado){
 
+      await this.notesCollection.doc(id).delete()
+      const index = this.grupoSeleccionado.notasID.indexOf(id, 0);
+      if (index > -1) {
+        this.grupoSeleccionado.notasID.splice(index, 1);
+        this.UpdateGroup(this.grupoSeleccionado);
+      }
+      
+    }
   }
 
   //entonces lo que queda es verificar que al crear la nota exista un grupo seleccionado
   saveNote(miNota:card){
-    console.log("card recibida"+miNota);
+    if(this.grupoSeleccionado){
+      console.log("card recibida"+miNota);
+      let customId = this.generateNewKey('Notas');
+      miNota.id = customId;
+    
+      this.notesCollection.doc(customId).set(miNota);    //agrega la nota a la base de datos
+
+      this.grupoSeleccionado.notasID.push(customId);                //agrega el id al arreglo de ids del grupo
+      this.UpdateGroup(this.grupoSeleccionado);
+
+      return customId;
+    }
+  }
+
+  //este metodo tiene que iterar por todos los idNotas del grupo generando un arreglo de notas cargadas.
+  async getAllNotesFromGroup(){
+    let notaux : card;
+    let toRet: card[]= new Array();
+    let i = 0;
+    for(let notid of this.grupoSeleccionado.notasID){
+      await this.getNotaPorId(notid).then(function(res){
+        notaux = res;
+      });
+      toRet[i]=notaux;
+      i+=1;
+    }
+
+    return toRet; // si el resultado de esto te da undefined tenes que sacar este metodo y llamar a las funciones como en el componente add-to-group.component.ts linea 24
+  }
+
+  async getNotaPorId(idNota:string){
+    
+    //return await this.afs.doc<UserInterface>(`Usuarios/${idUser}`).ref.get()
+    let nt: card;
+    await this.afs.doc<card>(`Notas/${idNota}`).ref.get().then(function(nuevaNota){
+      nt = nuevaNota.data();
+      //console.log("nuevo usuario "+usr.nombre);
+    });
+    //console.log("Este es el usiario perteneciente al grupo: "+usr.nombre);
+    return nt;
   }
 
 
