@@ -26,6 +26,12 @@
     
         <ul fxLayout fxLayoutGap="20px" class="navigation-items">
             <li>
+                <a (click)="EliminarGrupoSeleccionado()" >
+                  <mat-icon class="icon">event_note</mat-icon>
+                  <span  class="label">Eliminar Grupo</span>
+                 </a>
+            </li>
+            <li>
                 <a (click)="abrirVentanaCrearNota()" >
                   <mat-icon class="icon">event_note</mat-icon>
                   <span  class="label">Crear Nota</span>

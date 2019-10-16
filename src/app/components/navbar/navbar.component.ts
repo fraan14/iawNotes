@@ -89,6 +89,16 @@ export class NavbarComponent implements OnInit {
     }   
   }
 
+  EliminarGrupoSeleccionado(){
+    if(this.das.getCurrentGroup()!= null){
+
+      this.das.deleteGroup(this.das.getCurrentGroup());
+
+    }
+    else{
+      console.log("seleccione grupo");
+    }  
+  }
 
   onLogout(){
     this.afsAuth.auth.signOut();
