@@ -249,8 +249,10 @@ export class DataApiService {
 
   //entonces lo que queda es verificar que al crear la nota exista un grupo seleccionado
   saveNote(miNota:card){
+    console.log(this.grupoSeleccionado);
+    
     if(this.grupoSeleccionado){
-      console.log("card recibida"+miNota);
+      console.log("card recibida",miNota);
       let customId = this.generateNewKey('Notas');
       miNota.id = customId;
     

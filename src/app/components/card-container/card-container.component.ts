@@ -82,6 +82,9 @@ export class CardContainerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       console.log("se cerro el modal: ", res);
+      if(res != null){
+        this.das.saveNote(res);
+      }
     });
   }
 

@@ -24,16 +24,15 @@ import { GroupPanelComponent } from './components/group-panel/group-panel.compon
 import { NotesBoardComponent } from './components/notes-board/notes-board.component';
 import { CreateNoteComponent } from './components/create-note/create-note.component';
 import { AddToGroupComponent} from './components/add-to-group/add-to-group.component';
-
+import { GroupPanelModule } from "./components/group-panel/group-panel.module";
+import { NavbarModule } from "./components/navbar/navbar.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     LoginComponent,
     RegisterComponent,
     CreateGroupComponent,
-    GroupPanelComponent,
     NotesBoardComponent,
     CreateNoteComponent,
     AddToGroupComponent
@@ -53,7 +52,9 @@ import { AddToGroupComponent} from './components/add-to-group/add-to-group.compo
     CardContainerModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),  //de esta manera toma los datos de environment para conectar con la db
     AngularFireDatabaseModule,
-    MatMenuModule
+    MatMenuModule,
+    NavbarModule,
+    GroupPanelModule
     
   ],
   entryComponents:[NavbarComponent,LoginComponent,RegisterComponent,CreateGroupComponent,GroupPanelComponent,CreateNoteComponent,AddToGroupComponent],

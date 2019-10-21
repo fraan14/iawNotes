@@ -1,59 +1,140 @@
-<mat-sidenav-container>
-    <mat-sidenav-content>
-      <mat-toolbar color="primary">
-       <div>
-         <a>
-            IAW - NOTES
-         </a>
-       </div>
-       <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs *ngIf="!isLogged">
-          <ul fxLayout fxLayoutGap="20px" class="navigation-items">
-              <li>
-                  <a (click)="abrirVentanaLogueo()">
-                    <mat-icon class="icon">input</mat-icon>
-                    <span  class="label">Login</span>
-                   </a>
-              </li>
-              <li>
-                  <a (click)="abrirVentanaRegistro()">
-                      <mat-icon class="icon">person_add</mat-icon>
-                      <span class="label">Register</span>
-                  </a>
-                </li>
-          </ul>
-       </div>
-       <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs *ngIf="isLogged">
-    
+<!-- <mat-sidenav-container>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <div>
+        <a>
+          IAW - NOTES
+        </a>
+      </div>
+      <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs *ngIf="!isLogged">
         <ul fxLayout fxLayoutGap="20px" class="navigation-items">
-            <li>
-                <a (click)="abrirVentanaCrearNota()" >
-                  <mat-icon class="icon">event_note</mat-icon>
-                  <span  class="label">Crear Nota</span>
-                 </a>
-            </li>
-            <li>
-                <a (click)="abrirVentanaCrearGrupo()">
-                  <mat-icon class="icon">group</mat-icon>
-                  <span  class="label">Crear Grupo</span>
-                 </a>
-            </li>
-            <li>
-              <a (click)="abrirVentanaAgregarPersonaGrupo()">
-                <mat-icon class="icon">group</mat-icon>
-                <span  class="label">Agregar a Grupo</span>
-               </a>
-            </li>
-            <li>
-                <a (click)="onLogout()">
-                  <mat-icon class="icon">input</mat-icon>
-                  <span  class="label">Logout</span>
-                 </a>
-            </li>
+          <li>
+            <a (click)="abrirVentanaLogueo()">
+              <mat-icon class="icon">input</mat-icon>
+              <span  class="label">Login</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="abrirVentanaRegistro()">
+              <mat-icon class="icon">person_add</mat-icon>
+              <span class="label">Register</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs *ngIf="isLogged">
+        
+        <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+          <li>
+            <a (click)="abrirVentanaCrearNota()" >
+              <mat-icon class="icon">event_note</mat-icon>
+              <span  class="label">Crear Nota</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="abrirVentanaCrearGrupo()">
+              <mat-icon class="icon">group</mat-icon>
+              <span  class="label">Crear Grupo</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="abrirVentanaAgregarPersonaGrupo()">
+              <mat-icon class="icon">group</mat-icon>
+              <span  class="label">Agregar a Grupo</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="onLogout()">
+              <mat-icon class="icon">input</mat-icon>
+              <span  class="label">Logout</span>
+            </a>
+          </li>
         </ul>
         
-     </div>
-      </mat-toolbar>
-      <main>
-      </main>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+      </div>
+    </mat-toolbar>
+    <main>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div fxLayout="row" fxFlex="100" *ngIf="inicializado()">
+      <div class="boton-principal" fxFlex="20" >
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" >
+          <i class="material-icons">menu</i>
+        </button>
+        <span>IAW - NOTES</span>
+      </div>
+      
+      
+      <div class="menu-usuario" fxFlex="80" fxLayout="row wrap" fxLayoutAlign="end center"*ngIf="isLogged" >
+        <button mat-button [matMenuTriggerFor]="menuGrupos">
+          <span>Grupos </span>
+          <i class="material-icons">
+            arrow_drop_down
+          </i>
+        </button>
+        <mat-menu #menuGrupos="matMenu" class="menu-grupos">
+          <ng-container *ngFor="let grupo of grupos; let i = index">
+            <button mat-menu-item (click)="seleccionarGrupo(grupo)">{{grupo.nombreGrupo}}</button>
+          </ng-container>
+          
+        </mat-menu>
+        
+        
+        <button mat-button [matMenuTriggerFor]="menu">{{nombre}}</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onLogout()">Cerrar sesión</button>
+        </mat-menu>
+      </div>
+      
+      <div class="menu-usuario" fxFlex="80" fxLayout="row wrap" fxLayoutAlign="end center"*ngIf="!isLogged" >
+        <button mat-button (click)="abrirVentanaLogueo()">
+          <i class="material-icons">
+            input
+          </i>
+          <span>&nbsp; Iniciar sesión</span>
+        </button>
+        <button mat-button (click)="abrirVentanaRegistro()">
+          <i class="material-icons">
+            person
+          </i> 
+          <span>&nbsp; Registrarse</span>
+        </button>
+      </div>
+      
+      
+    </div>  
+    
+    
+  </mat-toolbar-row>
+  
+</mat-toolbar>
+
+<mat-sidenav-container class="example-container" >
+  <mat-sidenav #drawer mode="over" role="navigation">
+    <mat-nav-list>
+      <a mat-list-item (click)="abrirVentanaCrearGrupo()">
+        <i class="material-icons">
+          group_add
+        </i>
+        &nbsp;
+        <span  class="label">Crear Grupo</span>  
+      </a>
+      <a mat-list-item (click)="abrirVentanaAgregarPersonaGrupo()">
+        <i class="material-icons">
+          how_to_reg
+        </i>
+        &nbsp;
+        <span  class="label">Agregar a Grupo</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="container-cards">
+
+
+    <app-card-container></app-card-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>

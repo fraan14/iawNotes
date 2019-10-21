@@ -3,6 +3,7 @@ import { card } from 'src/app/interfaces/card.interface';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { CardModalComponent } from '../modals/card-modal/card-modal.component';
 import { BusquedaModalComponent } from '../modals/busqueda-modal/busqueda-modal.component';
+import { DataApiService } from 'src/app/services/data-api.service';
 
 @Component({
   selector: 'app-card',
@@ -17,8 +18,11 @@ export class CardComponent implements OnInit {
   @Output() deshacerBorrarCard: EventEmitter<card>;
   
   
-  constructor(private _snackBar: MatSnackBar,
-    public dialog: MatDialog) {
+  constructor(
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    private DAS: DataApiService
+    ) {
       this.borrarCard = new EventEmitter();  
       this.deshacerBorrarCard = new EventEmitter();
     }

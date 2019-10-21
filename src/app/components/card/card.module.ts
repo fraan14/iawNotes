@@ -14,6 +14,7 @@ import { MatSnackBarModule, MatMenuModule, MatListModule } from '@angular/materi
 import { CardModalComponent } from '../modals/card-modal/card-modal.component';
 import { ModalsModule } from '../modals/modals.module';
 import { BusquedaModalComponent } from '../modals/busqueda-modal/busqueda-modal.component';
+import { DataApiService } from 'src/app/services/data-api.service';
 
 
 
@@ -37,6 +38,7 @@ import { BusquedaModalComponent } from '../modals/busqueda-modal/busqueda-modal.
     MatListModule
   ],
    entryComponents:[CardModalComponent, BusquedaModalComponent],
-  exports:[CardComponent]
+  exports:[CardComponent],
+  providers:[DataApiService]
 })
 export class CardModule { }

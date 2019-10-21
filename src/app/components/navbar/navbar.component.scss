@@ -39,3 +39,30 @@ mat-sidenav-container, mat-sidenav-content, mat-sidenav {
     margin: 0;
     width: 85%;
   }
+
+
+  .mat-menu-panel{
+    max-height: 250px !important;
+  }
+
+  // .mat-menu-content{
+  //   max-height: 50px  !important;
+  // }
+
+  //NUEVO
+  .menu-usuario{
+    // align-self: flex-end;
+    .menu-grupos{
+      .mat-menu-content{
+        max-height: 50px;
+      }
+    }
+  }
+
+  .container-cards{
+    min-height: 900px;
+  }
+
+  .mat-drawer-backdrop.mat-drawer-shown{
+    background-color: transparent !important;
+}
