@@ -247,6 +247,17 @@ export class DataApiService {
     }
   }
 
+  async deleteGroup(gp:GrupInterface){
+    
+    this.grupoSeleccionado = null;
+    let i = 0;
+    for(let notid of this.grupoSeleccionado.notasID){   //elimino todas las notas
+      await this.notesCollection.doc(notid).delete()
+    }
+    
+    await this.groupCollection.doc(gp.id).delete()  //elimino el grupo
+  }
+
   //entonces lo que queda es verificar que al crear la nota exista un grupo seleccionado
   saveNote(miNota:card){
     console.log(this.grupoSeleccionado);

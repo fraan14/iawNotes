@@ -49,6 +49,36 @@
               <span  class="label">Logout</span>
             </a>
           </li>
+            <li>
+                <a (click)="EliminarGrupoSeleccionado()" >
+                  <mat-icon class="icon">event_note</mat-icon>
+                  <span  class="label">Eliminar Grupo</span>
+                 </a>
+            </li>
+            <li>
+                <a (click)="abrirVentanaCrearNota()" >
+                  <mat-icon class="icon">event_note</mat-icon>
+                  <span  class="label">Crear Nota</span>
+                 </a>
+            </li>
+            <li>
+                <a (click)="abrirVentanaCrearGrupo()">
+                  <mat-icon class="icon">group</mat-icon>
+                  <span  class="label">Crear Grupo</span>
+                 </a>
+            </li>
+            <li>
+              <a (click)="abrirVentanaAgregarPersonaGrupo()">
+                <mat-icon class="icon">group</mat-icon>
+                <span  class="label">Agregar a Grupo</span>
+               </a>
+            </li>
+            <li>
+                <a (click)="onLogout()">
+                  <mat-icon class="icon">input</mat-icon>
+                  <span  class="label">Logout</span>
+                 </a>
+            </li>
         </ul>
         
       </div>
