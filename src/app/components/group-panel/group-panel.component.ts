@@ -34,18 +34,18 @@ export class GroupPanelComponent implements OnInit {
     this.das.getKnownGroups(uid).subscribe(res=>{
       let auxgp:GrupInterface[] = res;
       this.grupos = res;
-      let i = 0;
-      auxgp.forEach(element => {
-                if(element.usuarioiD.includes(uid)){
-                  //console.log("ESTE GRUPO PERTENECE AL USUARIO: ",element.nombreGrupo);
-                  this.grupos
-                }
-                else{
-                  //this.grupos[i]=null;
-                  //console.log("ESTE GRUPO NO PERTENECE AL USUARIO: ",element.nombreGrupo);
-                }
-                i= i+1;
-      });
+      //let i = 0;
+      // auxgp.forEach(element => {
+      //           if(element.usuarioiD.includes(uid)){
+      //             //console.log("ESTE GRUPO PERTENECE AL USUARIO: ",element.nombreGrupo);
+      //             this.grupos
+      //           }
+      //           else{
+      //             //this.grupos[i]=null;
+      //             //console.log("ESTE GRUPO NO PERTENECE AL USUARIO: ",element.nombreGrupo);
+      //           }
+      //           i= i+1;
+      // });
     });
   }
 

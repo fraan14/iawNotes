@@ -71,7 +71,7 @@ export class AddToGroupComponent implements OnInit {
       console.log("no se ha detectado usuario registrado con el email provisto"); //aca deberia ser un modal que explique que el usuario indicado no esta registrado.
     }
   }
-  //este metodo obtiene todos los usuarios del grupo seleccionado
+  //TODO: verificar que las cruces para eliminar solo le aparezcan al administrador
   RemoverUsuarioDelGrupo(i){
     console.log("el usuario a remover seria: "+this.usuariosDelGrupo[i].nombre);
     //en este punto ya tengo el grupo y el usuario, simplemente tengo que sacar el idUsuario de la lista del grupo y sacar el grupo de la lista de grupos del usuario y actualizar

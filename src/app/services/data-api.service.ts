@@ -28,48 +28,21 @@ export class DataApiService {
     this.getCurrentGroup();
   }
   private notesCollection: AngularFirestoreCollection<card>;
-
   private groupCollection: AngularFirestoreCollection<GrupInterface>;
-  private grups: Observable<GrupInterface[]>;
-
   private usersCollection: AngularFirestoreCollection<UserInterface>;
-  private userDoc: AngularFirestoreDocument<UserInterface>;
+
+  private grups: Observable<GrupInterface[]>;
   private users:Observable<UserInterface[]>;
   private usersFiltrados:Observable<UserInterface[]>;
+
+  private userDoc: AngularFirestoreDocument<UserInterface>;
+
   private user:Observable<UserInterface>;
+
   private user2:UserInterface = null;
-
-
-  getUBI(idUser: string){
-    this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
-    return this.user = this.userDoc.valueChanges().pipe(map(action =>{
-      return action;
-      // if(action.payload.exists===false){
-      //   return null;
-      // }else{
-      //   const data = action.payload.data() as UserInterface;
-      //   data.id = action.payload.id;
-      //   console.log("data-service", data);
-        
-      //   return data;
-      // }
-    }));
-  }
   public grupoSeleccionado:GrupInterface = null;
 
-  getUserById(idUser: string){
-    this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
-    return this.user = this.userDoc.snapshotChanges().pipe(map(action =>{
-      if(action.payload.exists===false){
-        return null;
-      }else{
-        const data = action.payload.data() as UserInterface;
-        data.id = action.payload.id;
-        return data;
-      }
-    }));
-  }
-
+  
   async getUsuarioPorId(idUser:string){
     
     //return await this.afs.doc<UserInterface>(`Usuarios/${idUser}`).ref.get()
@@ -98,33 +71,7 @@ export class DataApiService {
     
   }
 
-  //este metodo se encarga de actualizar la lista de referencias a grupos de los usuarios.
-  updateUserGroups(user:UserInterface,idGroup:string){
-    
-    // this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
-
-    // this.userDoc.snapshotChanges().pipe(map(action =>{
-    //   if(action.payload.exists===false){
-    //     return null;
-    //   }else{
-    //     const data = action.payload.data() as UserInterface;
-    //     data.id = action.payload.id;
-    //     return data;
-    //   }
-    // })).toPromise().then(user=>{
-     user.Grupos.push(idGroup);
-     console.log("USUARIO UPDATEADO", user);
-     this.afs.doc(`Usuarios/${user.id}`).set(user);
-    // });
-    
-    // this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
-    // this.userDoc.valueChanges().subscribe(res=>{
-    //   res.Grupos.push(idGroup);
-    //   this.userDoc.update(res);
-      
-    // });
-    
-  }
+  
 
   CreateNewUser(person: firebase.User){
     let auxName = "";
@@ -195,44 +142,7 @@ export class DataApiService {
     return this.grupoSeleccionado;
   }
 
-  //este metodo debe retornar un arreglo de notas a partir de las ids de nota del grupo seleccionado
-  getNotes(){
-    let cards: card[] = [];
-
-    let card_1 = {
-      id: "123",
-      texto: '[  {"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]',
-      color: "rojo",
-      titulo: "El titulo mas largo delasd nknajk ldsjkl djklj ldasj dkla ",
-      img: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-      tipo: 2,
-      label: ["card", "prueba", "checkbox"]
-    }
-
-    let card_2 = {
-      id: "124",
-      texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porttitor tristique condimentum. Fusce non mauris id nibh volutpat facilisis vel in sem. Nunc aliquet augue quis dui laoreet, sit amet aliquet velit ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi faucibus lobortis nulla, quis volutpat metus eleifend vitae. Nulla quis nisl enim. Nunc fringilla nulla in egestas dictum. Morbi consectetur nibh lorem, non tincidunt risus vestibulum non. Pellentesque varius vulputate sem sit amet convallis. Pellentesque blandit leo at dignissim ornare. Quisque ut eros enim.',
-      color: "rojo",
-      titulo: "Un titulo de prueba 2 ",
-      img: "",
-      tipo: 1,
-      label: ["card", "prueba", "comun"]
-    }
-
-    let card_3 = {
-      id: "124",
-      texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porttitor tristique condimentum. Fusce non mauris id nibh volutpat facilisis vel in sem. Nunc aliquet augue quis dui laoreet, sit amet aliquet velit ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi faucibus lobortis nulla, quis volutpat metus eleifend vitae. Nulla quis nisl enim. Nunc fringilla nulla in egestas dictum. Morbi consectetur nibh lorem, non tincidunt risus vestibulum non. Pellentesque varius vulputate sem sit amet convallis. Pellentesque blandit leo at dignissim ornare. Quisque ut eros enim.',
-      color: "rojo",
-      titulo: "Un titulo de prueba 2 ",
-      img: "https://lh3.googleusercontent.com/YH6zn6nGGvf5g48KFRTsocF9jMmMVl00pcMrCF3mm43-0OAk3qt4DOUVo1Jnog5f7nv5cnPFpvTBoS7203rtc0amG5KfGPYtYf438H3Tl1M4SEzMEPaQ22oNOJK0E1UYHHcYfees7G-TQkww_XnjnAfiPaH631hv809hJRcf2qnWwb4y3gcVjk-5ks2TiFCKUQsX470K4ukP_pr9ezvhRRt2HssB--R8695sstKacAHgERC0yevYF49WO1Q8ZRuFzCEyE1GIrsyekdJbZpKdpNZIOBfI5Ntfyji2JMZ5yJi4mbfOYH59A7nj7vXHbd5RKdgHrW6Updsg_Gh6FKAUw2Pn4cku1khto7-Dcea6VifSSVZU0tfbciRKQod7-oKpzpv4Z5edAZmBI4sYdUxsPev8rZKrCosImAnDLlrL2Hc7ieLmmkor1dhHHOiB1tLQ7N9iE-m8J9vKDiA6Hut5iihNE6hUhqEhqT0klFntDNiq2nJFr4LlskY8dPrl2Yha1RC860ARrjfxV2lIthUGc6BLYl5lPB1FbMdv4vz6T02Srl45KcLigzb0dj5PkcCeemyX6IxZRnxGK-PI4jvX_x0vOFwsZ_FaiMHl3dbZYYPT7pizxzmipD8mZQysGCzHdhz4km7wTSEBHxCU-LTDFERFdGrz035ijpdFVyAi3d6a6nmM49Nm7GMY=w462-h615-no",
-      tipo: 1,
-      label: ["card", "prueba", "comun"]
-    }
-
-    return cards = [card_1, card_2, card_3];
-
-  }
-
+  
   //este metodo deberia eliminar la nota de la base de datos y el id de notas del arreglo de notas del grupo
   async deleteNote(id:string){
     if(this.grupoSeleccionado){
@@ -330,6 +240,104 @@ export class DataApiService {
   updateUser(usr:UserInterface){
     this.usersCollection.doc(usr.id).set(usr);    //agrega el usuario a la base de datos
   }
+
+
+
+  //------------------DEPRECATED-----------------------------
+  getUBI(idUser: string){
+    this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
+    return this.user = this.userDoc.valueChanges().pipe(map(action =>{
+      return action;
+      // if(action.payload.exists===false){
+      //   return null;
+      // }else{
+      //   const data = action.payload.data() as UserInterface;
+      //   data.id = action.payload.id;
+      //   console.log("data-service", data);
+        
+      //   return data;
+      // }
+    }));
+  }
+
+  getUserById(idUser: string){
+    this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
+    return this.user = this.userDoc.snapshotChanges().pipe(map(action =>{
+      if(action.payload.exists===false){
+        return null;
+      }else{
+        const data = action.payload.data() as UserInterface;
+        data.id = action.payload.id;
+        return data;
+      }
+    }));
+  }
+
+  //este metodo se encarga de actualizar la lista de referencias a grupos de los usuarios.
+  updateUserGroups(user:UserInterface,idGroup:string){
+    
+    // this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
+
+    // this.userDoc.snapshotChanges().pipe(map(action =>{
+    //   if(action.payload.exists===false){
+    //     return null;
+    //   }else{
+    //     const data = action.payload.data() as UserInterface;
+    //     data.id = action.payload.id;
+    //     return data;
+    //   }
+    // })).toPromise().then(user=>{
+     user.Grupos.push(idGroup);
+     console.log("USUARIO UPDATEADO", user);
+     this.afs.doc(`Usuarios/${user.id}`).set(user);
+    // });
+    
+    // this.userDoc = this.afs.doc<UserInterface>(`Usuarios/${idUser}`);
+    // this.userDoc.valueChanges().subscribe(res=>{
+    //   res.Grupos.push(idGroup);
+    //   this.userDoc.update(res);
+      
+    // });
+    
+  }
+  //este metodo debe retornar un arreglo de notas a partir de las ids de nota del grupo seleccionado
+  getNotes(){
+    let cards: card[] = [];
+
+    let card_1 = {
+      id: "123",
+      texto: '[  {"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]',
+      color: "rojo",
+      titulo: "El titulo mas largo delasd nknajk ldsjkl djklj ldasj dkla ",
+      img: "https://material.angular.io/assets/img/examples/shiba2.jpg",
+      tipo: 2,
+      label: ["card", "prueba", "checkbox"]
+    }
+
+    let card_2 = {
+      id: "124",
+      texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porttitor tristique condimentum. Fusce non mauris id nibh volutpat facilisis vel in sem. Nunc aliquet augue quis dui laoreet, sit amet aliquet velit ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi faucibus lobortis nulla, quis volutpat metus eleifend vitae. Nulla quis nisl enim. Nunc fringilla nulla in egestas dictum. Morbi consectetur nibh lorem, non tincidunt risus vestibulum non. Pellentesque varius vulputate sem sit amet convallis. Pellentesque blandit leo at dignissim ornare. Quisque ut eros enim.',
+      color: "rojo",
+      titulo: "Un titulo de prueba 2 ",
+      img: "",
+      tipo: 1,
+      label: ["card", "prueba", "comun"]
+    }
+
+    let card_3 = {
+      id: "124",
+      texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porttitor tristique condimentum. Fusce non mauris id nibh volutpat facilisis vel in sem. Nunc aliquet augue quis dui laoreet, sit amet aliquet velit ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi faucibus lobortis nulla, quis volutpat metus eleifend vitae. Nulla quis nisl enim. Nunc fringilla nulla in egestas dictum. Morbi consectetur nibh lorem, non tincidunt risus vestibulum non. Pellentesque varius vulputate sem sit amet convallis. Pellentesque blandit leo at dignissim ornare. Quisque ut eros enim.',
+      color: "rojo",
+      titulo: "Un titulo de prueba 2 ",
+      img: "https://lh3.googleusercontent.com/YH6zn6nGGvf5g48KFRTsocF9jMmMVl00pcMrCF3mm43-0OAk3qt4DOUVo1Jnog5f7nv5cnPFpvTBoS7203rtc0amG5KfGPYtYf438H3Tl1M4SEzMEPaQ22oNOJK0E1UYHHcYfees7G-TQkww_XnjnAfiPaH631hv809hJRcf2qnWwb4y3gcVjk-5ks2TiFCKUQsX470K4ukP_pr9ezvhRRt2HssB--R8695sstKacAHgERC0yevYF49WO1Q8ZRuFzCEyE1GIrsyekdJbZpKdpNZIOBfI5Ntfyji2JMZ5yJi4mbfOYH59A7nj7vXHbd5RKdgHrW6Updsg_Gh6FKAUw2Pn4cku1khto7-Dcea6VifSSVZU0tfbciRKQod7-oKpzpv4Z5edAZmBI4sYdUxsPev8rZKrCosImAnDLlrL2Hc7ieLmmkor1dhHHOiB1tLQ7N9iE-m8J9vKDiA6Hut5iihNE6hUhqEhqT0klFntDNiq2nJFr4LlskY8dPrl2Yha1RC860ARrjfxV2lIthUGc6BLYl5lPB1FbMdv4vz6T02Srl45KcLigzb0dj5PkcCeemyX6IxZRnxGK-PI4jvX_x0vOFwsZ_FaiMHl3dbZYYPT7pizxzmipD8mZQysGCzHdhz4km7wTSEBHxCU-LTDFERFdGrz035ijpdFVyAi3d6a6nmM49Nm7GMY=w462-h615-no",
+      tipo: 1,
+      label: ["card", "prueba", "comun"]
+    }
+
+    return cards = [card_1, card_2, card_3];
+
+  }
+
 
 }
 
