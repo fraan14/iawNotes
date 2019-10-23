@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { card } from 'src/app/interfaces/card.interface';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar, NativeDateAdapter } from '@angular/material';
 import { CardModalComponent } from '../modals/card-modal/card-modal.component';
 import { BusquedaModalComponent } from '../modals/busqueda-modal/busqueda-modal.component';
 import { DataApiService } from 'src/app/services/data-api.service';
@@ -32,6 +32,7 @@ export class CardComponent implements OnInit {
     
     
     //Accion de borrar crea un SnackBar para deshacer los cambios
+    // TODO: Debe eliminar el elemento de la base de datos
     borrar(){
       let copiaDelCard = this.card;
       let snackBar_borrar = this._snackBar.open("Se eliminó la tarjeta ", 'deshacer',{panelClass:"sucess", verticalPosition: "bottom",   duration: 5000});
@@ -42,6 +43,10 @@ export class CardComponent implements OnInit {
       this.borrarCard.emit(this.id);
     }
     
+    
+    
+    
+    // TODO: Debe editar
     editar(){
       console.log("Editar");
       let dialogRef = this.dialog.open(CardModalComponent, {
@@ -50,6 +55,7 @@ export class CardComponent implements OnInit {
       
       dialogRef.afterClosed().subscribe(res => {
         console.log("se cerro el modal: ", res);
+        // TODO: en caso de que devuelva un UNDIFINED no hacer NativeDateAdapter... sino update de nota
       });
       
       

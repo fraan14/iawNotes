@@ -153,12 +153,14 @@
         &nbsp;
         <span  class="label">Crear Grupo</span>  
       </a>
+      <!-- TODO: Poner visible cuando haya un grupo seleccionado -->
       <a mat-list-item (click)="abrirVentanaAgregarPersonaGrupo()">
         <i class="material-icons">
           how_to_reg
         </i>
         &nbsp;
-        <span  class="label">Agregar a Grupo</span>
+        <!-- TODO: Solo eliminar si soy admin -->
+        <span  class="label">Gestionar grupo</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
