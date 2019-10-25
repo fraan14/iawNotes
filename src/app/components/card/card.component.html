@@ -1,4 +1,4 @@
-<mat-card class="card">
+<mat-card class="card" [style.backgroundColor]= card.color >
     <img *ngIf="card.img != '' " class="card-image" mat-card-image  [src]=card?.img >
     <div class="card-header">
         <div class="card-title">{{card.titulo | TransformarTextoPipe :"":"cortarTitulo"}}</div>
@@ -21,33 +21,68 @@
         <mat-menu #colores="">
             
             <div fxLayout="row wrap" fxLayoutAlign="center center">
-                <div class="contenedor-color" fxFlex="50">
-                    <a matTooltip="Sin estilo" fxLayout="row wrap" fxLayoutAlign="center center" (click)="cambiarColor('sin-color')" >
+                <div class="contenedor-color" fxFlex="20">
+                    <a matTooltip="Predeterminado" fxLayout="row wrap" fxLayoutAlign="center center" (click)="cambiarColor('sin-color')" >
                         <mat-icon class="material-icons sin-color">
                             panorama_fish_eye
                         </mat-icon>
                     </a>
                 </div>
                 
-                <div class="contenedor-color" fxFlex="50">
-                    <a fxLayout="row wrap" matTooltip="Azul" fxLayoutAlign="center center" (click)="cambiarColor('primary')" >                    
-                        <mat-icon color="primary" class="material-icons amarillo" >
+                <div class="contenedor-color" fxFlex="20">
+                    <a fxLayout="row wrap" matTooltip="Azul" fxLayoutAlign="center center" (click)="cambiarColor('azul')" >                    
+                        <mat-icon  class="material-icons azul" >
                             fiber_manual_record
                         </mat-icon>
                     </a>
                 </div>
                 
-                <div class="contenedor-color" fxFlex="50">
-                    <a fxLayout="row wrap" matTooltip="Rosa" fxLayoutAlign="center center" (click)="cambiarColor('accent')" >                    
-                        <mat-icon color="accent" class="material-icons amarillo" >
+                <div class="contenedor-color" fxFlex="20">
+                    <a fxLayout="row wrap" matTooltip="Rosa" fxLayoutAlign="center center" (click)="cambiarColor('rosa')" >                    
+                        <mat-icon class="material-icons rosa" >
                             fiber_manual_record
                         </mat-icon>
                     </a>
                 </div>
 
-                <div class="contenedor-color" fxFlex="50">
-                    <a fxLayout="row wrap" matTooltip="Rojo" fxLayoutAlign="center center" (click)="cambiarColor('warn')" >                    
-                        <mat-icon color="warn" class="material-icons amarillo" >
+                <div class="contenedor-color" fxFlex="20">
+                    <a fxLayout="row wrap" matTooltip="Naranja" fxLayoutAlign="center center" (click)="cambiarColor('naranja')" >                    
+                        <mat-icon class="material-icons naranja" >
+                            fiber_manual_record
+                        </mat-icon>
+                    </a>
+                </div>
+                <div class="contenedor-color" fxFlex="20">
+                    <a fxLayout="row wrap" matTooltip="Verde" fxLayoutAlign="center center" (click)="cambiarColor('verde')" >                    
+                        <mat-icon class="material-icons verde" >
+                            fiber_manual_record
+                        </mat-icon>
+                    </a>
+                </div>
+                <div class="contenedor-color" fxFlex="20">
+                    <a fxLayout="row wrap" matTooltip="Celeste" fxLayoutAlign="center center" (click)="cambiarColor('celeste')" >                    
+                        <mat-icon class="material-icons celeste" >
+                            fiber_manual_record
+                        </mat-icon>
+                    </a>
+                </div>
+                <div class="contenedor-color" fxFlex="20">
+                    <a fxLayout="row wrap" matTooltip="violeta" fxLayoutAlign="center center" (click)="cambiarColor('violeta')" >                    
+                        <mat-icon class="material-icons violeta" >
+                            fiber_manual_record
+                        </mat-icon>
+                    </a>
+                </div>
+                <div class="contenedor-color" fxFlex="20">
+                    <a fxLayout="row wrap" matTooltip="lila" fxLayoutAlign="center center" (click)="cambiarColor('lila')" >                    
+                        <mat-icon class="material-icons lila" >
+                            fiber_manual_record
+                        </mat-icon>
+                    </a>
+                </div>
+                <div class="contenedor-color" fxFlex="20">
+                    <a fxLayout="row wrap" matTooltip="amarillo" fxLayoutAlign="center center" (click)="cambiarColor('amarillo')" >                    
+                        <mat-icon class="material-icons amarillo" >
                             fiber_manual_record
                         </mat-icon>
                     </a>

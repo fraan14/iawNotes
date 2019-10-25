@@ -82,19 +82,35 @@ export class CardComponent implements OnInit {
     }
     
     cambiarColor(color:String){
+      console.log(color);
+      
       switch (color) {
         case 'sin-color':
         this.card.color = "white"; 
         break;
-        case 'primary':
-        this.card.color = "blue";
+        case 'azul':
+        this.card.color = "#034fbbd4";
         break;
-        case 'accent':
-        this.card.color = "pink";
+        case 'rosa':
+        this.card.color = "#ff7ba8";
         break;
-        case 'warn':
-        this.card.color = "red";
+        case 'naranja':
+        this.card.color = "#ffc107d1";
         break;
+        case 'celeste':
+        this.card.color = "#03b5bbd4";
+        break;
+        case 'violeta':
+        this.card.color = "#5803bbd4";
+        break;
+        case 'lila':
+        this.card.color = "#bb039ed4";
+        break;
+        case 'amarillo':
+        this.card.color = "#e4ff40";
+        break;
+        case 'verde':
+          this.card.color ="#33bb03d4";
         default:
         break;
       }

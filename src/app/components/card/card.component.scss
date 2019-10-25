@@ -6,7 +6,6 @@
     width: 200px;
     max-height: 470px;
     border-radius:10px;
-    background-color: $color;
     .card-header{
         margin-bottom: 5px;
         .card-title{
@@ -30,17 +29,52 @@
             .circle:before {
                 content: ' \25CF';
                 font-size: 200px;
-              }
+            }
         }
-     
-       
+        
+        
     }
-.mat-menu-content{
-    .contenedor-color{
-        text-align: center;
+    .mat-menu-content{
+        .contenedor-color{
+            text-align: center;
+        }
     }
-}
 }
 .card:hover{
     transform: scale(1.05);
 }
+
+mat-icon{
+
+    &.material-icons{
+        &.azul{
+            color: #034fbbd4;
+        }
+        &.sin-color{
+            color: lightgray;
+        }
+        &.rosa{
+            color:#ff7ba8;
+        }
+        &.naranja{
+            color:#ffc107d1;
+        }
+        &.verde{
+            color: #33bb03d4;
+        }
+        &.celeste{
+            color: #03b5bbd4;
+        }
+        &.violeta{
+            color:#5803bbd4;
+        }
+        &.lila{
+            color: #bb039ed4 ;    
+        }
+        &.amarillo{
+            color:  #e4ff40;
+        }
+
+    }
+
+} 
