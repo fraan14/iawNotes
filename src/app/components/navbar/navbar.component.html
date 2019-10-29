@@ -49,36 +49,36 @@
               <span  class="label">Logout</span>
             </a>
           </li>
-            <li>
-                <a (click)="EliminarGrupoSeleccionado()" >
-                  <mat-icon class="icon">event_note</mat-icon>
-                  <span  class="label">Eliminar Grupo</span>
-                 </a>
-            </li>
-            <li>
-                <a (click)="abrirVentanaCrearNota()" >
-                  <mat-icon class="icon">event_note</mat-icon>
-                  <span  class="label">Crear Nota</span>
-                 </a>
-            </li>
-            <li>
-                <a (click)="abrirVentanaCrearGrupo()">
-                  <mat-icon class="icon">group</mat-icon>
-                  <span  class="label">Crear Grupo</span>
-                 </a>
-            </li>
-            <li>
-              <a (click)="abrirVentanaAgregarPersonaGrupo()">
-                <mat-icon class="icon">group</mat-icon>
-                <span  class="label">Agregar a Grupo</span>
-               </a>
-            </li>
-            <li>
-                <a (click)="onLogout()">
-                  <mat-icon class="icon">input</mat-icon>
-                  <span  class="label">Logout</span>
-                 </a>
-            </li>
+          <li>
+            <a (click)="EliminarGrupoSeleccionado()" >
+              <mat-icon class="icon">event_note</mat-icon>
+              <span  class="label">Eliminar Grupo</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="abrirVentanaCrearNota()" >
+              <mat-icon class="icon">event_note</mat-icon>
+              <span  class="label">Crear Nota</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="abrirVentanaCrearGrupo()">
+              <mat-icon class="icon">group</mat-icon>
+              <span  class="label">Crear Grupo</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="abrirVentanaAgregarPersonaGrupo()">
+              <mat-icon class="icon">group</mat-icon>
+              <span  class="label">Agregar a Grupo</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="onLogout()">
+              <mat-icon class="icon">input</mat-icon>
+              <span  class="label">Logout</span>
+            </a>
+          </li>
         </ul>
         
       </div>
@@ -114,33 +114,41 @@
         </mat-menu>
         
         
+        <!-- (change)="switchColor($event)" -->
         <button mat-button [matMenuTriggerFor]="menu">{{nombre}}</button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="onLogout()">Cerrar sesión</button>
-        </mat-menu>
-      </div>
-      
-      <div class="menu-usuario" fxFlex="80" fxLayout="row wrap" fxLayoutAlign="end center"*ngIf="!isLogged" >
-        <button mat-button (click)="abrirVentanaLogueo()">
-          <i class="material-icons">
-            input
-          </i>
-          <span>&nbsp; Iniciar sesión</span>
-        </button>
-        <button mat-button (click)="abrirVentanaRegistro()">
-          <i class="material-icons">
-            person
-          </i> 
-          <span>&nbsp; Registrarse</span>
-        </button>
-      </div>
-      
-      
-    </div>  
+          <mat-slide-toggle
+            [color]="color"
+            [checked]="checked"
+            [disabled]="disabled"
+            (click)="selectedTheme='my-second-theme'">
+          Color!
+        </mat-slide-toggle>
+      </mat-menu>
+    </div>
+    
+    <div class="menu-usuario" fxFlex="80" fxLayout="row wrap" fxLayoutAlign="end center"*ngIf="!isLogged" >
+      <button mat-button (click)="abrirVentanaLogueo()">
+        <i class="material-icons">
+          input
+        </i>
+        <span>&nbsp; Iniciar sesión</span>
+      </button>
+      <button mat-button (click)="abrirVentanaRegistro()">
+        <i class="material-icons">
+          person
+        </i> 
+        <span>&nbsp; Registrarse</span>
+      </button>
+    </div>
     
     
-  </mat-toolbar-row>
+  </div>  
   
+  
+</mat-toolbar-row>
+
 </mat-toolbar>
 
 <mat-sidenav-container class="example-container" >
@@ -165,8 +173,8 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="container-cards">
-
-
+    
+    
     <app-card-container></app-card-container>
   </mat-sidenav-content>
 </mat-sidenav-container>
