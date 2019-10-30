@@ -10,6 +10,7 @@ import { CreateNoteComponent } from '../create-note/create-note.component';
 import { DataApiService } from '../../services/data-api.service';
 import { AddToGroupComponent } from '../add-to-group/add-to-group.component';
 import { GrupInterface } from 'src/app/models/grupo';
+import { UserInterface } from 'src/app/models/user';
 
 
 
@@ -24,8 +25,9 @@ export class NavbarComponent implements OnInit {
   constructor(private loginDialog:MatDialog, private authService: AuthService, private afsAuth: AngularFireAuth, private das:DataApiService) { }
   public app_name: string = 'notes-iaw';
   public isLogged: boolean = null;
+  public email:string = "";
   public hayGrupo:boolean = false;
-  public nombre: String;
+  public nombre: string;
   public grupos: GrupInterface[];
   public userid: string;
 
@@ -35,11 +37,22 @@ export class NavbarComponent implements OnInit {
   
   getCurrentUser(){
     this.authService.isAuth().subscribe(auth => {
+      console.log("Se ejecuta el auth")
       if(auth){
         this.isLogged = true;
         this.nombre = auth.displayName;
+        if(this.nombre == null){
+          this.nombre = auth.email;
+        }
         this.userid = auth.uid;
         this.getGroups(this.userid);
+        let usrActual:UserInterface={
+          email: this.email,
+          nombre:this.nombre,
+          id:this.userid,
+          Grupos:null
+        }
+        this.das.usuarioActual = usrActual;
       }
       else{
         this.isLogged = false;
@@ -115,11 +128,11 @@ export class NavbarComponent implements OnInit {
 
 
   getGroups(uid:string){
+    //console.log("al getGroups le llega: "+uid)
     this.das.getKnownGroups(uid).subscribe(res=>{
       let auxgp:GrupInterface[] = res;
-      console.log("res ", res);
-      
-       this.grupos = res;
+      console.log("Grupos del usuario ", res);
+      this.grupos = res;
       let i = 0;
       auxgp.forEach(element => {
                 if(element.usuarioiD.includes(uid)){

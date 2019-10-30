@@ -90,14 +90,34 @@
 
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <div fxLayout="row" fxFlex="100" *ngIf="inicializado()">
-      <div class="boton-principal" fxFlex="20" >
-        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" >
+    <div fxLayout="row" fxFlex="100" >
+      <div class="boton-principal" fxFlex="20"  >
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isLogged" >
           <i class="material-icons">menu</i>
         </button>
         <span>IAW - NOTES</span>
       </div>
+      <li>
+        <a (click)="EliminarGrupoSeleccionado()" >
+          <mat-icon class="icon">event_note</mat-icon>
+          <span  class="label">Eliminar Grupo</span>
+         </a>
+    </li>
       
+      <li>
+        <a (click)="abrirVentanaCrearGrupo()">
+          <mat-icon class="icon">group</mat-icon>
+          <span  class="label">Crear Grupo</span>
+         </a>
+    </li>
+    <a mat-list-item (click)="abrirVentanaAgregarPersonaGrupo()">
+      <i class="material-icons">
+        how_to_reg
+      </i>
+      &nbsp;
+      <!-- TODO: Solo eliminar si soy admin -->
+      <span  class="label">Gestionar grupo</span>
+    </a>
       
       <div class="menu-usuario" fxFlex="80" fxLayout="row wrap" fxLayoutAlign="end center"*ngIf="isLogged" >
         <button mat-button [matMenuTriggerFor]="menuGrupos">
@@ -143,7 +163,7 @@
   
 </mat-toolbar>
 
-<mat-sidenav-container class="example-container" >
+<mat-sidenav-container class="example-container" *ngIf="isLogged">
   <mat-sidenav #drawer mode="over" role="navigation">
     <mat-nav-list>
       <a mat-list-item (click)="abrirVentanaCrearGrupo()">

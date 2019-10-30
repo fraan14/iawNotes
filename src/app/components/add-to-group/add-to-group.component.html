@@ -5,7 +5,7 @@
         <h3 mat-subheader fxFlex="100">Lista de usuarios del grupo</h3>
         <mat-list-item *ngFor="let l of usuariosDelGrupo; let i=index" fxFlex="100">
             <p fxFlex="95">{{l.nombre}}</p>
-            <button fxFlex="5" (click)="RemoverUsuarioDelGrupo(i)" >x</button>
+            <button fxFlex="5" (click)="RemoverUsuarioDelGrupo(i)" *ngIf="isThisAdmin(l)" >x</button>
         </mat-list-item>
     </mat-list>
 </div>
@@ -17,6 +17,6 @@
     </mat-form-field>
 </div>
 <div mat-dialog-actions>
-    <button mat-raised-button (click)="addIntegrante()">Añadir</button>
+    <button mat-raised-button (click)="addIntegrante()" [mat-dialog-close]>Añadir</button>
     <button mat-raised-button [mat-dialog-close]>Cancelar</button>
 </div>

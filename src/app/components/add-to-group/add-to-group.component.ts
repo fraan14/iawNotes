@@ -16,14 +16,20 @@ export class AddToGroupComponent implements OnInit {
   public suemail:string="";
   public usuariosDelGrupo:UserInterface[];
   public grupoActual:GrupInterface;
+  public usrActual:UserInterface;
+  public isAdmin:boolean;
 
   ngOnInit() {
     this.getUsuariosDelGrupo();
+    this.usrActual = this.das.getCurrentUser();
+    this.grupoActual = this.das.getCurrentGroup();
+    this.isAdmin = (this.usrActual.id == this.grupoActual.AdminID);
   }
 
   async getUsuariosDelGrupo(){
     this.usuariosDelGrupo = new Array();
     this.grupoActual = this.das.getCurrentGroup();
+    this.usrActual = this.das.getCurrentUser();
     let idstr:string;
     let usrAux:UserInterface;
     let i = 0;
@@ -33,9 +39,11 @@ export class AddToGroupComponent implements OnInit {
       });
       this.usuariosDelGrupo[i]=usrAux;
       i+=1;
+      
+     
     }
 
-    console.log("Usuarios del grupo"+this.usuariosDelGrupo.length)
+    console.log("Usuarios del grupo "+this.usuariosDelGrupo.length)
 
 
 
@@ -61,8 +69,8 @@ export class AddToGroupComponent implements OnInit {
       grupo.usuarioiD.push(usr.id);
       usr.Grupos.push(grupo.id);
 
-      console.log("Nuevo Usuario "+usr.Grupos);
-      console.log("nuevo grupo "+grupo.usuarioiD);
+      //console.log("Nuevo Usuario "+usr.Grupos);
+      //console.log("nuevo grupo "+grupo.usuarioiD);
       this.das.UpdateGroup(grupo);
       this.das.updateUser(usr);
 
@@ -71,7 +79,11 @@ export class AddToGroupComponent implements OnInit {
       console.log("no se ha detectado usuario registrado con el email provisto"); //aca deberia ser un modal que explique que el usuario indicado no esta registrado.
     }
   }
-  //TODO: verificar que las cruces para eliminar solo le aparezcan al administrador
+
+  isThisAdmin(l:UserInterface):boolean{
+    return (this.isAdmin && (l.id != this.usrActual.id));
+  }
+  
   RemoverUsuarioDelGrupo(i){
     console.log("el usuario a remover seria: "+this.usuariosDelGrupo[i].nombre);
     //en este punto ya tengo el grupo y el usuario, simplemente tengo que sacar el idUsuario de la lista del grupo y sacar el grupo de la lista de grupos del usuario y actualizar
