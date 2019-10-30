@@ -3,22 +3,23 @@
     <app-card (borrarCard)="borrarCard($event)" (deshacerBorrarCard)="deshacerBorrarCard($event)" [card] = c [id] = i > </app-card>
     
     
-    <div class="boton-speed-dial">
-      <button class="boton-mas" matRipple mat-fab color="primary" [ngClass]="{'activo': btn_activo}" [matMenuTriggerFor]="menu" (click)="activo()">
-        <mat-icon class="icon-add">add</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu" (closed)="activo()">
-        <button mat-menu-item (click)="crearCard('1')">
-          <mat-icon>note_add</mat-icon>
-          <span>Crear nota</span>
-        </button>
-        <button mat-menu-item (click)="crearCard('2')">
-          <mat-icon>list</mat-icon>
-          <span>Crear lista</span>
-        </button>
-      </mat-menu>
-    </div>
     
     
   </div>
+</div>
+
+<div class="boton-speed-dial">
+  <button class="boton-mas" matRipple mat-fab color="primary" [ngClass]="{'activo': btn_activo}" [matMenuTriggerFor]="menu" (click)="activo()">
+    <mat-icon class="icon-add">add</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" (closed)="activo()">
+    <button mat-menu-item (click)="crearCard('1')">
+      <mat-icon>note_add</mat-icon>
+      <span>Crear nota</span>
+    </button>
+    <button mat-menu-item (click)="crearCard('2')">
+      <mat-icon>list</mat-icon>
+      <span>Crear lista</span>
+    </button>
+  </mat-menu>
 </div>
