@@ -9,6 +9,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CardContainerModule } from '../card-container/card-container.module';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MaterialModule } from 'src/app/material.module';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { CardContainerModule } from '../card-container/card-container.module';
     MatListModule,
     MatMenuModule,
     FlexLayoutModule,
-    CardContainerModule
+    CardContainerModule,
+    MatSlideToggleModule,
+    MaterialModule
   ],
   exports:[NavbarComponent]
 })

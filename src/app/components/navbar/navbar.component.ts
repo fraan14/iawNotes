@@ -13,7 +13,6 @@ import { GrupInterface } from 'src/app/models/grupo';
 import { UserInterface } from 'src/app/models/user';
 
 
-
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'app-navbar',
@@ -22,7 +21,10 @@ import { UserInterface } from 'src/app/models/user';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private loginDialog:MatDialog, private authService: AuthService, private afsAuth: AngularFireAuth, private das:DataApiService) { }
+  constructor(private loginDialog:MatDialog, 
+    private authService: AuthService,
+    private afsAuth: AngularFireAuth, 
+    private das:DataApiService) { }
   public app_name: string = 'notes-iaw';
   public isLogged: boolean = null;
   public email:string = "";
@@ -30,6 +32,9 @@ export class NavbarComponent implements OnInit {
   public nombre: string;
   public grupos: GrupInterface[];
   public userid: string;
+  color = 'accent';
+  checked = false;
+  disabled = false;
 
   ngOnInit() {
     this.getCurrentUser();
@@ -151,6 +156,13 @@ export class NavbarComponent implements OnInit {
     console.log("grupo seleccionado: " + item.nombreGrupo)
   }
 
+  switchColor(color){
+    // if(color.checked){
+    //   document.getElementById("").classList.add
+    // }
+    console.log("check: ",color);
+    
+  }
 
 
 }
