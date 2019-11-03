@@ -10,6 +10,8 @@ export class ContenidoTextoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('contenido-texto',this.texto);
+    
   }
 
 }

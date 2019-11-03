@@ -12,11 +12,11 @@ export class ContenidoComponent implements OnInit {
   constructor() { 
     this.contenido_texto = new EventEmitter<string>();
   }
-
+  
   ngOnInit() {
   }
 
   aGuardar(event){
-    this.contenido_texto.emit(event)    
+    this.contenido_texto.emit(event);
   }
 }

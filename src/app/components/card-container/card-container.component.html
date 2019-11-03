@@ -1,11 +1,15 @@
-<div fxLayout="row wrap" fxLayoutAlign="center start" *ngIf="cards.length > 0">
-  <div *ngFor="let c of cards; let i = index" class="container-card">
-    <app-card (borrarCard)="borrarCard($event)" (deshacerBorrarCard)="deshacerBorrarCard($event)" [card] = c [id] = i > </app-card>
-    
-    
-    
+<div fxLayout="row wrap" fxLayoutAlign="center start">
+  <div *ngFor="let c of cards; let i = index" class="container-card" >
+      <div *ngIf="checkForId(c.id)">  
+          <app-card (borrarCard)="borrarCard($event)"
+          (deshacerBorrarCard)="deshacerBorrarCard($event)" 
+          [card] = c [id] = i >
+          </app-card>
+      </div>
     
   </div>
+
+
 </div>
 
 <div class="boton-speed-dial">

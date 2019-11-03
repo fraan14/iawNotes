@@ -3,6 +3,10 @@ import { card } from 'src/app/interfaces/card.interface';
 import { CardModalComponent } from '../modals/card-modal/card-modal.component';
 import { MatDialog } from '@angular/material';
 import { DataApiService } from 'src/app/services/data-api.service';
+import { GrupInterface } from 'src/app/models/grupo';
+import { async } from '@angular/core/testing';
+
+
 
 @Component({
   selector: 'app-card-container',
@@ -11,50 +15,21 @@ import { DataApiService } from 'src/app/services/data-api.service';
 })
 export class CardContainerComponent implements OnInit {
 
-  cards : object[];
+  cards : card[] = [];
+  cards2: string[] = [];
   btn_activo:boolean = false;
 
   constructor(
     public dialog: MatDialog,
     private das: DataApiService
   ) { 
-    // let card_1 = {
-    //   id: 123,
-    //   texto: '[  {"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]',
-    //   color: "rojo",
-    //   titulo: "El titulo mas largo delasd nknajk ldsjkl djklj ldasj dkla ",
-    //   img: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-    //   tipo: 2,
-    //   label: ["card", "prueba", "checkbox"]
-    // }
-
-    // let card_2 = {
-    //   id: 124,
-    //   texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porttitor tristique condimentum. Fusce non mauris id nibh volutpat facilisis vel in sem. Nunc aliquet augue quis dui laoreet, sit amet aliquet velit ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi faucibus lobortis nulla, quis volutpat metus eleifend vitae. Nulla quis nisl enim. Nunc fringilla nulla in egestas dictum. Morbi consectetur nibh lorem, non tincidunt risus vestibulum non. Pellentesque varius vulputate sem sit amet convallis. Pellentesque blandit leo at dignissim ornare. Quisque ut eros enim.',
-    //   color: "rojo",
-    //   titulo: "Un titulo de prueba 2 ",
-    //   img: "",
-    //   tipo: 1,
-    //   label: ["card", "prueba", "comun"]
-    // }
-
-    // let card_3 = {
-    //   id: 124,
-    //   texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porttitor tristique condimentum. Fusce non mauris id nibh volutpat facilisis vel in sem. Nunc aliquet augue quis dui laoreet, sit amet aliquet velit ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi faucibus lobortis nulla, quis volutpat metus eleifend vitae. Nulla quis nisl enim. Nunc fringilla nulla in egestas dictum. Morbi consectetur nibh lorem, non tincidunt risus vestibulum non. Pellentesque varius vulputate sem sit amet convallis. Pellentesque blandit leo at dignissim ornare. Quisque ut eros enim.',
-    //   color: "rojo",
-    //   titulo: "Un titulo de prueba 2 ",
-    //   img: "https://lh3.googleusercontent.com/YH6zn6nGGvf5g48KFRTsocF9jMmMVl00pcMrCF3mm43-0OAk3qt4DOUVo1Jnog5f7nv5cnPFpvTBoS7203rtc0amG5KfGPYtYf438H3Tl1M4SEzMEPaQ22oNOJK0E1UYHHcYfees7G-TQkww_XnjnAfiPaH631hv809hJRcf2qnWwb4y3gcVjk-5ks2TiFCKUQsX470K4ukP_pr9ezvhRRt2HssB--R8695sstKacAHgERC0yevYF49WO1Q8ZRuFzCEyE1GIrsyekdJbZpKdpNZIOBfI5Ntfyji2JMZ5yJi4mbfOYH59A7nj7vXHbd5RKdgHrW6Updsg_Gh6FKAUw2Pn4cku1khto7-Dcea6VifSSVZU0tfbciRKQod7-oKpzpv4Z5edAZmBI4sYdUxsPev8rZKrCosImAnDLlrL2Hc7ieLmmkor1dhHHOiB1tLQ7N9iE-m8J9vKDiA6Hut5iihNE6hUhqEhqT0klFntDNiq2nJFr4LlskY8dPrl2Yha1RC860ARrjfxV2lIthUGc6BLYl5lPB1FbMdv4vz6T02Srl45KcLigzb0dj5PkcCeemyX6IxZRnxGK-PI4jvX_x0vOFwsZ_FaiMHl3dbZYYPT7pizxzmipD8mZQysGCzHdhz4km7wTSEBHxCU-LTDFERFdGrz035ijpdFVyAi3d6a6nmM49Nm7GMY=w462-h615-no",
-    //   tipo: 1,
-    //   label: ["card", "prueba", "comun"]
-    // }
-
-    // this.cards = [card_1, card_2, card_3];
-
+    
   }
 
   // Espero a que me pasen una card a eliminar
-  private borrarCard(e:number) {
+  private borrarCard(e:string) {
     console.log("llego",e);
+    this.das.deleteNote(e)
   //  TODO:Falta la comunicacion con firebase para borrar 
   }
 
@@ -89,9 +64,57 @@ export class CardContainerComponent implements OnInit {
   }
 
   ngOnInit() {
+    //this._buescarNotas();
+    this.changeGroup();
+    this.lasNotasQueHay();
+    
     //me suscribo al service y hago un get notes1}
-    this.cards = this.das.getNotes();
+    // this.cards = this.das.getNotes();
   }
+
+  changeGroup(){
+    this.das.grupoSeleccionado$.subscribe(res => {
+      this.cards2 =[]
+      this.cards2 =res.notasID
+
+      
+      console.log("ACAAAAAAAAA")
+      console.log("NOTAS FINAL ",this.cards);
+    });
+   
+  }
+
+  checkForId(unId:string){
+    if(this.cards2 != null)
+      return this.cards2.includes(unId);
+    else
+      return false;
+  }
+
+
+
+
+  lasNotasQueHay(){
+    this.das.getNotes().subscribe(res=>{
+      this.cards=[]
+      let auxCard:card[] = res;
+      this.cards = auxCard; 
+      console.log("notas de la DB ", res);
+      // this.grupos = res;
+      //let i = 0;
+      // let gp:GrupInterface = this.das.getCurrentGroup()
+      // auxCard.forEach(element => {
+      //           if(gp.notasID.includes(element.id)){
+      //             if(element != undefined){
+      //               this.cards.push(element);
+      //             }
+      //           }
+      //           else{
+      //           }
+      // });
+    });
+  }
+  
 
   activo(){
     console.log("clickeo");
@@ -102,4 +125,22 @@ export class CardContainerComponent implements OnInit {
       this.btn_activo = false;
   }
 
+  seleccionarGrupo(){
+  }
+
+
+   hayGrupo(){
+    //  this._buescarNotas();
+    return this.das.getCurrentGroup() != null;
+  }
+
+
+  async _buescarNotas() {
+    console.log("Fui a buscar las notas");
+    
+    if(this.das.getCurrentGroup() != null){
+      this.cards = await this.das.getAllNotesFromGroup();
+    }
+    return this.cards;
+  }
 }

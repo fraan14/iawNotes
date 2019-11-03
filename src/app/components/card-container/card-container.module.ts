@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule, MatButtonModule, MatRippleModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
 import { ModalsModule } from '../modals/modals.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +20,9 @@ import { ModalsModule } from '../modals/modals.module';
     MatMenuModule,
     MatButtonModule,
     ModalsModule,
-    MatRippleModule
+    MatRippleModule,
+    FormsModule
+
 
   ],
   exports: [CardContainerComponent]

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { MatDialogModule, MatDialog, MatDialogConfig } from '@angular/material';
 import { RegisterComponent } from '../register/register.component';
@@ -11,6 +11,7 @@ import { DataApiService } from '../../services/data-api.service';
 import { AddToGroupComponent } from '../add-to-group/add-to-group.component';
 import { GrupInterface } from 'src/app/models/grupo';
 import { UserInterface } from 'src/app/models/user';
+import { card } from 'src/app/interfaces/card.interface';
 
 
 @Component({
@@ -21,10 +22,9 @@ import { UserInterface } from 'src/app/models/user';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private loginDialog:MatDialog, 
-    private authService: AuthService,
-    private afsAuth: AngularFireAuth, 
-    private das:DataApiService) { }
+@Output() nuevoGrupo: EventEmitter<string>  = new EventEmitter<string>();
+ 
+    
   public app_name: string = 'notes-iaw';
   public isLogged: boolean = null;
   public email:string = "";
@@ -35,6 +35,16 @@ export class NavbarComponent implements OnInit {
   color = 'accent';
   checked = false;
   disabled = false;
+
+
+
+  constructor(private loginDialog:MatDialog, 
+    private authService: AuthService,
+    private afsAuth: AngularFireAuth, 
+    private das:DataApiService) {
+     }
+
+
 
   ngOnInit() {
     this.getCurrentUser();
@@ -151,9 +161,17 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  seleccionarGrupo(item: GrupInterface){
+  async seleccionarGrupo(item: GrupInterface){
     this.das.grupoSeleccionado=item;
-    console.log("grupo seleccionado: " + item.nombreGrupo)
+
+    console.log("grupo seleccionado: " + item.nombreGrupo);
+    this.das.updateGrupoSeleccionado(item);
+    let aux : card[] = await this.das.getAllNotesFromGroup()
+    this.nuevoGrupo.emit(item.id);
+    this.hayGrupo = true;
+    //console.table(aux);
+
+
   }
 
   switchColor(color){

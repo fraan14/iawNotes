@@ -192,9 +192,7 @@
       </a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content class="container-cards">
-    
-    
+  <mat-sidenav-content class="container-cards" *ngIf="hayGrupo">
     <app-card-container></app-card-container>
   </mat-sidenav-content>
 </mat-sidenav-container>

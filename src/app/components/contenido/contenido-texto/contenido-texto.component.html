@@ -1,1 +1,3 @@
-<p>{{texto | TransformarTextoPipe :"":"cortarTexto"}}</p>
+<ng-container *ngIf="texto">
+    <p>{{texto | TransformarTextoPipe :"":"cortarTexto"}}</p>
+</ng-container>

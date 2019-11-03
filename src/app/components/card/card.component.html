@@ -1,11 +1,11 @@
-<mat-card class="card" [style.backgroundColor]= card.color >
-    <img *ngIf="card.img != '' " class="card-image" mat-card-image  [src]=card?.img >
+<mat-card class="card" [style.backgroundColor]= card.color *ngIf="card">
+    <img *ngIf="card.img" class="card-image" mat-card-image  [src]=card?.img >
     <div class="card-header">
         <div class="card-title">{{card.titulo | TransformarTextoPipe :"":"cortarTitulo"}}</div>
     </div>
     
     <mat-card-content>
-        <app-contenido  (contenido_texto)=aGuardar($event) [tipo]="card.tipo" [texto] = "card.texto" ></app-contenido>
+        <app-contenido  (contenido_texto)=aGuardar($event) [tipo]="card.tipo" [texto]="card.texto" ></app-contenido>
     </mat-card-content>
     <mat-card-actions>
         <div fxLayout="row" fxLayoutAlign="space-around center" class="botones-container">

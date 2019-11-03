@@ -117,7 +117,7 @@ export class CardModalComponent implements OnInit {
     }
     
     // console.log(card);
-
+    // this.das.saveNote(card);
     
     return card;
     

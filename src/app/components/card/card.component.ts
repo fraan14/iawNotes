@@ -11,10 +11,10 @@ import { DataApiService } from 'src/app/services/data-api.service';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
-  @Input() card:card;
+  @Input() card: card;
   @Input() id: number;
   
-  @Output() borrarCard: EventEmitter<number>;
+  @Output() borrarCard: EventEmitter<string>;
   @Output() deshacerBorrarCard: EventEmitter<card>;
   
   
@@ -28,6 +28,8 @@ export class CardComponent implements OnInit {
     }
     
     ngOnInit() {
+      console.log('card:', this.card);
+      
     }
     
     
@@ -40,7 +42,7 @@ export class CardComponent implements OnInit {
         if(data.dismissedByAction)
         this.deshacerBorrarCard.emit(copiaDelCard);
       });
-      this.borrarCard.emit(this.id);
+      this.borrarCard.emit(this.card.id);
     }
     
     
@@ -115,6 +117,11 @@ export class CardComponent implements OnInit {
         break;
       }
     }
+    seleccionarGrupo(e: any){
+      console.log("card-container: ");
+      
+    }
+  
     
   }
   

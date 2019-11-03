@@ -1,12 +1,14 @@
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore'
 import { UserInterface } from '../models/user';
-import { Observable } from 'rxjs';
+import { Observable,of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { auth, User } from 'firebase/app';
 import { GrupInterface } from '../models/grupo';
 import * as firebase from 'firebase';
 import { card } from '../interfaces/card.interface';
+
+
 
 
 //tengo que importar las interfaces.
@@ -34,6 +36,7 @@ export class DataApiService {
   private grups: Observable<GrupInterface[]>;
   private users:Observable<UserInterface[]>;
   private usersFiltrados:Observable<UserInterface[]>;
+  
 
   private userDoc: AngularFirestoreDocument<UserInterface>;
 
@@ -41,6 +44,8 @@ export class DataApiService {
 
   private user2:UserInterface = null;
   public grupoSeleccionado:GrupInterface = null;
+  public $grupoSeleccionado: Subject<GrupInterface> = new Subject<GrupInterface>();
+  public grupoSeleccionado$: Observable<GrupInterface> = this.$grupoSeleccionado.asObservable();
   public usuarioActual:UserInterface = null;
 
   
@@ -57,6 +62,22 @@ export class DataApiService {
     });
     //console.log("Este es el usiario perteneciente al grupo: "+usr.nombre);
     return usr;
+  }
+
+
+  public updateGrupoSeleccionado(gi: GrupInterface) {
+    this.$grupoSeleccionado.next(gi);
+  }
+
+  public actualGroup(): Observable<GrupInterface> {
+    // const mocked: Plant[] = [
+    //   { id: 1, image: 'hello.png' }
+    // ];
+    // returns an Observable that emits one value, mocked; which in this case is an array,
+    // and then a complete notification
+    // You can easily just add more arguments to emit a list of values instead
+    this.$grupoSeleccionado.next(this.grupoSeleccionado);
+    return this.$grupoSeleccionado.asObservable();
   }
 
   async CrearGrupoYactualizarUser(idUser: string, groupName:string){
@@ -154,6 +175,8 @@ export class DataApiService {
   
   //este metodo deberia eliminar la nota de la base de datos y el id de notas del arreglo de notas del grupo
   async deleteNote(id:string){
+
+    
     if(this.grupoSeleccionado){
 
       await this.notesCollection.doc(id).delete()
@@ -179,19 +202,20 @@ export class DataApiService {
 
   //entonces lo que queda es verificar que al crear la nota exista un grupo seleccionado
   saveNote(miNota:card){
-    console.log(this.grupoSeleccionado);
-    
-    if(this.grupoSeleccionado){
-      console.log("card recibida",miNota);
-      let customId = this.generateNewKey('Notas');
-      miNota.id = customId;
-    
-      this.notesCollection.doc(customId).set(miNota);    //agrega la nota a la base de datos
-
-      this.grupoSeleccionado.notasID.push(customId);                //agrega el id al arreglo de ids del grupo
-      this.UpdateGroup(this.grupoSeleccionado);
-
-      return customId;
+    if(miNota != null && miNota!=undefined){
+      console.log(this.grupoSeleccionado);
+      if(this.grupoSeleccionado){
+        console.log("card recibida",miNota);
+        let customId = this.generateNewKey('Notas');
+        miNota.id = customId;
+      
+        this.notesCollection.doc(customId).set(miNota);    //agrega la nota a la base de datos
+  
+        this.grupoSeleccionado.notasID.push(customId);                //agrega el id al arreglo de ids del grupo
+        this.UpdateGroup(this.grupoSeleccionado);
+  
+        return customId;
+      }
     }
   }
 
@@ -200,14 +224,16 @@ export class DataApiService {
     let notaux : card;
     let toRet: card[]= new Array();
     let i = 0;
-    for(let notid of this.grupoSeleccionado.notasID){
-      await this.getNotaPorId(notid).then(function(res){
-        notaux = res;
-      });
-      toRet[i]=notaux;
-      i+=1;
+    if(this.grupoSeleccionado.notasID != null){
+      for(let notid of this.grupoSeleccionado.notasID){
+        await this.getNotaPorId(notid).then(function(res){
+          notaux = res;
+          
+        });
+        toRet[i]=notaux;
+        i+=1;
+      }
     }
-
     return toRet; // si el resultado de esto te da undefined tenes que sacar este metodo y llamar a las funciones como en el componente add-to-group.component.ts linea 24
   }
 
@@ -313,41 +339,7 @@ export class DataApiService {
   }
   //este metodo debe retornar un arreglo de notas a partir de las ids de nota del grupo seleccionado
   getNotes(){
-     let cards: card[] = [];
-
-    // let card_1 = {
-    //   id: "123",
-    //   texto: '[  {"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} ,{"check":true, "text":"Chequeado"} , {"check":false, "text":"No Check"}]',
-    //   color: "rojo",
-    //   titulo: "El titulo mas largo delasd nknajk ldsjkl djklj ldasj dkla ",
-    //   img: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-    //   tipo: 2,
-    //   label: ["card", "prueba", "checkbox"]
-    // }
-
-    // let card_2 = {
-    //   id: "124",
-    //   texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porttitor tristique condimentum. Fusce non mauris id nibh volutpat facilisis vel in sem. Nunc aliquet augue quis dui laoreet, sit amet aliquet velit ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi faucibus lobortis nulla, quis volutpat metus eleifend vitae. Nulla quis nisl enim. Nunc fringilla nulla in egestas dictum. Morbi consectetur nibh lorem, non tincidunt risus vestibulum non. Pellentesque varius vulputate sem sit amet convallis. Pellentesque blandit leo at dignissim ornare. Quisque ut eros enim.',
-    //   color: "rojo",
-    //   titulo: "Un titulo de prueba 2 ",
-    //   img: "",
-    //   tipo: 1,
-    //   label: ["card", "prueba", "comun"]
-    // }
-
-    // let card_3 = {
-    //   id: "124",
-    //   texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porttitor tristique condimentum. Fusce non mauris id nibh volutpat facilisis vel in sem. Nunc aliquet augue quis dui laoreet, sit amet aliquet velit ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi faucibus lobortis nulla, quis volutpat metus eleifend vitae. Nulla quis nisl enim. Nunc fringilla nulla in egestas dictum. Morbi consectetur nibh lorem, non tincidunt risus vestibulum non. Pellentesque varius vulputate sem sit amet convallis. Pellentesque blandit leo at dignissim ornare. Quisque ut eros enim.',
-    //   color: "rojo",
-    //   titulo: "Un titulo de prueba 2 ",
-    //   img: "https://lh3.googleusercontent.com/YH6zn6nGGvf5g48KFRTsocF9jMmMVl00pcMrCF3mm43-0OAk3qt4DOUVo1Jnog5f7nv5cnPFpvTBoS7203rtc0amG5KfGPYtYf438H3Tl1M4SEzMEPaQ22oNOJK0E1UYHHcYfees7G-TQkww_XnjnAfiPaH631hv809hJRcf2qnWwb4y3gcVjk-5ks2TiFCKUQsX470K4ukP_pr9ezvhRRt2HssB--R8695sstKacAHgERC0yevYF49WO1Q8ZRuFzCEyE1GIrsyekdJbZpKdpNZIOBfI5Ntfyji2JMZ5yJi4mbfOYH59A7nj7vXHbd5RKdgHrW6Updsg_Gh6FKAUw2Pn4cku1khto7-Dcea6VifSSVZU0tfbciRKQod7-oKpzpv4Z5edAZmBI4sYdUxsPev8rZKrCosImAnDLlrL2Hc7ieLmmkor1dhHHOiB1tLQ7N9iE-m8J9vKDiA6Hut5iihNE6hUhqEhqT0klFntDNiq2nJFr4LlskY8dPrl2Yha1RC860ARrjfxV2lIthUGc6BLYl5lPB1FbMdv4vz6T02Srl45KcLigzb0dj5PkcCeemyX6IxZRnxGK-PI4jvX_x0vOFwsZ_FaiMHl3dbZYYPT7pizxzmipD8mZQysGCzHdhz4km7wTSEBHxCU-LTDFERFdGrz035ijpdFVyAi3d6a6nmM49Nm7GMY=w462-h615-no",
-    //   tipo: 1,
-    //   label: ["card", "prueba", "comun"]
-    // }
-
-    // return cards = [card_1, card_2, card_3];
-    return cards
-
+    return this.afs.collection("Notas").valueChanges();
   }
 
 
