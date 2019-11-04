@@ -58,6 +58,7 @@ export class CardComponent implements OnInit {
       dialogRef.afterClosed().subscribe(res => {
         console.log("se cerro el modal: ", res);
         // TODO: en caso de que devuelva un UNDIFINED no hacer NativeDateAdapter... sino update de nota
+        this.DAS.saveNote(res);
       });
       
       

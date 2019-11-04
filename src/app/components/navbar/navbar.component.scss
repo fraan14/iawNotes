@@ -1,22 +1,14 @@
- 
- mat-sidenav, mat-sidenav-content{
-   padding: 60px;
- }
-  
-  .customSidenav{
-    position: absolute;
-  }
- 
-  
-  a {
-    text-decoration: none;
-    // color: white;
-  }
-  
-  a:hover,
-  a:active {
-    color: lightgray;
-  }
+
+.titulo{
+  text-decoration: none;
+}
+.titulo:hover{
+  color: lightgray;
+}
+
+
+.menu-usuario{
+
   
   .navigation-items {
     list-style: none;
@@ -24,46 +16,47 @@
     margin: 0;
     cursor: pointer;
   }
+}
   
-  .icon {
-    display: inline-block;
-    height: 30px;
-    margin: 0 auto;
-    padding-right: 10px;
-    text-align: center;
-    vertical-align: middle;
-    width: 15%;
-  }
   
-  .label {
-    display: inline-block;
-    line-height: 30px;
-    margin: 0;
-    width: 85%;
-  }
+  // .icon {
+  //   display: inline-block;
+  //   height: 30px;
+  //   margin: 0 auto;
+  //   padding-right: 10px;
+  //   text-align: center;
+  //   vertical-align: middle;
+  //   width: 15%;
+  // }
+  
+  // .label {
+  //   display: inline-block;
+  //   line-height: 30px;
+  //   margin: 0;
+  //   width: 85%;
+  // }
 
 
-  .mat-menu-panel{
-    max-height: 250px !important;
-  }
+  // .mat-menu-panel{
+  //   max-height: 250px !important;
+  // }
 
   // .mat-menu-content{
   //   max-height: 50px  !important;
   // }
 
   //NUEVO
-  .menu-usuario{
-    // align-self: flex-end;
-    .menu-grupos{
-      .mat-menu-content{
-        max-height: 50px;
-      }
-    }
-  }
+  // .menu-usuario{
+  //   .menu-grupos{
+  //     .mat-menu-content{
+  //       max-height: 50px;
+  //     }
+  //   }
+  // }
   
-  .container-cards{
-    min-height: 900px;
-  }
+  // .container-cards{
+  //   min-height: 900px;
+  // }
 
   .mat-drawer-backdrop.mat-drawer-shown{
     background-color: transparent !important;

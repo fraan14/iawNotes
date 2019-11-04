@@ -1,5 +1,5 @@
-<div fxLayout="row wrap" fxLayoutAlign="center start">
-  <div *ngFor="let c of cards; let i = index" class="container-card" >
+<div fxLayout="row wrap" fxLayoutAlign="start start" class="container-card">
+  <div *ngFor="let c of cards; let i = index"  >
       <div *ngIf="checkForId(c.id)">  
           <app-card (borrarCard)="borrarCard($event)"
           (deshacerBorrarCard)="deshacerBorrarCard($event)" 
@@ -10,20 +10,21 @@
   </div>
 
 
-</div>
-
-<div class="boton-speed-dial" *ngIf="hayGrupoSeleccionado()">
-  <button class="boton-mas" matRipple mat-fab color="primary" [ngClass]="{'activo': btn_activo}" [matMenuTriggerFor]="menu" (click)="activo()">
-    <mat-icon class="icon-add">add</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu" (closed)="activo()">
-    <button mat-menu-item (click)="crearCard('1')">
-      <mat-icon>note_add</mat-icon>
-      <span>Crear nota</span>
+  
+  <div class="boton-speed-dial" *ngIf="hayGrupoSeleccionado()">
+    <button class="boton-mas" matRipple mat-fab color="primary" [ngClass]="{'activo': btn_activo}" [matMenuTriggerFor]="menu" (click)="activo()">
+      <mat-icon class="icon-add">add</mat-icon>
     </button>
-    <button mat-menu-item (click)="crearCard('2')">
-      <mat-icon>list</mat-icon>
-      <span>Crear lista</span>
-    </button>
-  </mat-menu>
+    <mat-menu #menu="matMenu" (closed)="activo()">
+      <button mat-menu-item (click)="crearCard('1')">
+        <mat-icon>note_add</mat-icon>
+        <span>Crear nota</span>
+      </button>
+      <button mat-menu-item (click)="crearCard('2')">
+        <mat-icon>list</mat-icon>
+        <span>Crear lista</span>
+      </button>
+    </mat-menu>
+  </div>
+  
 </div>

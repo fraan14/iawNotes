@@ -1,73 +1,92 @@
 <mat-toolbar color="primary">
-  <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="opened=!opened" *ngIf="isLogged" >
+  <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="opened=!opened" *ngIf="isLogged">
     <i class="material-icons">menu</i>
   </button>
-  <div><a>IAW - NOTES</a></div>
-  <div class="menu-usuario" fxFlex="80" fxLayout="row wrap" fxLayoutAlign="end center"  fxHide.xs *ngIf="!isLogged">
-    <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+  <div>
+    <a class="titulo">IAW - NOTES</a>
+  </div>
+  <div class="menu-usuario" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="end center" fxHide.xs *ngIf="!isLogged">
+    <ul fxLayout class="navigation-items">
       <li>
         <button mat-button (click)="abrirVentanaLogueo()">
-            <i class="material-icons">input</i>
-            <span>&nbsp; Iniciar sesión</span>
+          <i class="material-icons">input</i>
+          <span>&nbsp; Iniciar sesión</span>
         </button>
       </li>
       <li>
         <button mat-button (click)="abrirVentanaRegistro()">
-            <i class="material-icons">person</i>
-            <span>&nbsp; Registrarse</span>
+          <i class="material-icons">person</i>
+          <span>&nbsp; Registrarse</span>
         </button>
       </li>
     </ul>
   </div>
-  <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs *ngIf="isLogged">
-    <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+
+  <div fxFlex fxLayout fxLayoutAlign="flex-end" class="menu-usuario" fxHide.xs *ngIf="isLogged">
+    <ul fxLayout class="navigation-items">
+      <li>
+        <button mat-button [matMenuTriggerFor]="menuGrupos">
+          <span>{{nombreGrupoSeleccionado}} </span>
+          <i class="material-icons">arrow_drop_down</i>
+        </button>
+        <mat-menu #menuGrupos="matMenu" class="menu-grupos">
+          <ng-container *ngFor="let grupo of grupos; let i = index">
+            <button mat-menu-item (click)="seleccionarGrupo(grupo)">{{grupo.nombreGrupo}}</button>
+          </ng-container>
+        </mat-menu>
+      </li>
+
       <li>
         <button mat-button [matMenuTriggerFor]="menu">{{nombre}}</button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="onLogout()">Cerrar sesión</button>
-            <mat-slide-toggle
-              [color]="color"
-              [checked]="checked"
-              [disabled]="disabled"
-              (click)="selectedTheme='my-second-theme'">
-              Color!
+          <button mat-menu-item (click)="onLogout()">Cerrar sesión</button>
+          <mat-slide-toggle [color]="color" [checked]="checked" [disabled]="disabled"
+            (click)="selectedTheme='my-second-theme'">
+            Color!
           </mat-slide-toggle>
         </mat-menu>
       </li>
-      
+
     </ul>
   </div>
 </mat-toolbar>
 
-<mat-sidenav-container>
-    <mat-sidenav [(opened)]="opened">
-        
-      <button mat-button [matMenuTriggerFor]="menuGrupos">
-          <span>{{nombreGrupoSeleccionado}} </span>
-          <i class="material-icons">arrow_drop_down</i>
-      </button>
-      <mat-menu #menuGrupos="matMenu" class="menu-grupos">
-          <ng-container *ngFor="let grupo of grupos; let i = index">
-              <button mat-menu-item (click)="seleccionarGrupo(grupo)">{{grupo.nombreGrupo}}</button>
-          </ng-container>
-      </mat-menu>
-      
-      <button mat-button (click)="abrirVentanaCrearGrupo()">
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav [(opened)]="opened" #sidenav>
+
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <button mat-button (click)="abrirVentanaCrearGrupo()">
           <span>Crear Grupo</span>
           <i class="material-icons">group</i>
-      </button>
-
-      <button mat-button (click)="abrirVentanaAgregarPersonaGrupo()" *ngIf="hayGrupo">
+        </button>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <button mat-button (click)="abrirVentanaAgregarPersonaGrupo()" *ngIf="hayGrupo">
           <span>Gestionar Grupo</span>
           <i class="material-icons">group</i>
-      </button>
-
-      <button mat-button (click)="EliminarGrupoSeleccionado()" *ngIf="hayGrupo">
+        </button>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <button mat-button (click)="EliminarGrupoSeleccionado()" *ngIf="hayGrupo">
           <span>Eliminar Grupo</span>
           <i class="material-icons">group</i>
-      </button>
+        </button>
+      </mat-list-item>
+    </mat-list>
 
-    </mat-sidenav>
+    <!-- <button mat-button [matMenuTriggerFor]="menuGrupos">
+      <span>{{nombreGrupoSeleccionado}} </span>
+      <i class="material-icons">arrow_drop_down</i>
+    </button>
+    <mat-menu #menuGrupos="matMenu" class="menu-grupos">
+      <ng-container *ngFor="let grupo of grupos; let i = index">
+        <button mat-menu-item (click)="seleccionarGrupo(grupo)">{{grupo.nombreGrupo}}</button>
+      </ng-container>
+    </mat-menu> -->
+
+  </mat-sidenav>
+  <section>
     <app-card-container *ngIf="isLogged"></app-card-container>
+  </section>
 </mat-sidenav-container>
-

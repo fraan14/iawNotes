@@ -1,11 +1,12 @@
 .container-card{
+   min-height: 500px;
    padding: 1%; 
    position: relative;
    
    .boton-speed-dial{
-      position: absolute;
-      top: 80px;
-      right: 0;
+      position: fixed;
+      bottom: 50px;
+      right: 50px;
       .boton-mas{
          &.activo {
             transition: width 5s;
