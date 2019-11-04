@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DataApiService } from 'src/app/services/data-api.service';
+import { GrupInterface } from 'src/app/models/grupo';
+import { UserInterface } from 'src/app/models/user';
+import { card } from 'src/app/interfaces/card.interface';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-busqueda-modal',
@@ -10,26 +15,43 @@ export class BusquedaModalComponent implements OnInit {
 
   lista_amigos:string[];
   lista_contactos:string[];
-
+  grupos:GrupInterface[] = [];
+  gruposAGuardar:GrupInterface[]=[]
+  usuarioActual: UserInterface = null;
   emailFormControl: FormControl;
 
+  Micard : card
 
-  constructor() {
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any,private das:DataApiService) {
     this.emailFormControl = new FormControl('',[Validators.required, Validators.email]);
+    this.Micard = data.card;
    }
 
   ngOnInit() {
-    this.llenarListaAmigos();
-    this.llenarListaContactos();
+    this.usuarioActual = this.das.usuarioActual;
+    this.getGroups(this.usuarioActual.id)
+    //this.llenarListaAmigos();
+    //this.llenarListaContactos();
   }
 
+  getGroups(uid:string){
+    //console.log("al getGroups le llega: "+uid)
+    this.das.getKnownGroups(uid).subscribe(res=>{
+      let auxgp:GrupInterface[] = res;
+      // console.log("Grupos del usuario ", res);
+      this.grupos = res;
+      let i = 0;
+      auxgp.forEach(element => {
+                if(element.usuarioiD.includes(uid)){
+                  // this.grupos
+                }
+                else{
+                }
+                i= i+1;
+      });
+    });
+  }
 
-  llenarListaContactos() {
-    this.lista_contactos = ["Juan Perez", "Jose Romualdo", "Romina Perez", "Homero Simpsons"];
-  }
-  llenarListaAmigos() {
-    this.lista_amigos = ["Juampi Coutinho", "Pame Bonfiglio", "Karen Reddel"];
-  }
 
   eliminar(i:number){
     // TODO:Conectar con la base de datos.
@@ -37,17 +59,24 @@ export class BusquedaModalComponent implements OnInit {
   }
 
   // TODO: Habria que ver la posibilidad de ver la funcionalidad.. si usar alguna ed transitoria y cuando le das aceptar o cancelar aplicar los cambios
-  insertar(){
-
-  }
-
-  agregarContacto(){
-    if(this.emailFormControl.valid){
-      console.log(this.emailFormControl.value);
-      this.lista_amigos.push(this.emailFormControl.value);
-      this.emailFormControl.setValue("");
-    }
+  compartir(g:GrupInterface, index: number){
+    console.log("Grupo a compartir",g);
+    console.log("indice",index);
     
+    
+    if(this.gruposAGuardar.includes(g)){
+      this.gruposAGuardar.slice(index,1);
+    }
+    else{
+      this.gruposAGuardar.push(g);
+    }
+  }
+  
+  terminarCompartir(){
+    this.gruposAGuardar.forEach(element => {
+      element.notasID.push(this.Micard.id);
+      this.das.UpdateGroup(element);
+    });
   }
 }
 

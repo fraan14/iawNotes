@@ -1,29 +1,16 @@
 <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center" class="container" >
-    <mat-list *ngIf="lista_amigos"  fxFlex="100" fxLayout="row wrap">
+    <mat-list *ngIf="grupos"  fxFlex="100" fxLayout="row wrap">
         <h3 mat-subheader fxFlex="100">Lista de contactos</h3>
-        <mat-list-item *ngFor="let l of lista_amigos; let i=index" fxFlex="100">
-            <p fxFlex="95">{{l}}</p>
-            <a fxFlex="5" (click)="eliminar(i)" >x</a>
+        <mat-list-item *ngFor="let l of grupos; let i=index" fxFlex="100">
+          <p fxFlex="95">{{l.nombreGrupo}}</p>
+          <a fxFlex="5" (click)="compartir(l, i)" >+</a>
         </mat-list-item>
     </mat-list>
     
-    <div class="nuevo_contacto" fxLayout="row" fxFlex="100">
-        <mat-form-field fxFlex="94">
-            <input matInput placeholder="Email" [formControl]="emailFormControl">
-            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-              Inserte un mail válido
-            </mat-error>
-            <!-- <mat-error *ngIf="emailFormControl.hasError('required')">
-              Email is <strong>required</strong>
-            </mat-error> -->
-          </mat-form-field>
-        <a fxFlex="5" (click)="agregarContacto()"><mat-icon>done</mat-icon></a>
-    </div>
-
-
+    
     <!-- TODO: Hacer la funcionalidad de los botones-->
     <div fxLayout="row" fxFlex="95" fxLayoutAlign="end center" >
-        <a mat-button>Cancelar</a>
-        <a mat-raised-button color="primary">Aceptar</a>
+        <a mat-button [mat-dialog-close]>Cancelar</a>
+        <a mat-raised-button color="primary" [mat-dialog-close] (click)="terminarCompartir()">Aceptar</a>
     </div>
 </div>

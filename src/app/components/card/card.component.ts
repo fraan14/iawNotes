@@ -66,7 +66,7 @@ export class CardComponent implements OnInit {
       });
       
       dialog.afterClosed().subscribe(res => {
-        console.log("Se cerro la busqueda", res);
+        //console.log("Se cerro la busqueda", res);
       });
     }
     
