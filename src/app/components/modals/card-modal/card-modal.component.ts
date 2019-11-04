@@ -12,6 +12,7 @@ import { DataApiService } from 'src/app/services/data-api.service';
 export class CardModalComponent implements OnInit {
   
   card:card=null;
+  tipo: string = null;
   cardForm: FormGroup;
   fb: FormBuilder;
   lista_check: {check:boolean, text:string}[];
@@ -24,7 +25,8 @@ export class CardModalComponent implements OnInit {
     //Datos pasados
     if(data){
       this.card = data.card;
-      console.log("data pasada",this.card );
+      this.tipo = data.tipo;
+      console.log("data pasada",this.card, this.tipo );
       
       if(this.card.tipo == 2){
         this.lista_check = JSON.parse(this.card.texto);

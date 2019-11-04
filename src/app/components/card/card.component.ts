@@ -52,13 +52,15 @@ export class CardComponent implements OnInit {
     editar(){
       console.log("Editar");
       let dialogRef = this.dialog.open(CardModalComponent, {
-        data: {card: this.card}
+        data: {card: this.card , tipo:'editar'}
       });
       
       dialogRef.afterClosed().subscribe(res => {
         console.log("se cerro el modal: ", res);
         // TODO: en caso de que devuelva un UNDIFINED no hacer NativeDateAdapter... sino update de nota
-        this.DAS.saveNote(res);
+        if(res){
+          this._actualizarCard(res)
+        }
       });
       
       
@@ -117,10 +119,17 @@ export class CardComponent implements OnInit {
         default:
         break;
       }
+      this._actualizarCard(this.card);
     }
     seleccionarGrupo(e: any){
       console.log("card-container: ");
       
+    }
+
+    // TODO: IMPORTANTE SOLUCIONAR EL SAVENOTE
+    private _actualizarCard(c: card){
+      this.DAS.deleteNote(c.id);
+      this.DAS.saveNote(c);
     }
   
     

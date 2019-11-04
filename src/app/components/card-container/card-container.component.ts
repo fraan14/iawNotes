@@ -55,7 +55,7 @@ export class CardContainerComponent implements OnInit {
       nuevaCard.texto = "[]";
     }
     let dialogRef = this.dialog.open(CardModalComponent, {
-      data: {card: nuevaCard}
+      data: {card: nuevaCard,  tipo:'nuevo'}
     });
 
     dialogRef.afterClosed().subscribe(res => {

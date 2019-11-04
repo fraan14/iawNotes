@@ -5,7 +5,7 @@ import { PipeTransform, Pipe } from "@angular/core";
 
 export class TransformarTextoPipe implements PipeTransform {
     MAXIMA_LONGITUD_TEXTO: number = 200;
-    MAXIMA_LONGITUD_TITULO: number = 25;
+    MAXIMA_LONGITUD_TITULO: number = 30;
 
     transform(input: string, tipo: string, tipo_pipe:string):string {
         switch (tipo_pipe) {
@@ -21,12 +21,15 @@ export class TransformarTextoPipe implements PipeTransform {
     /**
      * cortar_texto
      */
-    public cortar_texto(input, cantidad):string {
+    public cortar_texto(input:string, cantidad):string {
         if(!input){
             return "";
         }
         else{
-            return input.substring(0, cantidad) + "...";
+            if(input.length > cantidad)
+                return input.substring(0, cantidad) + "...";
+            else 
+                return input;
         }
     }
 }
