@@ -1,10 +1,12 @@
-mat-sidenav-container, mat-sidenav-content, mat-sidenav {
-    height: 50%;
-  }
+ 
+ mat-sidenav, mat-sidenav-content{
+   padding: 60px;
+ }
   
-  mat-sidenav {
-    width: 200px;
+  .customSidenav{
+    position: absolute;
   }
+ 
   
   a {
     text-decoration: none;
@@ -58,7 +60,7 @@ mat-sidenav-container, mat-sidenav-content, mat-sidenav {
       }
     }
   }
-
+  
   .container-cards{
     min-height: 900px;
   }
@@ -66,3 +68,4 @@ mat-sidenav-container, mat-sidenav-content, mat-sidenav {
   .mat-drawer-backdrop.mat-drawer-shown{
     background-color: transparent !important;
 }
+

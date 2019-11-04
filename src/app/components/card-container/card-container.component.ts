@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { DataApiService } from 'src/app/services/data-api.service';
 import { GrupInterface } from 'src/app/models/grupo';
 import { async } from '@angular/core/testing';
+import { NullTemplateVisitor } from '@angular/compiler';
 
 
 
@@ -91,7 +92,9 @@ export class CardContainerComponent implements OnInit {
       return false;
   }
 
-
+  hayGrupoSeleccionado():boolean{
+    return this.das.getCurrentGroup()!=null;
+  }
 
 
   lasNotasQueHay(){
@@ -99,19 +102,8 @@ export class CardContainerComponent implements OnInit {
       this.cards=[]
       let auxCard:card[] = res;
       this.cards = auxCard; 
-      console.log("notas de la DB ", res);
-      // this.grupos = res;
-      //let i = 0;
-      // let gp:GrupInterface = this.das.getCurrentGroup()
-      // auxCard.forEach(element => {
-      //           if(gp.notasID.includes(element.id)){
-      //             if(element != undefined){
-      //               this.cards.push(element);
-      //             }
-      //           }
-      //           else{
-      //           }
-      // });
+      //console.log("notas de la DB ", res);
+     
     });
   }
   
