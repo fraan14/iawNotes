@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   title = 'Iaw-Notes';
   isLogged:Boolean=false;
   public idPerson:string="";
+  tema: string = "my-theme";
 
   ngOnInit() {
     this.verifyUser();
@@ -36,6 +37,15 @@ export class AppComponent implements OnInit {
   //aca tengo que ver si el email del usuario que llega esta incluido en la bd, si no esta 
   getOrCreateUser(person : firebase.User){
     this.das.getOrCreateUser(person);
+  }
+  cambiarTema(event){
+    
+    if(this.tema === "my-theme"){
+      this.tema = 'my-second-theme';
+    }
+    else{
+      this.tema = "my-theme";
+    }
   }
 
   
