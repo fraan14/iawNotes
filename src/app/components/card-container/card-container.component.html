@@ -12,7 +12,7 @@
 
 </div>
 
-<div class="boton-speed-dial">
+<div class="boton-speed-dial" *ngIf="hayGrupoSeleccionado()">
   <button class="boton-mas" matRipple mat-fab color="primary" [ngClass]="{'activo': btn_activo}" [matMenuTriggerFor]="menu" (click)="activo()">
     <mat-icon class="icon-add">add</mat-icon>
   </button>

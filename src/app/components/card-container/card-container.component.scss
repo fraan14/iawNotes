@@ -3,9 +3,9 @@
    position: relative;
    
    .boton-speed-dial{
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
+      position: absolute;
+      top: 80px;
+      right: 0;
       .boton-mas{
          &.activo {
             transition: width 5s;

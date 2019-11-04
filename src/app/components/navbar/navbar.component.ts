@@ -24,12 +24,13 @@ export class NavbarComponent implements OnInit {
 
 @Output() nuevoGrupo: EventEmitter<string>  = new EventEmitter<string>();
  
-    
+  opened = false;
   public app_name: string = 'notes-iaw';
   public isLogged: boolean = null;
   public email:string = "";
   public hayGrupo:boolean = false;
   public nombre: string;
+  public nombreGrupoSeleccionado = "Seleccione Grupo"
   public grupos: GrupInterface[];
   public userid: string;
   color = 'accent';
@@ -138,6 +139,10 @@ export class NavbarComponent implements OnInit {
   }
 
   onLogout(){
+    this.das.grupoSeleccionado = null;
+    this.hayGrupo = false;
+    this.nombreGrupoSeleccionado="Seleccione Grupo"
+    //this.das.updateGrupoSeleccionado(null)
     this.afsAuth.auth.signOut();
   }
 
@@ -163,10 +168,10 @@ export class NavbarComponent implements OnInit {
 
   async seleccionarGrupo(item: GrupInterface){
     this.das.grupoSeleccionado=item;
-
+    this.nombreGrupoSeleccionado = item.nombreGrupo;
     console.log("grupo seleccionado: " + item.nombreGrupo);
     this.das.updateGrupoSeleccionado(item);
-    let aux : card[] = await this.das.getAllNotesFromGroup()
+    //let aux : card[] = await this.das.getAllNotesFromGroup()
     this.nuevoGrupo.emit(item.id);
     this.hayGrupo = true;
     //console.table(aux);

@@ -3,7 +3,7 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {MaterialModule} from './material.module'
 import { NgModule } from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout'
-import {MatDialogModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatIconModule, MatMenuModule} from '@angular/material'
+import {MatDialogModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatIconModule, MatMenuModule, MatSidenavModule, MatToolbar, MatToolbarModule} from '@angular/material'
 import {AngularFireModule} from '@angular/fire'
 import {AngularFireDatabaseModule} from '@angular/fire/database'
 import {AngularFireAuth} from '@angular/fire/auth';
@@ -54,7 +54,9 @@ import { NavbarModule } from "./components/navbar/navbar.module";
     AngularFireDatabaseModule,
     MatMenuModule,
     NavbarModule,
-    GroupPanelModule
+    GroupPanelModule,
+    MatSidenavModule,
+    MatToolbarModule
     
   ],
   entryComponents:[NavbarComponent,LoginComponent,RegisterComponent,CreateGroupComponent,GroupPanelComponent,CreateNoteComponent,AddToGroupComponent],
