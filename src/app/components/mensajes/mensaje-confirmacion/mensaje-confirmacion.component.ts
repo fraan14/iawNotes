@@ -13,7 +13,7 @@ export class MensajeConfirmacionComponent implements OnInit {
   }
 
   opcionElegida(op:string){
-    console.log(op);
+    // console.log(op);
     
   }
 }

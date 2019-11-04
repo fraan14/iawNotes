@@ -16,6 +16,7 @@ import { NullTemplateVisitor } from '@angular/compiler';
 })
 export class CardContainerComponent implements OnInit {
 
+  borrarDefinitivo = false;
   cards : card[] = [];
   cards2: string[] = [];
   btn_activo:boolean = false;
@@ -30,28 +31,34 @@ export class CardContainerComponent implements OnInit {
 
   // Espero a que me pasen una card a eliminar
   private borrarCard(e:card) {
-    this.card_eliminada = e;
-    // this.das.deleteNote(e.id);
+    this.borrarDefinitivo = true;
+    setTimeout( ()=>{
+      this.accionBorrarDefinitiva(e)
+    }, 3000 );
+    
+
+  }
+
+  accionBorrarDefinitiva(e){
+    if(this.borrarDefinitivo){
+      this.das.deleteNote(e.id);
+    }
   }
 
   private deshacerBorrarCard(e) {
-    console.log("llego: ",e);
-    this.das.saveNote(this.card_eliminada);
-
-  //  TODO:Falta la comunicacion con firebase para re insertar la card 
+    this.borrarDefinitivo = false;
   }
 
 
-  public crearCard(tipo:string){
+  public crearCard(tipo_aux:string){
     let nuevaCard: card; 
-    let tipo_aux: number = Number.parseInt(tipo);
     nuevaCard = {
       texto : "",
       titulo : "",
       img: "",
       tipo: tipo_aux
     }
-    if(tipo_aux == 2){
+    if(tipo_aux == 'check_list'){
       nuevaCard.texto = "[]";
     }
     let dialogRef = this.dialog.open(CardModalComponent, {
@@ -59,7 +66,6 @@ export class CardContainerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      console.log("se cerro el modal: ", res);
       if(res != null){
         this.das.saveNote(res);
       }
@@ -79,10 +85,6 @@ export class CardContainerComponent implements OnInit {
     this.das.grupoSeleccionado$.subscribe(res => {
       this.cards2 =[]
       this.cards2 =res.notasID
-
-      
-      console.log("ACAAAAAAAAA")
-      console.log("NOTAS FINAL ",this.cards);
     });
    
   }
@@ -111,8 +113,6 @@ export class CardContainerComponent implements OnInit {
   
 
   activo(){
-    console.log("clickeo");
-    
     if(this.btn_activo == false)
       this.btn_activo = true;
     else
@@ -130,8 +130,6 @@ export class CardContainerComponent implements OnInit {
 
 
   async _buescarNotas() {
-    console.log("Fui a buscar las notas");
-    
     if(this.das.getCurrentGroup() != null){
       this.cards = await this.das.getAllNotesFromGroup();
     }

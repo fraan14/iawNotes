@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
 
   inputValue='';
   AceptarLogin(){
-    console.log('Email', this.email);
-    console.log('Password', this.pass);
+    // console.log('Email', this.email);
+    // console.log('Password', this.pass);
   }
   CancelarLogin(){
   }
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     this.authService.loginGoogleUser().then((res)=>{
       this.close();
     }).catch(err=>{
-      console.log('error',err.message); 
+      // console.log('error',err.message); 
       this.errorRised(err.message);  //esto se ejecuta cuando sucede un error, aca tendria que evitar el cierre del popup y poner en rojo el problema
     })
   }
@@ -51,7 +51,8 @@ export class LoginComponent implements OnInit {
     this.authService.loginFacebookUser().then((res)=>{
       this.close();
     }).catch(err=>{
-      console.log('error',err.message);   //esto se ejecuta cuando sucede un error, aca tendria que evitar el cierre del popup y poner en rojo el problema
+      //esto se ejecuta cuando sucede un error, aca tendria que evitar el cierre del popup y poner en rojo el problema
+      // console.log('error',err.message);
       this.errorRised(err.message);
     })
   }

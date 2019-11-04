@@ -43,7 +43,7 @@ export class AddToGroupComponent implements OnInit {
      
     }
 
-    console.log("Usuarios del grupo "+this.usuariosDelGrupo.length)
+    // console.log("Usuarios del grupo "+this.usuariosDelGrupo.length)
 
 
 
@@ -61,8 +61,8 @@ export class AddToGroupComponent implements OnInit {
     });
     //verifico que el email provea un usuario registrado.
     if(usr){
-      console.log("El mail registrado es: "+usr.nombre);
-      console.log("El grupo seleccionado sigue siendo: "+grupo.nombreGrupo);
+      // console.log("El mail registrado es: "+usr.nombre);
+      // console.log("El grupo seleccionado sigue siendo: "+grupo.nombreGrupo);
 
       //ahora tengo que actualizar el grupo con el id del usuario y el usuario con el id del nuevo grupo.
       //ahora tengo que actualizar el usuario con el email del grupo
@@ -76,7 +76,7 @@ export class AddToGroupComponent implements OnInit {
 
     }
     else{
-      console.log("no se ha detectado usuario registrado con el email provisto"); //aca deberia ser un modal que explique que el usuario indicado no esta registrado.
+      // console.log("no se ha detectado usuario registrado con el email provisto"); //aca deberia ser un modal que explique que el usuario indicado no esta registrado.
     }
   }
 
@@ -85,7 +85,7 @@ export class AddToGroupComponent implements OnInit {
   }
   
   RemoverUsuarioDelGrupo(i){
-    console.log("el usuario a remover seria: "+this.usuariosDelGrupo[i].nombre);
+    // console.log("el usuario a remover seria: "+this.usuariosDelGrupo[i].nombre);
     //en este punto ya tengo el grupo y el usuario, simplemente tengo que sacar el idUsuario de la lista del grupo y sacar el grupo de la lista de grupos del usuario y actualizar
     //el indice es el mismo porque lo obtengo iterativamente
     let usr:UserInterface = this.usuariosDelGrupo[i]  //oobtengo el usuario del arreglo de usuarios
@@ -102,9 +102,9 @@ export class AddToGroupComponent implements OnInit {
     this.usuariosDelGrupo[i] = usr;
     this.grupoActual.usuarioiD.splice(i,1); //elimino el id del usuario de la lista de usuarios del grupo actual.
 
-    console.log("Datos finales");
-    console.log(usr);
-    console.log(this.grupoActual);
+    // console.log("Datos finales");
+    // console.log(usr);
+    // console.log(this.grupoActual);
 
     //llamar a actualizar del servicio
     //llamar a metodo actualizar de este modal "get usuarios del grupo"

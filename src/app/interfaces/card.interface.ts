@@ -5,5 +5,5 @@ export interface card{
     titulo ?: string,
     img ?: string,
     label ?: string[],
-    tipo ?: number
+    tipo ?: string
 }

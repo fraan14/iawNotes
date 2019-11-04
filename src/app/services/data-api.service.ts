@@ -125,7 +125,7 @@ export class DataApiService {
       Admin:pname,
       AdminID:pid,
       nombreGrupo:gname,
-      notasID:null,
+      notasID:[],
       usuarioiD:[pid],
       id:customId
      }
@@ -140,9 +140,9 @@ export class DataApiService {
       //console.log("RES",res);
       if(res.length!=0){
         this.user2 = res[0];
-        console.log("el usuario con ese id es: " + this.user2.nombre);
+        // console.log("el usuario con ese id es: " + this.user2.nombre);
       }else{
-        console.log("No existe el usuario en la base de datos, se procede a crearlo...");
+        // console.log("No existe el usuario en la base de datos, se procede a crearlo...");
         this.CreateNewUser(person);
       }
     });
@@ -202,19 +202,25 @@ export class DataApiService {
 
   //entonces lo que queda es verificar que al crear la nota exista un grupo seleccionado
   saveNote(miNota:card){
-    if(miNota != null && miNota!=undefined){
-      console.log(this.grupoSeleccionado);
-      if(this.grupoSeleccionado){
-        console.log("card recibida",miNota);
-        let customId = this.generateNewKey('Notas');
-        miNota.id = customId;
-      
-        this.notesCollection.doc(customId).set(miNota);    //agrega la nota a la base de datos
+    // debugger;
+    if(miNota != null && miNota!=undefined ){
+      //console.log(this.grupoSeleccionado);
+      console.log("card recibida",miNota);
+      let valorFlase = false;
+
+      if(this.grupoSeleccionado ){
+
+        if(miNota.id ==null){
+          let customId = this.generateNewKey('Notas');
+          console.log("customId:",customId);
+          miNota.id = customId;
+        }
+        this.notesCollection.doc(miNota.id).set(miNota);    //agrega la nota a la base de datos
   
-        this.grupoSeleccionado.notasID.push(customId);                //agrega el id al arreglo de ids del grupo
+        this.grupoSeleccionado.notasID.push(miNota.id);                //agrega el id al arreglo de ids del grupo
         this.UpdateGroup(this.grupoSeleccionado);
   
-        return customId;
+        return miNota.id;
       }
     }
   }
@@ -279,6 +285,12 @@ export class DataApiService {
   }
 
 
+  subirImagen(imagen: File){
+    // Create a root reference
+    var storageRef = firebase.storage().ref('uploads'+imagen.name);
+    storageRef.put(imagen);
+  }
+
 
   //------------------DEPRECATED-----------------------------
   getUBI(idUser: string){
@@ -325,7 +337,7 @@ export class DataApiService {
     //   }
     // })).toPromise().then(user=>{
      user.Grupos.push(idGroup);
-     console.log("USUARIO UPDATEADO", user);
+    //  console.log("USUARIO UPDATEADO", user);
      this.afs.doc(`Usuarios/${user.id}`).set(user);
     // });
     

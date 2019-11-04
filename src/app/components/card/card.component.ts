@@ -28,19 +28,16 @@ export class CardComponent implements OnInit {
     }
     
     ngOnInit() {
-      console.log('card:', this.card);
-      
     }
     
     
     //Accion de borrar crea un SnackBar para deshacer los cambios
-    // TODO: Debe eliminar el elemento de la base de datos
     borrar(){
       let copiaDelCard = this.card;
       let snackBar_borrar = this._snackBar.open("Se eliminó la tarjeta ", 'deshacer',{panelClass:"sucess", verticalPosition: "bottom",   duration: 5000});
       snackBar_borrar.afterDismissed().subscribe(data => {
         if(data.dismissedByAction)
-        this.deshacerBorrarCard.emit(copiaDelCard);
+         this.deshacerBorrarCard.emit(copiaDelCard);
       });
       this.borrarCard.emit(this.card);
     }
@@ -48,18 +45,15 @@ export class CardComponent implements OnInit {
     
     
     
-    // TODO: Debe editar
     editar(){
-      console.log("Editar");
       let dialogRef = this.dialog.open(CardModalComponent, {
         data: {card: this.card , tipo:'editar'}
       });
       
       dialogRef.afterClosed().subscribe(res => {
-        console.log("se cerro el modal: ", res);
-        // TODO: en caso de que devuelva un UNDIFINED no hacer NativeDateAdapter... sino update de nota
+        
         if(res){
-          this._actualizarCard(res)
+          this._actualizarCard(res);
         }
       });
       
@@ -73,7 +67,6 @@ export class CardComponent implements OnInit {
       
       dialog.afterClosed().subscribe(res => {
         console.log("Se cerro la busqueda", res);
-        
       });
     }
     
@@ -82,12 +75,12 @@ export class CardComponent implements OnInit {
     }
     
     aGuardar(event){
-      console.log(event);
+      // console.log(event);
       
     }
     
     cambiarColor(color:String){
-      console.log(color);
+      // console.log(color);
       
       switch (color) {
         case 'sin-color':
@@ -122,13 +115,11 @@ export class CardComponent implements OnInit {
       this._actualizarCard(this.card);
     }
     seleccionarGrupo(e: any){
-      console.log("card-container: ");
+      // console.log("card-container: ");
       
     }
 
-    // TODO: IMPORTANTE SOLUCIONAR EL SAVENOTE
     private _actualizarCard(c: card){
-      this.DAS.deleteNote(c.id);
       this.DAS.saveNote(c);
     }
   

@@ -17,7 +17,7 @@ export class CardModalComponent implements OnInit {
   fb: FormBuilder;
   lista_check: {check:boolean, text:string}[];
   fileUploadInputFor:string = "";
-  
+  archivoImagent = null;
   
   constructor(@Inject(MAT_DIALOG_DATA) private data: any,
   fb: FormBuilder , private das:DataApiService           
@@ -25,10 +25,12 @@ export class CardModalComponent implements OnInit {
     //Datos pasados
     if(data){
       this.card = data.card;
+      console.log("card contructor", this.card);
+      
       this.tipo = data.tipo;
       console.log("data pasada",this.card, this.tipo );
       
-      if(this.card.tipo == 2){
+      if(this.card.tipo == 'check_list'){
         this.lista_check = JSON.parse(this.card.texto);
         this.cardForm = fb.group({
           'titulo':             [this.card.titulo],
@@ -113,6 +115,8 @@ export class CardModalComponent implements OnInit {
     }
     
     let card: card ={
+      'id': this.card.id,
+      'color': this.card.color,
       'titulo': this.cardForm.get('titulo').value,
       'texto' : texto,
       'tipo'  : this.cardForm.get('tipo_contenido').value 
@@ -150,21 +154,11 @@ export class CardModalComponent implements OnInit {
     
   }
   
-  
+
+
   // TODO: Guardar la imagen en el storage de Firebase
   subirImagen(){
-    const fileUpload = document.getElementById('fileUpload') as HTMLInputElement;
-    fileUpload.onchange = () => {
-
-      const file = fileUpload.files[0];
-      console.log("files:",file);
-      for (let index = 0; index < fileUpload.files.length; index++) {
-        
-        // this.files.push({ data: file, state: 'in', 
-        // inProgress: false, progress: 0, canRetry: false, canCancel: true });
-      }
-      // this.uploadFiles();
-    };
-    fileUpload.click();
+  //  console.log(this.archivoImagent);
+   
   }
 }

@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit {
   
   getCurrentUser(){
     this.authService.isAuth().subscribe(auth => {
-      console.log("Se ejecuta el auth")
+      // console.log("Se ejecuta el auth")
       if(auth){
         this.isLogged = true;
         this.nombre = auth.displayName;
@@ -96,14 +96,14 @@ export class NavbarComponent implements OnInit {
 
   abrirVentanaCrearNota(){
     if(this.das.getCurrentGroup()!= null){
-      console.log("Grupo seleccionado: ", this.das.getCurrentGroup().nombreGrupo)
+      // console.log("Grupo seleccionado: ", this.das.getCurrentGroup().nombreGrupo)
       let config:MatDialogConfig={
         width:'400px',
       }
       this.loginDialog.open(CreateNoteComponent,config);
     }
     else{
-      console.log("seleccione grupo");
+      // console.log("seleccione grupo");
     }   
   }
 
@@ -116,14 +116,14 @@ export class NavbarComponent implements OnInit {
 
   abrirVentanaAgregarPersonaGrupo(){
     if(this.das.getCurrentGroup()!= null){
-      console.log("Grupo seleccionado: ", this.das.getCurrentGroup().nombreGrupo)
+      // console.log("Grupo seleccionado: ", this.das.getCurrentGroup().nombreGrupo)
       let config:MatDialogConfig={
         width:'400px',
       }
       this.loginDialog.open(AddToGroupComponent,config);
     }
     else{
-      console.log("seleccione grupo");
+      // console.log("seleccione grupo");
     }   
   }
 
@@ -151,7 +151,7 @@ export class NavbarComponent implements OnInit {
     //console.log("al getGroups le llega: "+uid)
     this.das.getKnownGroups(uid).subscribe(res=>{
       let auxgp:GrupInterface[] = res;
-      console.log("Grupos del usuario ", res);
+      // console.log("Grupos del usuario ", res);
       this.grupos = res;
       let i = 0;
       auxgp.forEach(element => {
@@ -169,7 +169,7 @@ export class NavbarComponent implements OnInit {
   async seleccionarGrupo(item: GrupInterface){
     this.das.grupoSeleccionado=item;
     this.nombreGrupoSeleccionado = item.nombreGrupo;
-    console.log("grupo seleccionado: " + item.nombreGrupo);
+    // console.log("grupo seleccionado: " + item.nombreGrupo);
     this.das.updateGrupoSeleccionado(item);
     //let aux : card[] = await this.das.getAllNotesFromGroup()
     this.nuevoGrupo.emit(item.id);
@@ -183,13 +183,13 @@ export class NavbarComponent implements OnInit {
     // if(color.checked){
     //   document.getElementById("").classList.add
     // }
-    console.log("check: ",color);
+    // console.log("check: ",color);
     
   }
 
 
   abrir(){
-    console.log("holis");
+    // console.log("holis");
     
   }
 
