@@ -14,7 +14,7 @@ export class CardComponent implements OnInit {
   @Input() card: card;
   @Input() id: number;
   
-  @Output() borrarCard: EventEmitter<string>;
+  @Output() borrarCard: EventEmitter<card>;
   @Output() deshacerBorrarCard: EventEmitter<card>;
   
   
@@ -42,7 +42,7 @@ export class CardComponent implements OnInit {
         if(data.dismissedByAction)
         this.deshacerBorrarCard.emit(copiaDelCard);
       });
-      this.borrarCard.emit(this.card.id);
+      this.borrarCard.emit(this.card);
     }
     
     

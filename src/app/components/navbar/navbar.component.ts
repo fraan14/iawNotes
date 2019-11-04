@@ -183,4 +183,10 @@ export class NavbarComponent implements OnInit {
   }
 
 
+  abrir(){
+    console.log("holis");
+    
+  }
+
+
 }

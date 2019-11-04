@@ -88,38 +88,64 @@
   </mat-sidenav-content>
 </mat-sidenav-container> -->
 
+<mat-sidenav-container class="example-container" *ngIf="isLogged">
+
+
+    <mat-sidenav #drawer mode="over" role="navigation">
+
+        <mat-nav-list>
+          <a mat-list-item (click)="abrirVentanaCrearGrupo()">
+            <i class="material-icons">
+              group_add
+            </i>
+            &nbsp;
+            <span class="label">Crear Grupo</span>
+          </a>
+          <!-- TODO: Poner visible cuando haya un grupo seleccionado -->
+          <a mat-list-item (click)="abrirVentanaAgregarPersonaGrupo()">
+            <i class="material-icons">
+              how_to_reg
+            </i>
+            &nbsp;
+            <!-- TODO: Solo eliminar si soy admin -->
+            <span class="label">Gestionar grupo</span>
+          </a>
+        </mat-nav-list>
+      </mat-sidenav>
+
+
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <div fxLayout="row" fxFlex="100" >
-      <div class="boton-principal" fxFlex="20"  >
-        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isLogged" >
+    <div fxLayout="row" fxFlex="100">
+      <div class="boton-principal" fxFlex="20">
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isLogged">
           <i class="material-icons">menu</i>
         </button>
         <span>IAW - NOTES</span>
       </div>
-      <li>
-        <a (click)="EliminarGrupoSeleccionado()" >
+      <!-- <li>
+        <a (click)="EliminarGrupoSeleccionado()">
           <mat-icon class="icon">event_note</mat-icon>
-          <span  class="label">Eliminar Grupo</span>
-         </a>
-    </li>
-      
-      <li>
+          <span class="label">Eliminar Grupo</span>
+        </a>
+      </li> -->
+
+      <!-- <li>
         <a (click)="abrirVentanaCrearGrupo()">
           <mat-icon class="icon">group</mat-icon>
-          <span  class="label">Crear Grupo</span>
-         </a>
-    </li>
-    <a mat-list-item (click)="abrirVentanaAgregarPersonaGrupo()">
-      <i class="material-icons">
-        how_to_reg
-      </i>
-      &nbsp;
-      <!-- TODO: Solo eliminar si soy admin -->
-      <span  class="label">Gestionar grupo</span>
-    </a>
-      
-      <div class="menu-usuario" fxFlex="80" fxLayout="row wrap" fxLayoutAlign="end center"*ngIf="isLogged" >
+          <span class="label">Crear Grupo</span>
+        </a>
+      </li> -->
+      <!-- <a mat-list-item (click)="abrirVentanaAgregarPersonaGrupo()">
+        <i class="material-icons">
+          how_to_reg
+        </i>
+        &nbsp;
+
+        <span class="label">Gestionar grupo</span>
+      </a> -->
+
+      <!-- <div class="menu-usuario" fxFlex="80" fxLayout="row wrap" fxLayoutAlign="end center" *ngIf="isLogged">
         <button mat-button [matMenuTriggerFor]="menuGrupos">
           <span>Grupos </span>
           <i class="material-icons">
@@ -130,68 +156,43 @@
           <ng-container *ngFor="let grupo of grupos; let i = index">
             <button mat-menu-item (click)="seleccionarGrupo(grupo)">{{grupo.nombreGrupo}}</button>
           </ng-container>
-          
+
         </mat-menu>
-        
-        
-        <!-- (change)="switchColor($event)" -->
+
+
         <button mat-button [matMenuTriggerFor]="menu">{{nombre}}</button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="onLogout()">Cerrar sesión</button>
-          <mat-slide-toggle
-            [color]="color"
-            [checked]="checked"
-            [disabled]="disabled"
+          <mat-slide-toggle [color]="color" [checked]="checked" [disabled]="disabled"
             (click)="selectedTheme='my-second-theme'">
-          Color!
-        </mat-slide-toggle>
-      </mat-menu>
+            Color!
+          </mat-slide-toggle>
+        </mat-menu>
+      </div> -->
+
+      <!-- <div class="menu-usuario" fxFlex="80" fxLayout="row wrap" fxLayoutAlign="end center" *ngIf="!isLogged">
+        <button mat-button (click)="abrirVentanaLogueo()">
+          <i class="material-icons">
+            input
+          </i>
+          <span>&nbsp; Iniciar sesión</span>
+        </button>
+        <button mat-button (click)="abrirVentanaRegistro()">
+          <i class="material-icons">
+            person
+          </i>
+          <span>&nbsp; Registrarse</span>
+        </button>
+      </div> -->
+
+
     </div>
-    
-    <div class="menu-usuario" fxFlex="80" fxLayout="row wrap" fxLayoutAlign="end center"*ngIf="!isLogged" >
-      <button mat-button (click)="abrirVentanaLogueo()">
-        <i class="material-icons">
-          input
-        </i>
-        <span>&nbsp; Iniciar sesión</span>
-      </button>
-      <button mat-button (click)="abrirVentanaRegistro()">
-        <i class="material-icons">
-          person
-        </i> 
-        <span>&nbsp; Registrarse</span>
-      </button>
-    </div>
-    
-    
-  </div>  
-  
-  
-</mat-toolbar-row>
+
+
+  </mat-toolbar-row>
 
 </mat-toolbar>
 
-<mat-sidenav-container class="example-container" *ngIf="isLogged">
-  <mat-sidenav #drawer mode="over" role="navigation">
-    <mat-nav-list>
-      <a mat-list-item (click)="abrirVentanaCrearGrupo()">
-        <i class="material-icons">
-          group_add
-        </i>
-        &nbsp;
-        <span  class="label">Crear Grupo</span>  
-      </a>
-      <!-- TODO: Poner visible cuando haya un grupo seleccionado -->
-      <a mat-list-item (click)="abrirVentanaAgregarPersonaGrupo()">
-        <i class="material-icons">
-          how_to_reg
-        </i>
-        &nbsp;
-        <!-- TODO: Solo eliminar si soy admin -->
-        <span  class="label">Gestionar grupo</span>
-      </a>
-    </mat-nav-list>
-  </mat-sidenav>
   <mat-sidenav-content class="container-cards" *ngIf="hayGrupo">
     <app-card-container></app-card-container>
   </mat-sidenav-content>

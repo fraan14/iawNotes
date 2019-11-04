@@ -3,8 +3,7 @@ import { card } from 'src/app/interfaces/card.interface';
 import { CardModalComponent } from '../modals/card-modal/card-modal.component';
 import { MatDialog } from '@angular/material';
 import { DataApiService } from 'src/app/services/data-api.service';
-import { GrupInterface } from 'src/app/models/grupo';
-import { async } from '@angular/core/testing';
+
 
 
 
@@ -18,6 +17,7 @@ export class CardContainerComponent implements OnInit {
   cards : card[] = [];
   cards2: string[] = [];
   btn_activo:boolean = false;
+  card_eliminada: card = null;
 
   constructor(
     public dialog: MatDialog,
@@ -27,14 +27,15 @@ export class CardContainerComponent implements OnInit {
   }
 
   // Espero a que me pasen una card a eliminar
-  private borrarCard(e:string) {
-    console.log("llego",e);
-    this.das.deleteNote(e)
-  //  TODO:Falta la comunicacion con firebase para borrar 
+  private borrarCard(e:card) {
+    this.card_eliminada = e;
+    // this.das.deleteNote(e.id);
   }
 
-  private deshacerBorrarCard(e:card) {
+  private deshacerBorrarCard(e) {
     console.log("llego: ",e);
+    this.das.saveNote(this.card_eliminada);
+
   //  TODO:Falta la comunicacion con firebase para re insertar la card 
   }
 
