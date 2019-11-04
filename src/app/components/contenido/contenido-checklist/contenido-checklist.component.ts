@@ -42,6 +42,6 @@ public inicializado: boolean = false;
  /**
   * modificacion  */
  public modificacion(o: any) {
-   
+   this.textoAGuardar.emit(JSON.stringify(this.obj));
  }
 }

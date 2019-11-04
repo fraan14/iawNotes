@@ -75,10 +75,13 @@ export class CardComponent implements OnInit {
     }
     
     aGuardar(event){
-      // console.log(event);
-      
+
+      this.card.texto = event;
+       this._actualizarCard(this.card);
     }
     
+
+
     cambiarColor(color:String){
       // console.log(color);
       
