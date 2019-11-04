@@ -94,6 +94,10 @@ export class NavbarComponent implements OnInit {
     this.loginDialog.open(RegisterComponent,config);
   }
 
+  esAdmin():boolean{
+    return (this.das.usuarioActual.id === this.das.grupoSeleccionado.AdminID)
+  }
+
   abrirVentanaCrearNota(){
     if(this.das.getCurrentGroup()!= null){
       // console.log("Grupo seleccionado: ", this.das.getCurrentGroup().nombreGrupo)
@@ -131,7 +135,9 @@ export class NavbarComponent implements OnInit {
     if(this.das.getCurrentGroup()!= null){
 
       this.das.deleteGroup(this.das.getCurrentGroup());
-
+      this.hayGrupo = false;
+      this.nombreGrupoSeleccionado = "Seleccione Grupo"
+      
     }
     else{
       console.log("seleccione grupo");

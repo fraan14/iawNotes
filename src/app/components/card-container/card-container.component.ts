@@ -56,6 +56,7 @@ export class CardContainerComponent implements OnInit {
       texto : "",
       titulo : "",
       img: "",
+      color:"white",
       tipo: tipo_aux
     }
     if(tipo_aux == 'check_list'){
