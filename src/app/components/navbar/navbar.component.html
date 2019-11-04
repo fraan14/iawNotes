@@ -41,8 +41,8 @@
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="onLogout()">Cerrar sesión</button>
           <mat-slide-toggle [color]="color" [checked]="checked" [disabled]="disabled"
-            (click)="selectedTheme='my-second-theme'">
-            Color!
+            (click)="cambiarColor()">
+            Tema
           </mat-slide-toggle>
         </mat-menu>
       </li>

@@ -23,7 +23,7 @@ import { card } from 'src/app/interfaces/card.interface';
 export class NavbarComponent implements OnInit {
 
 @Output() nuevoGrupo: EventEmitter<string>  = new EventEmitter<string>();
- 
+@Output() cambiarColorEvento: EventEmitter<boolean>= new EventEmitter<boolean>();
   opened = false;
   public app_name: string = 'notes-iaw';
   public isLogged: boolean = null;
@@ -130,6 +130,13 @@ export class NavbarComponent implements OnInit {
       // console.log("seleccione grupo");
     }   
   }
+
+
+  cambiarColor(){
+    this.checked = !this.checked;
+    this.cambiarColorEvento.emit(true);
+  }
+
 
   EliminarGrupoSeleccionado(){
     if(this.das.getCurrentGroup()!= null){
